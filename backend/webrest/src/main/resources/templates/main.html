@@ -1,0 +1,37 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ru">
+
+<body>
+<h1>Добро пожаловать на сайт по продае игровых аккаунтов</h1>
+
+<div sec:authorize="!isAuthenticated()">
+    <h4><a href="/login">Войти</a></h4>
+    <h4><a href="/registration">Зарегистрироваться</a></h4>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h4><a href="/logout">Выйти</a></h4>
+</div>
+
+
+
+
+<h2>Категории</h2>
+
+
+<table>
+<a th:href="@{/gamestore(id=0)}"> Все игры</a>
+
+<th:block th:each="store : ${stores}">
+    <br>
+    <a th:href="@{/gamestore(id=${store.getId()})}" th:text="${store.getName()}">  </a>
+</th:block>
+
+
+</table>
+
+<a th:href="@{/bag(id=1)}">Корзина</a>
+</body>
+</html>
+

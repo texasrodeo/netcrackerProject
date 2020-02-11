@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ваша корзина</title>
+</head>
+<body>
+
+
+<h2>Товары</h2>
+
+
+<p th:if = "${items.size() == 0}">Здесь пока ничего нет</p>
+<table th:unless = "${items.size() != 0}">
+
+    <th:block th:each="item : ${items}">
+    <tr>
+        <td th:text="${item.getDescription()}"> </td>
+        <td th:text="${item.getPrice() }"> </td>
+    </tr>
+    </th:block>
+</table>
+
+
+
+
+</body>
+</html>

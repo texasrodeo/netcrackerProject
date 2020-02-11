@@ -1,0 +1,3 @@
+# Project exclude paths
+/backend/business/target/
+/backend/webrest/target/
