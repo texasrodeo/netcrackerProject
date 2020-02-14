@@ -1,6 +1,12 @@
 package com.netcrackerTask.backend.business.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="game_account")
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Long getId(){
@@ -25,10 +31,11 @@ public class Account {
         return status;
     }
 
-    private Long game_id;
+    @Column(name="game_id")
+    private Long gameId;
 
     public Long getGameId(){
-        return  game_id;
+        return  gameId;
     }
 
     public Account(Long id, String description, Integer price, Integer status, Long gameId){
@@ -36,7 +43,7 @@ public class Account {
         this.description = description;
         this.price = price;
         this.status = status;
-        this.game_id  = gameId;
+        this.gameId  = gameId;
     }
 
     public Account() {

@@ -15,27 +15,25 @@ import java.sql.SQLException;
 
 public class MainController {
 
-    private final StoreService storeService;
+  //  private final StoreService storeService;
 
 //    @Autowired
     private final GameRepository gameRepository;
 
     @Autowired
-    public MainController(final StoreService storeService, final GameRepository gameRepository){
-        this.storeService = storeService;
+    public MainController(final GameRepository gameRepository){
+        //this.storeService = storeService;
         this.gameRepository = gameRepository;
     }
 
     @GetMapping("/main")
     public String main(Model model){
-        //model.addAttribute("stores", storeService.getAllgames());
         model.addAttribute("stores", gameRepository.findAll());
         return "main";
     }
 
     @GetMapping("/categories")
     public String games(Model model){
-
         return "games";
     }
 
