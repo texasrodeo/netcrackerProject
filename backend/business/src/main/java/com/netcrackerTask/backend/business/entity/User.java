@@ -10,7 +10,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
     private String username;
     private String password;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -19,11 +19,11 @@ public class User {
     private Set<Role> roles;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {

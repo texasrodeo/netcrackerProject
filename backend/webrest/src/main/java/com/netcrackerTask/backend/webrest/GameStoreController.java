@@ -36,7 +36,7 @@ public class GameStoreController {
            // model.addAttribute("header", "Список аккаунтов " + gameRepository.getAccountsByGame_id(id));
         }
 
-        model.addAttribute("accounts", accountRepository.getAccountsByGameId(id));
+        model.addAttribute("accounts", accountRepository.getAccountsByGameId( id));
         return "gamestore";
     }
 
