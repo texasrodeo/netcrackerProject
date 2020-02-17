@@ -42,13 +42,13 @@ public class MainController {
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("error", "Неверное имя пользователя или пароль");
-        else{
+    //    else{
             if (logout != null)
                 model.addAttribute("message", "Вы успешно вышли");
-            else {
-                return "redirect:/main";
-            }
-        }
+//            else {
+//                return "redirect:/main";
+//            }
+       // }
 
 
         return "login";
