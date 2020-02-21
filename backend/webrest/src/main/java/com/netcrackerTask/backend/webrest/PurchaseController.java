@@ -10,18 +10,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 
-public class BagController {
+public class PurchaseController {
     private final StoreService storeService;
 
     @Autowired
-    public BagController(final StoreService storeService){
+    public PurchaseController(final StoreService storeService){
         this.storeService = storeService;
     }
 
     @GetMapping("/bag")
-    public String bag(Model model, @RequestParam("id") long id){
+    public String getBag(Model model, @RequestParam("id") long id){
         model.addAttribute("items", storeService.getBagItemsForUser(id));
         return "bag";
+    }
+
+    @GetMapping("/purchese")
+    public String getPurchase(Model model, @RequestParam("id") long id){
+        model.addAttribute("items", storeService.getPurchaseItemsForUser(id));
+        return "purchase";
     }
 
 //    @GetMapping("/bag/add")

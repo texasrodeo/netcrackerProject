@@ -16,14 +16,10 @@ import java.sql.SQLException;
 
 public class MainController {
 
-  //  private final StoreService storeService;
-
-//    @Autowired
     private final GameRepository gameRepository;
 
     @Autowired
     public MainController(final GameRepository gameRepository){
-        //this.storeService = storeService;
         this.gameRepository = gameRepository;
     }
 
@@ -42,15 +38,8 @@ public class MainController {
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("error", "Неверное имя пользователя или пароль");
-    //    else{
-            if (logout != null)
-                model.addAttribute("message", "Вы успешно вышли");
-//            else {
-//                return "redirect:/main";
-//            }
-       // }
-
-
+        if (logout != null)
+            model.addAttribute("message", "Вы успешно вышли");
         return "login";
     }
 

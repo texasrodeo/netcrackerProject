@@ -32,15 +32,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/main","/registration", "/categories", "/gamestore").permitAll()
+                    .antMatchers( "/main","/registration", "/categories", "/gamestore").permitAll()
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
+
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/main")
+                    .permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/main");
+//                .and()
+//                    .exceptionHandling().accessDeniedPage("/accessDenied");
     }
 
     @Autowired
