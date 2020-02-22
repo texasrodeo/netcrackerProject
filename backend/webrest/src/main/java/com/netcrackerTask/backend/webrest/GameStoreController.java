@@ -17,26 +17,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GameStoreController {
 
 
-    private final AccountRepository accountRepository;
-    private final GameRepository gameRepository;
+    private final StoreService storeService;
 
     @Autowired
-    public GameStoreController(final AccountRepository accountRepository, final GameRepository gameRepository){
-        this.accountRepository = accountRepository;
-        this.gameRepository = gameRepository;
+    public GameStoreController(final StoreService storeService){
+        this.storeService = storeService;
     }
 
     @GetMapping("/gamestore")
-    public String gamestore(Model model, @RequestParam("id") long id)
+    public String gamestore(Model model, @RequestParam("id") Long id,
+                            @RequestParam(value="from", required = false) Integer from,
+                            @RequestParam(value="to",required = false) Integer to,
+                            @RequestParam(value="sort",required = false) String sort)
     {
         if(id == 0){
             model.addAttribute("header", "Список всех аккунтов");
         }
         else {
-           // model.addAttribute("header", "Список аккаунтов " + gameRepository.getAccountsByGame_id(id));
+            model.addAttribute("header", "Список аккаунтов " + storeService.getGameById(id).getName());
         }
-
-        model.addAttribute("accounts", accountRepository.getAccountsByGameId( id));
+        model.addAttribute("accounts", storeService.getAccountsByGameID(id, from, to, sort));
+        model.addAttribute("storeId",id);
         return "gamestore";
     }
 

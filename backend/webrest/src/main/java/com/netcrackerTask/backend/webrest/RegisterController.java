@@ -14,13 +14,7 @@ import java.util.Collections;
 
 @Controller
 public class RegisterController {
-
-
-
-
     private UserService userService;
-
-
 
     @Autowired
     public RegisterController(final UserService userService){
@@ -38,9 +32,7 @@ public class RegisterController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-//        user.setRoles(Collections.singleton(Role.ROLE_USER));
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//        userRepository.save(user);
+
        return "redirect:/login";
     }
 

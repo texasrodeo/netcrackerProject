@@ -24,7 +24,7 @@
 <div sec:authorize="hasRole('ROLE_USER')">
 
     <br>
-    <h4><a href="/profile">Личный кабинет</a></h4>
+    <h4><a href="/user/profile">Личный кабинет</a></h4>
 </div>
 
 
@@ -34,7 +34,7 @@
 
 
 <table>
-<a th:href="@{/gamestore(id=0)}"> Все игры</a>
+
 
 <th:block th:each="store : ${stores}">
     <br>
@@ -44,7 +44,21 @@
 
 </table>
 
-<a th:href="@{/bag(id=1)}">Корзина</a>
+<!--<div sec:authorize="hasRole('ROLE_USER')">-->
+
+<!--&lt;!&ndash;    <br>&ndash;&gt;-->
+<!--&lt;!&ndash;    <h4><a href="/user/addaccount">Выставить аккаунт на продажу</a></h4>&ndash;&gt;-->
+<!--</div>-->
+
+
+<div sec:authorize="hasRole('ROLE_USER')">
+
+    <br>
+
+    <a th:href="@{/bag(id=${userid})}">Корзина</a>
+</div>
+
+
 </body>
 </html>
 

@@ -7,9 +7,31 @@
 </head>
 <body>
 <h1 th:text="  ${header}" >
-
-
 </h1>
+<p th:if = "${message}" th:text="${message}"></p>
+
+
+<form th:action="@{/gamestore}" method="get">
+    <h3>Фильтр</h3>
+    <input type="hidden" name="id" th:value="${storeId}">
+    <div>
+
+        <label> Цена от : <input type="text" name="from"/> </label>
+        <label> до : <input type="text" name="to"/> </label>
+    </div>
+    <label>
+        <select name = "sort">
+            <option value="desc">По убыванию цены</option>
+            <option value="inc">По возрастанию цены</option>
+<!--                <option th:value="${game.getId().toString()}" th:text="${game.getName()}" > </option>-->
+        </select>
+    </label>
+
+    <div><input type="submit" value="Показать"/></div>
+</form>
+
+<br>
+
 <table>
     <th:block th:each="account : ${accounts}">
         <br>
