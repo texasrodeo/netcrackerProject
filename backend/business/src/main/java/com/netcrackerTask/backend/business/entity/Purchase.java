@@ -1,6 +1,7 @@
 package com.netcrackerTask.backend.business.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -16,9 +17,9 @@ public class Purchase {
     }
 
     @Column(name="date")
-    private Date date;
+    private Timestamp date;
 
-    public Date getDate(){
+    public Timestamp getDate(){
         return date;
     }
 
@@ -45,13 +46,12 @@ public class Purchase {
         return  gameAccountId;
     }
 
-//    public Purchase(Long id, Date date, Integer status, Long userId, Long gameAccountId){
-//        this.id = id;
-//        this.date = date;
-//        this.status = status;
-//        this.user_id = userId;
-//        this.game_account_id  = gameAccountId;
-//    }
+    public Purchase(Timestamp date, Integer status, Long userId, Long gameAccountId){
+        this.date = date;
+        this.status = status;
+        this.userId = userId;
+        this.gameAccountId  = gameAccountId;
+    }
 
     public Purchase() {
 

@@ -4,14 +4,13 @@ import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Game;
 import com.netcrackerTask.backend.business.entity.Purchase;
 import com.netcrackerTask.backend.business.persistence.AccountRepository;
-import com.netcrackerTask.backend.business.persistence.GameAccountStore;
 import com.netcrackerTask.backend.business.persistence.GameRepository;
 import com.netcrackerTask.backend.business.persistence.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,16 +29,15 @@ public class StoreService {
         return purchaseRepository.getPurchaseByUserId(id);
     }
 
-    public Purchase getBagItemsForUser(long id) {
-        return purchaseRepository.getBagItemsForUser(id);
+    public List<Purchase> getBagItemsForUser(long id) {
+        return purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, 0);
     }
 
     public Iterable<Game> findAllgames() {
         return gameRepository.findAll();
     }
 
-    public Iterable<Account> getAccountsByGameID(long id, Integer from, Integer to, String sort){
-
+    public Iterable<Account> getAccountsByGameID(Long id, Integer from, Integer to, String sort){
             if(from!= null && to !=null){
                 if(sort==null)
                     return accountRepository.getAccountsByGameIdAndPriceBetween(id, from, to);
@@ -49,9 +47,6 @@ public class StoreService {
                     else
                         return accountRepository.getAccountsByGameIdAndPriceBetweenOrderByPrice(id, from, to);
                 }
-
-
-
             }
             else {
                 if(sort==null)
@@ -61,20 +56,29 @@ public class StoreService {
                 else
                     return accountRepository.getAccountsByGameIdOrderByPrice(id);
             }
-
-
-
-
-
     }
 
-    public boolean addAccount(Account account) {
+    public void addAccount(Account account) {
         accountRepository.save(account);
-        return true;
     }
 
-    public Game getGameById(long id) {
+    public Game getGameById(Long id) {
         return gameRepository.getGameById(id);
+    }
+
+    public Account getAccountById(Long id){
+        return accountRepository.getAccountsById(id);
+    }
+
+    public void addPurchase(Long accountId, Long userId) {
+        java.util.Date date=new java.util.Date();
+
+        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+        java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
+
+        Purchase purchase = new Purchase(sqlTime, 0, userId, accountId);
+
+        purchaseRepository.save(purchase);
     }
 
 

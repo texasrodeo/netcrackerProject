@@ -10,12 +10,12 @@
 <h2>Товары</h2>
 
 
-<p th:if = "${items.size() == 0}">Здесь пока ничего нет</p>
-<table th:unless = "${items.size() != 0}">
+<p th:if = "${message}" th:text="${message}"></p>
+<table>
 
     <th:block th:each="item : ${items}">
     <tr>
-        <td th:text="${item.getDescription()}"> </td>
+        <td th:text="${item.}"> </td>
         <td th:text="${item.getPrice() }"> </td>
     </tr>
     </th:block>

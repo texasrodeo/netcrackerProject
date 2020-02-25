@@ -2,11 +2,15 @@ package com.netcrackerTask.backend.webrest;
 
 
 import com.netcrackerTask.backend.business.entity.Account;
+import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.AccountRepository;
 import com.netcrackerTask.backend.business.persistence.GameRepository;
 import com.netcrackerTask.backend.business.service.StoreService;
 
+import com.netcrackerTask.backend.business.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +23,12 @@ public class GameStoreController {
 
     private final StoreService storeService;
 
+    private final UserService userService;
+
     @Autowired
-    public GameStoreController(final StoreService storeService){
+    public GameStoreController(final StoreService storeService, final UserService userService){
         this.storeService = storeService;
+        this.userService = userService;
     }
 
     @GetMapping("/gamestore")
@@ -42,10 +49,11 @@ public class GameStoreController {
     }
 
     @GetMapping("/gamestore/account")
-    public String account(Model model, @RequestParam("id") long id)
+    public String account(Model model, @RequestParam("id") Long id)
     {
-      //  model.addAttribute("account", storeService.getById(id, Account.class));
-//        model.addAttribute("gamename")
+        model.addAttribute("account", storeService.getAccountById(id));
         return "account";
     }
+
+
 }

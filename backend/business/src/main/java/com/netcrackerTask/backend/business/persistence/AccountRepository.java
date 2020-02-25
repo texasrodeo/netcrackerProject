@@ -8,14 +8,16 @@ import java.util.List;
 public interface AccountRepository extends CrudRepository<Account, Long> {
    List<Account> getAccountsByGameId(Long id);
 
-   List<Account> getAccountsByGameIdOrderByPriceDesc(long id);
+   List<Account> getAccountsByGameIdOrderByPriceDesc(Long id);
 
-   List<Account> getAccountsByGameIdOrderByPrice(long id);
+   List<Account> getAccountsByGameIdOrderByPrice(Long id);
 
-   List<Account> getAccountsByGameIdAndPriceBetween(long id, int from, int to);
+   List<Account> getAccountsByGameIdAndPriceBetween(Long id, Integer from, Integer to);
 
-   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPrice(long id, int from, int to);
+   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPrice(Long id, Integer from, Integer to);
 
-   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPriceDesc(long id, int from, int to);
+   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPriceDesc(Long id, Integer from, Integer to);
+
+   Account getAccountsById(Long id);
 
 }

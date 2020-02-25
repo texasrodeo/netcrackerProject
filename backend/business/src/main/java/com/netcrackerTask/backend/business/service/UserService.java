@@ -69,6 +69,10 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+    public User findByUsername(String name) {
+        return userRepository.findByUsername(name);
+    }
+
 //    public List<User> usergtList(Long idMin) {
 //        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
 //                .setParameter("paramId", idMin).getResultList();

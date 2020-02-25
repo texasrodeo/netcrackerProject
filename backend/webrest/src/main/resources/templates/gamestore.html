@@ -9,7 +9,7 @@
 <h1 th:text="  ${header}" >
 </h1>
 <p th:if = "${message}" th:text="${message}"></p>
-
+<p th:if = "${addedToCart}" th:text="${addedToCart}"></p>
 
 <form th:action="@{/gamestore}" method="get">
     <h3>Фильтр</h3>
@@ -33,9 +33,23 @@
 <br>
 
 <table>
+    <tr>
+        <td>
+            Описание
+        </td>
+        <td>
+            Цена
+        </td>
+    </tr>
     <th:block th:each="account : ${accounts}">
-        <br>
-        <a th:href="@{gamestore/account(id=${account.getId()})}" th:text="${account.getDescription()}">  </a>
+        <tr>
+            <td>
+                <a th:href="@{gamestore/account(id=${account.getId()})}" th:text="${account.getDescription()}">  </a>
+            </td>
+            <td>
+                <span th:text="${account.getPrice()}"> </span>
+            </td>
+        </tr>
     </th:block>
 </table>
 
