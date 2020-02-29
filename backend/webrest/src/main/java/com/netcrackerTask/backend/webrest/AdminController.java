@@ -42,11 +42,8 @@ public class AdminController {
 
     @PostMapping("/admin/addaccount")
     public String sendaccount(@RequestParam("game") String gameId, Model model, Account account){
-//        if (!storeService.addAccount(account)){
-//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-//            return "registration";
-//        }
         account.setGameId(Long.parseLong(gameId));
+        account.setStatus("FREE"); //??
         storeService.addAccount(account);
         model.addAttribute("message","Аккаунт добавлен");
         StringBuilder sb = new StringBuilder("redirect:/gamestore?id=");

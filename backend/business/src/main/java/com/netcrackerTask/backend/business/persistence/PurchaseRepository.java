@@ -14,4 +14,5 @@ public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
 //    Purchase getBagItemsForUser(Long userId);
 
     List<Purchase> getPurchaseByUserIdAndStatusEquals(Long userId, Integer status);
+
 }

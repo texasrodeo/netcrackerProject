@@ -16,7 +16,7 @@ public class Purchase {
         return id;
     }
 
-    @Column(name="date")
+    @Column(name="data")
     private Timestamp date;
 
     public Timestamp getDate(){
@@ -24,9 +24,9 @@ public class Purchase {
     }
 
     @Column(name="status")
-    private Integer status;
+    private String status;
 
-    public Integer getStatus(){
+    public String getStatus(){
         return status;
     }
 
@@ -46,7 +46,7 @@ public class Purchase {
         return  gameAccountId;
     }
 
-    public Purchase(Timestamp date, Integer status, Long userId, Long gameAccountId){
+    public Purchase(Timestamp date, String status, Long userId, Long gameAccountId){
         this.date = date;
         this.status = status;
         this.userId = userId;

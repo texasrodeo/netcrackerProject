@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class StoreService {
     public Iterable<Account> getAccountsByGameID(Long id, Integer from, Integer to, String sort){
             if(from!= null && to !=null){
                 if(sort==null)
+
                     return accountRepository.getAccountsByGameIdAndPriceBetween(id, from, to);
                 else {
                     if(sort.equals("desc"))
@@ -67,7 +69,7 @@ public class StoreService {
     }
 
     public Account getAccountById(Long id){
-        return accountRepository.getAccountsById(id);
+        return accountRepository.getAccountById(id);
     }
 
     public void addPurchase(Long accountId, Long userId) {
@@ -76,9 +78,23 @@ public class StoreService {
         java.sql.Date sqlDate=new java.sql.Date(date.getTime());
         java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 
-        Purchase purchase = new Purchase(sqlTime, 0, userId, accountId);
+        Purchase purchase = new Purchase(sqlTime, "ADDED_TO_BASKET", userId, accountId);
 
+        Account account = accountRepository.getAccountById(accountId);
+        account.setStatus("RESERVED");
+
+        accountRepository.save(account);
         purchaseRepository.save(purchase);
+    }
+
+    public List<Account> getAccountsInBag(List<Purchase> purchases) {
+        List<Account> accountsInBag = new ArrayList<>();
+        for(Purchase p: purchases){
+            if(accountRepository.findById(p.getGameAccountId()).isPresent()){
+                accountsInBag.add(accountRepository.findById(p.getGameAccountId()).get());
+            }
+        }
+        return accountsInBag;
     }
 
 

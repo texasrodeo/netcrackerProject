@@ -22,7 +22,14 @@
 
 
 
-
+<th:block th:if="${account.getStatus().equals('FREE')}">
     <a th:href="@{/addtocart(id=${account.getId()})}" > Добавить в корзину </a>
+</th:block>
+
+<th:block th:if="${account.getStatus().equals('RESERVED')}">
+    <span>Данный аккаунт уже зарезервирован</span>
+</th:block>
+
+
 </body>
 </html>

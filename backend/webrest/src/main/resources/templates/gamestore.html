@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
 
     <meta charset="UTF-8">
@@ -8,7 +10,8 @@
 <body>
 <h1 th:text="  ${header}" >
 </h1>
-<p th:if = "${message}" th:text="${message}"></p>
+<!--<p th:if = "${message}" th:text="${message}"></p>-->
+<span th:text="${message}"></span>
 <p th:if = "${addedToCart}" th:text="${addedToCart}"></p>
 
 <form th:action="@{/gamestore}" method="get">
@@ -49,10 +52,20 @@
             <td>
                 <span th:text="${account.getPrice()}"> </span>
             </td>
+            <th:block th:if="${account.getStatus().equals('RESERVED')}">
+                <td>Данный аккаунт уже зарезервирован</td>
+            </th:block>
         </tr>
     </th:block>
 </table>
 
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+
+    <h4><a href="/admin/addaccount">Добавить аккаунт</a></h4>
+</div>
+
+<br>
+<a href="/main">На главную</a>
 
 </body>
 </html>

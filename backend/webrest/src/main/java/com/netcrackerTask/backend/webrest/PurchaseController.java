@@ -35,7 +35,8 @@ public class PurchaseController {
             model.addAttribute("message", "Здесь пока ничего нет");
         }
         else {
-            model.addAttribute("items", items);
+            List<Account> accountsInBag = storeService.getAccountsInBag(items);
+            model.addAttribute("items", accountsInBag);
         }
         return "bag";
     }
@@ -48,6 +49,7 @@ public class PurchaseController {
 
     @GetMapping("/addtocart")
     public String addtocart(Model model, @RequestParam("id") Long id){
+        Account account = storeService.getAccountById(id);
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
         if(auth!=null){
             String name=auth.getName();
@@ -57,7 +59,7 @@ public class PurchaseController {
                 model.addAttribute("addedToCart","Акаунт успешно добавлен в корзину");
             }
         }
-        return "redirect:/gamestore?id="+id;
+        return "redirect:/gamestore?id="+account.getGameId();
     }
 
 //    @GetMapping("/bag/add")

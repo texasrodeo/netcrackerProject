@@ -13,7 +13,7 @@ public class Account {
 
     private Integer price;
 
-
+    private String status;
 
     @Column(name="game_id")
     private Long gameId;
@@ -50,11 +50,15 @@ public class Account {
         this.gameId = gameId;
     }
 
-    //    private Integer status;
-//
-//    private Integer getStatus(){
-//        return status;
-//    }
+
+
+    public String getStatus(){
+        return status;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
 
 
 

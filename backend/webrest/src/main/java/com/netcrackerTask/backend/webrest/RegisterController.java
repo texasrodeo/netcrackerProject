@@ -26,6 +26,12 @@ public class RegisterController {
         return "registration";
     }
 
+//    @GetMapping("/logout")
+//    public String logout(Model model ){
+//        model.addAttribute("logout","Вы успешно вышли");
+//        return "main";
+//    }
+
     @PostMapping("/registration")
     public String addUser(User user, Model model){
         if (!userService.saveUser(user)){

@@ -6,13 +6,21 @@
 <body>
 <h1>Добро пожаловать на сайт по продае игровых аккаунтов</h1>
 
+<th:block th:if="${logout}" th:text="${logout}">
+</th:block>
+
 <div sec:authorize="!isAuthenticated()">
     <h4><a href="/login">Войти</a></h4>
     <h4><a href="/registration">Зарегистрироваться</a></h4>
 </div>
 <div sec:authorize="isAuthenticated()">
-    <h4><a href="/logout">Выйти</a></h4>
+<!--    <h4><a href="/logout">Выйти</a></h4>-->
+    <th:form action="/j_spring_security_check" method="POST">
+        <input type="submit" value="Logout" />
+    </th:form>
 </div>
+
+
 
 <br>
 <div sec:authorize="hasRole('ROLE_ADMIN')">

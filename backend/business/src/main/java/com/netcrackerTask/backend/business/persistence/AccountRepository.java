@@ -18,6 +18,6 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
 
    List<Account> getAccountsByGameIdAndPriceBetweenOrderByPriceDesc(Long id, Integer from, Integer to);
 
-   Account getAccountsById(Long id);
+   Account getAccountById(Long id);
 
 }
