@@ -10,15 +10,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
+
+    @Autowired
+    private MailService mailService;
+
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -57,7 +63,19 @@ public class UserService implements UserDetailsService {
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActivationCode(UUID.randomUUID().toString());
+
+
         userRepository.save(user);
+        if(!StringUtils.isEmpty(user.getEmail())){
+            String message = String.format("Здравствуйте "
+                    +user.getUsername()+".  Для активации аккаунта перейдите по ссылке"
+                    +" http://localhost:8080/activate/%s",
+                    user.getActivationCode());
+
+            mailService.send(user.getEmail(), "Код активации", message);
+        }
+
         return true;
     }
 
@@ -71,6 +89,17 @@ public class UserService implements UserDetailsService {
 
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
+    }
+
+    public boolean activateUser(String code) {
+        User user = userRepository.findByActivationCode(code);
+        if(user==null){
+            return false;
+        }
+        user.setActivationCode(null);
+
+        userRepository.save(user);
+        return true;
     }
 
 //    public List<User> usergtList(Long idMin) {

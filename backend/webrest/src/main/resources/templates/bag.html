@@ -15,7 +15,7 @@
 
     <th:block th:each="item : ${items}">
     <tr>
-        <td th:text="${item.getDescription()}"> </td>
+        <td> <a th:href="@{gamestore/account(id=${item.getId()})}" th:text="${item.getDescription()}">  </a> </td>
         <td th:text="${item.getPrice() }"> </td>
     </tr>
     </th:block>

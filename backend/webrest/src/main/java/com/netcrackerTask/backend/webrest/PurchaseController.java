@@ -41,11 +41,7 @@ public class PurchaseController {
         return "bag";
     }
 
-    @GetMapping("/purchase")
-    public String getPurchase(Model model, @RequestParam("id") long id){
-        model.addAttribute("items", storeService.getPurchaseItemsForUser(id));
-        return "purchase";
-    }
+
 
     @GetMapping("/addtocart")
     public String addtocart(Model model, @RequestParam("id") Long id){

@@ -26,12 +26,12 @@ public class StoreService {
     @Autowired
     GameRepository gameRepository;
 
-    public Purchase getPurchaseItemsForUser(long id) {
-        return purchaseRepository.getPurchaseByUserId(id);
+    public List<Purchase> getOrdersForUser(long id) {
+        return purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, "BOUGHT");
     }
 
     public List<Purchase> getBagItemsForUser(long id) {
-        return purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, 0);
+        return purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, "ADDED_TO_BASKET");
     }
 
     public Iterable<Game> findAllgames() {
