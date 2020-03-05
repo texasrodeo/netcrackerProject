@@ -29,18 +29,17 @@ public class PurchaseController {
     }
 
     @GetMapping("/bag")
-    public String getBag(Model model, @RequestParam("id") long id){
-        List<Purchase> items = storeService.getBagItemsForUser(id);
+    public String getBag(Model model, @RequestParam("id") Long id){
+        List<Account> items = storeService.getBagItemsForUser(id);
         if(items.size()==0){
             model.addAttribute("message", "Здесь пока ничего нет");
         }
         else {
-            List<Account> accountsInBag = storeService.getAccountsInBag(items);
-            model.addAttribute("items", accountsInBag);
+            model.addAttribute("items", items);
         }
+        model.addAttribute("id",id.toString());
         return "bag";
     }
-
 
 
     @GetMapping("/addtocart")
@@ -58,12 +57,6 @@ public class PurchaseController {
         return "redirect:/gamestore?id="+account.getGameId();
     }
 
-//    @GetMapping("/bag/add")
-//    public String addToBag(Model model, @RequestParam("id") long id){
-//        storeService.addToBag(id, )
-//        model.addAttribute("items", storeService.getBagItemsForUser(id));
-//        return "bag";
-//    }
 
 
 }

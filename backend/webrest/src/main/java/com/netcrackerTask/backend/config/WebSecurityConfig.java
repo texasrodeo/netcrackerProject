@@ -1,6 +1,8 @@
 package com.netcrackerTask.backend.config;
 
 import com.netcrackerTask.backend.business.service.UserService;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.iv.RandomIvGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import javax.sql.DataSource;
@@ -28,13 +31,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    public StandardPBEStringEncryptor standardPBEStringEncryptor(){
+        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword("jasypt");
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        encryptor.setIvGenerator(new RandomIvGenerator());
+        return  encryptor;
+
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+               // .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers( "/main","/registration", "/categories", "/gamestore/**","/activate/* ").permitAll()
+                    .antMatchers( "/main","/registration", "/categories","/activate/*", "/gamestore/**").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/user/**").hasRole("USER")
+                    .antMatchers("/user/**","/pay","/pay/**").hasRole("USER")
                 .anyRequest().authenticated()
 
                 .and()
@@ -48,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     
                     .permitAll()
                     .logoutSuccessUrl("/login");
+
 //                .and()
 //                    .exceptionHandling().accessDeniedPage("/accessDenied");
     }

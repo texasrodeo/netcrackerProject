@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("user/orders")
     public String getOrderd(Model model, @RequestParam("id") long id){
-        List<Purchase> items = storeService.getOrdersForUser(id);
+        List<Account> items = storeService.getOrdersForUser(id);
         if(items.size()==0){
             model.addAttribute("message", "Здесь пока ничего нет");
         }

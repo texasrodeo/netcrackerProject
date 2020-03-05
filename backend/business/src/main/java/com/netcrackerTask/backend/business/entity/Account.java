@@ -15,6 +15,10 @@ public class Account {
 
     private String status;
 
+    private String login;
+
+    private String password;
+
     @Column(name="game_id")
     private Long gameId;
 
@@ -50,8 +54,6 @@ public class Account {
         this.gameId = gameId;
     }
 
-
-
     public String getStatus(){
         return status;
     }
@@ -60,9 +62,23 @@ public class Account {
         this.status = status;
     }
 
+    public String getLogin() {
+        return login;
+    }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-//    public Account(Long id, String description, Integer price, Integer status, Long gameId){
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    //    public Account(Long id, String description, Integer price, Integer status, Long gameId){
 //        this.id = id;
 //        this.description = description;
 //        this.price = price;

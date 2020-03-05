@@ -39,8 +39,8 @@ public class RegisterController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-
-       return "redirect:/login";
+        model.addAttribute("email","Для подтреждения почты, проверьте свой почтовый ящик");
+        return "redirect:/login";
     }
 
     @GetMapping("/activate/{code}")
@@ -52,7 +52,7 @@ public class RegisterController {
         else {
             model.addAttribute("message", "Неверный код");
         }
-        return "login";
+        return "redirect:/login";
     }
 
 

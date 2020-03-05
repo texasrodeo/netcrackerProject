@@ -16,12 +16,6 @@ import java.util.List;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
-
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
     }
