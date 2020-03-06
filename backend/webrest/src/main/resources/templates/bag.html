@@ -18,6 +18,7 @@
             <tr>
                 <td> <a th:href="@{gamestore/account(id=${item.getId()})}" th:text="${item.getDescription()}">  </a> </td>
                 <td th:text="${item.getPrice() }"> </td>
+                <td> <a th:href="@{bag/removePurchase(id=${item.getId()})}" >  Убрать из корзины</a> </td>
             </tr>
         </th:block>
     </table>

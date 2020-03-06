@@ -39,7 +39,7 @@ public class RegisterController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-        model.addAttribute("email","Для подтреждения почты, проверьте свой почтовый ящик");
+        model.addAttribute("email","Для подтреждения почты, перейдите по ссылке, отправленной Вам на почту.");
         return "redirect:/login";
     }
 

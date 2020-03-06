@@ -138,4 +138,9 @@ public class StoreService {
 
         mailService.send(email, "Покупка", sb.toString());
     }
+
+    public void removePurchase(Long accountId) {
+        purchaseRepository.delete(purchaseRepository.getPurchaseByGameAccountId(accountId));
+
+    }
 }

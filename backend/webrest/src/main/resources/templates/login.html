@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ru">
 <head>
     <title>Login </title>
 </head>
 <body>
 
-<p th:if = "${error}" th:text="${error}"></p>
+<p th:if = "${usernameError}" th:text="${usernameError}"></p>
 
 <p th:if = "${message}" th:text="${message}"></p>
 

@@ -15,4 +15,6 @@ public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
 
     List<Purchase> getPurchaseByUserIdAndStatusEquals(Long userId, String status);
 
+    Purchase getPurchaseByGameAccountId(Long accountId);
+
 }

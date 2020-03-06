@@ -57,6 +57,18 @@ public class PurchaseController {
         return "redirect:/gamestore?id="+account.getGameId();
     }
 
+    @GetMapping("bag/removePurchase")
+    public String remove(Model model, @RequestParam("id") Long accountId){
+
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+
+        String name = auth.getName();
+        User user = userService.findByUsername(name);
+
+        storeService.removePurchase(accountId);
+        return "redirect:/bag?id="+user.getId().toString();
+    }
+
 
 
 }
