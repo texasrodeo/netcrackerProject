@@ -12,13 +12,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
-@ Controller
-
+@RestController
+@CrossOrigin
 public class MainController {
 
     private final GameRepository gameRepository;
@@ -32,18 +36,17 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(Model model){
-
+    public Map<String,Object> main(){
+        Map<String,Object> model = new HashMap<>();
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
         if(auth!=null){
             String name=auth.getName();
             User user= userRepository.findByUsername(name);
             if(user!=null)
-                model.addAttribute("userid", user.getId());
+                model.put("userid", user.getId());
         }
-        model.addAttribute("stores", gameRepository.findAll());
-        return "main";
-
+        model.put("stores", gameRepository.findAll());
+        return model;
     }
 
 

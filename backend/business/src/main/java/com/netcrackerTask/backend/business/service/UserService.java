@@ -72,12 +72,10 @@ public class UserService implements UserDetailsService {
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format("Здравствуйте "
                     +user.getUsername()+".  Для активации аккаунта перейдите по ссылке"
-                    +" http://localhost:8080/activate/%s",
+                    +"  http://localhost:8080/activate/%s",
                     user.getActivationCode());
-
             mailService.send(user.getEmail(), "Код активации", message);
         }
-
         return true;
     }
 
@@ -104,8 +102,4 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-//    public List<User> usergtList(Long idMin) {
-//        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-//                .setParameter("paramId", idMin).getResultList();
-//    }
 }

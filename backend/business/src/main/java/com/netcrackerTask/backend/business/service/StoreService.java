@@ -123,9 +123,7 @@ public class StoreService {
     public void sellAccounts(List<Long> accountsId, String name, String email) {
         StringBuilder sb = new StringBuilder("Здравствуйте, ").append(name).append(".")
                 .append("\n").append("Ваши покупки: ").append("\n");
-
         for(Long id: accountsId){
-
             Account account = accountRepository.getAccountById(id);
             sb.append("Описание: ").append(account.getDescription()).append("\n");
             sb.append("Логин: ").append(account.getLogin()).append("\n");
@@ -134,13 +132,10 @@ public class StoreService {
             accountRepository.save(account);
         }
         sb.append("С уважением, Кубленко Павел.");
-
-
         mailService.send(email, "Покупка", sb.toString());
     }
 
     public void removePurchase(Long accountId) {
         purchaseRepository.delete(purchaseRepository.getPurchaseByGameAccountId(accountId));
-
     }
 }
