@@ -1,0 +1,24 @@
+<div class="card my-5">
+
+  <div class="card-body">
+    <h1 class="display-1">{{header}}</h1>
+    <table class="table table-dark table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">Название</th>
+        <th scope="col">Цена</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of accounts">
+
+<!--        <td>  <a [routerLink]="['/gamestore', account.id.toString()]"> {{account.description}}</a></td>-->
+<!--        <td>  <a [routerLink]="['/gamestore', store.id.toString()]"> {{store.name}}</a></td>-->
+        <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
+        <td>{{account.price}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

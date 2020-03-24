@@ -1,0 +1,22 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">Название</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let store of stores">
+
+        <td>  <a routerLink="/gamestore"  [queryParams]="{'id':store.id.toString()}"> {{store.name}}</a></td>
+<!--        <td>  {{store.name}}</td>-->
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

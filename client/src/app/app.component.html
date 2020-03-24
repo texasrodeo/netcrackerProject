@@ -1,15 +1,31 @@
-<div style="text-align:center"class="container">
 
-  <div class="container">
 
-    <h1>{{title}}</h1>
-    <h2>Список аккаунтов:</h2>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<!--       // <h2 class="card-title text-center text-white py-3"><a routerLink="/" >{{ title }}</a></h2>-->
+        <a class="navbar-brand" href="/">{{title}}</a>
 
-<!--    <p>Id: <span>{{param.userid}}</span></p>-->
-<!--    <p>Message: <span>{{greeting.content}}!</span></p>-->
 
-  </div>
-</div>
+    <a routerLink="/gamestores" class="navbar-brand">Список магазинов</a>
+
+          <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li>
+              <a *ngIf="isLoggedIn" class="nav-link" href="/logout" (click)=handleLogout()>Выйти</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li>
+              <a *ngIf="!isLoggedIn" class="nav-link" href="/login" >Войти</a>
+            </li>
+          </ul>
+
+  </nav>
+</header>
 
 
 <router-outlet></router-outlet>
+
+
+
+
