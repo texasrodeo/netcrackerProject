@@ -6,21 +6,28 @@
         <a class="navbar-brand" href="/">{{title}}</a>
 
 
-    <a routerLink="/gamestores" class="navbar-brand">Список магазинов</a>
+    <a routerLink="/gamestores" class="nav-link">Список магазинов</a>
 
-          <ul class="navbar-nav navbar-collapse justify-content-end">
-            <li>
-              <a *ngIf="isLoggedIn" class="nav-link" href="/logout" (click)=handleLogout()>Выйти</a>
-            </li>
-          </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Зарегестрироваться</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Войти</a>
+      </li>
+    </ul>
 
-          <ul class="navbar-nav navbar-collapse justify-content-end">
-            <li>
-              <a *ngIf="!isLoggedIn" class="nav-link" href="/login" >Войти</a>
-            </li>
-          </ul>
-
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">Добро пожаловать, {{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">Выйти</a>
+      </li>
+    </ul>
   </nav>
+
+
 </header>
 
 

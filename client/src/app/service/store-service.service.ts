@@ -15,7 +15,6 @@ export class StoreService {
   }
 
   public find(id:string): Observable<any>{
-
     const params = new HttpParams()
       .set('id', id.toString());
     return this.http.get<any>(this.storeUrl,{params});

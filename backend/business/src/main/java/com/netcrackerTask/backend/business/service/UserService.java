@@ -2,9 +2,11 @@ package com.netcrackerTask.backend.business.service;
 
 import com.netcrackerTask.backend.business.entity.Role;
 import com.netcrackerTask.backend.business.entity.User;
+import com.netcrackerTask.backend.business.payloads.MessageResponse;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
 import com.netcrackerTask.backend.business.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,10 +16,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -42,7 +41,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        return user;
+        return UserDetailsImpl.build(user);
     }
 
 
@@ -56,15 +55,31 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+    public ResponseEntity<?> saveUser(User user, Set<String> strRoles) {
+        Set<Role> roles = new HashSet<>();
 
-        if (userFromDB != null) {
-            return false;
+        if (strRoles == null) {
+            Role userRole = roleRepository.findByName("ROLE_USER")
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(userRole);
+        } else {
+            strRoles.forEach(role -> {
+                if ("admin".equals(role)) {
+                    Role adminRole = roleRepository.findByName("ROLE_ADMIN")
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(adminRole);
+                } else {
+                    Role userRole = roleRepository.findByName("ROLE_USER")
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(userRole);
+                }
+            });
         }
 
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoles(roles);
+        userRepository.save(user);
+
+
         user.setActivationCode(UUID.randomUUID().toString());
 
 
@@ -72,11 +87,11 @@ public class UserService implements UserDetailsService {
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format("Здравствуйте "
                     +user.getUsername()+".  Для активации аккаунта перейдите по ссылке"
-                    +"  http://localhost:8080/activate/%s",
+                    +"  http://localhost:4200/activate/%s",
                     user.getActivationCode());
             mailService.send(user.getEmail(), "Код активации", message);
         }
-        return true;
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     public boolean deleteUser(Long userId) {
@@ -102,4 +117,11 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }

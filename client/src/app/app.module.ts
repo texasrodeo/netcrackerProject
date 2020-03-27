@@ -11,8 +11,13 @@ import { StoreComponent } from './templateComponents/store/store.component';
 import { AccountComponent } from './templateComponents/account/account.component';
 import { LoginComponent } from './templateComponents/login/login.component';
 import {AppService} from "./service/app-service.service";
-import {HttpInterceptorService} from "./service/http-interceptor-service.service";
-import { LogoutComponent } from './templateComponents/logout/logout.component';
+
+
+
+import { RegisterComponent } from './templateComponents/register/register.component';
+import {authInterceptorProviders} from "./config/auth.interseptor";
+import { ProfileComponent } from './templateComponents/profile/profile.component';
+import { ActivationComponent } from './templateComponents/activation/activation.component';
 
 
 
@@ -23,7 +28,9 @@ import { LogoutComponent } from './templateComponents/logout/logout.component';
     StoreComponent,
     AccountComponent,
     LoginComponent,
-    LogoutComponent,
+    RegisterComponent,
+    ProfileComponent,
+    ActivationComponent,
 
   ],
   imports: [
@@ -32,11 +39,7 @@ import { LogoutComponent } from './templateComponents/logout/logout.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [StoreService, AppService,  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorService,
-    multi: true
-  }],
+  providers: [StoreService, AppService,  authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

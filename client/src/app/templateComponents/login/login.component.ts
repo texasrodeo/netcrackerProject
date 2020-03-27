@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AppService} from "../../service/app-service.service";
+import {TokenstorageService} from "../../service/tokenstorage.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,38 +11,40 @@ import {AppService} from "../../service/app-service.service";
 })
 export class LoginComponent implements OnInit {
 
-  credentials = {username: '', password: ''};
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-  username: string;
-  password: string;
-  errorMessage = 'Invalid Credentials';
-  successMessage: string;
-  invalidLogin = false;
-  loginSuccess = false;
+  constructor(private authService: AppService, private tokenStorage: TokenstorageService) { }
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router) {
+  ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
-  // login() {
-  //   this.app.authenticate(this.credentials, () => {
-  //     this.router.navigateByUrl('/');
-  //   });
-  //   return false;
-  // }
+  onSubmit() {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
 
-  handleLogin() {
-    this.app.authenticationService(this.username, this.password).subscribe((result) => {
-      this.invalidLogin = false;
-      this.loginSuccess = true;
-      this.successMessage = 'Успешно вошли.';
-      this.router.navigate(['/']);
-    }, () => {
-      this.invalidLogin = true;
-      this.loginSuccess = false;
-    });
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
   }
 
-  ngOnInit(): void {
+  reloadPage() {
+    window.location.reload();
   }
-
 }

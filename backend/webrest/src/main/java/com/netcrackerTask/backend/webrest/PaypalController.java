@@ -46,7 +46,7 @@ public class PaypalController {
             User user = userService.findByUsername(name);
             if(user.getActivationCode()!=null){
                 model.addAttribute("autherror","Вы не подтвердили свой адрес электронной почты. " +
-                        "Перейдите по ссылки в отправленном Вам письме для активации аккаунта.");
+                        "Перейдите по ссылке в отправленном Вам письме для активации аккаунта.");
             }
 
         }

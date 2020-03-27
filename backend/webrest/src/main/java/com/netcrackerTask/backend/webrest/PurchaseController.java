@@ -7,6 +7,7 @@ import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.service.StoreService;
 import com.netcrackerTask.backend.business.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/bag")
+    @PreAuthorize("hasRole('USER')")
     public String getBag(Model model, @RequestParam("id") Long id){
         List<Account> items = storeService.getBagItemsForUser(id);
         if(items.size()==0){
@@ -43,6 +45,7 @@ public class PurchaseController {
 
 
     @GetMapping("/addtocart")
+    @PreAuthorize("hasRole('USER')")
     public String addtocart(Model model, @RequestParam("id") Long id){
         Account account = storeService.getAccountById(id);
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
@@ -58,6 +61,7 @@ public class PurchaseController {
     }
 
     @GetMapping("bag/removePurchase")
+    @PreAuthorize("hasRole('USER')")
     public String remove(Model model, @RequestParam("id") Long accountId){
 
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
