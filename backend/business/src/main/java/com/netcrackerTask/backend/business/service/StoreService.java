@@ -55,21 +55,21 @@ public class StoreService {
             if(from!= null && to !=null){
                 if(sort==null)
 
-                    return accountRepository.getAccountsByGameIdAndPriceBetween(id, from, to);
+                    return accountRepository.getAccountsByGameIdAndStatusAndPriceBetween(id, "FREE", from, to);
                 else {
                     if(sort.equals("desc"))
-                        return accountRepository.getAccountsByGameIdAndPriceBetweenOrderByPriceDesc(id, from, to);
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(id, "FREE",  from, to);
                     else
-                        return accountRepository.getAccountsByGameIdAndPriceBetweenOrderByPrice(id, from, to);
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(id, "FREE", from, to);
                 }
             }
             else {
                 if(sort==null)
-                    return accountRepository.findAll();
+                    return accountRepository.getAccountsByGameIdAndStatus(id,"FREE");
                 else  if(sort.equals("desc"))
-                    return accountRepository.getAccountsByGameIdOrderByPriceDesc(id);
+                    return accountRepository.getAccountsByGameIdAndStatusOrderByPriceDesc(id, "FREE");
                 else
-                    return accountRepository.getAccountsByGameIdOrderByPrice(id);
+                    return accountRepository.getAccountsByGameIdAndStatusOrderByPrice(id, "FREE");
             }
     }
 

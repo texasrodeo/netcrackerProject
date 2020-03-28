@@ -3,20 +3,24 @@ import {Subscription} from "rxjs";
 import {StoreService} from "../../service/store-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {Account} from "../../model/account";
+import {TokenstorageService} from "../../service/tokenstorage.service";
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+   styleUrls: ['./account.component.css']
+
 })
 export class AccountComponent implements OnInit {
 
   id:string;
   account: Account;
   private querySubscription: Subscription;
+  currentUser: any;
+  message: String;
+  added = false;
 
-
-  constructor(private storeService: StoreService, private route: ActivatedRoute) {
+  constructor(private storeService: StoreService, private route: ActivatedRoute, private tokenStorage: TokenstorageService) {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam['id'];
@@ -25,9 +29,24 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUser = this.tokenStorage.getUser();
+
     this.storeService.findAccount(this.id).subscribe(data => {
       this.account = data;
     });
+  }
+
+  addToCart(){
+    this.storeService.addtocart(this.account.id).subscribe(data=>{
+        this.message = data['message'];
+        this.added=true;
+       //  this.reloadPage();
+      }
+    );
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
 }

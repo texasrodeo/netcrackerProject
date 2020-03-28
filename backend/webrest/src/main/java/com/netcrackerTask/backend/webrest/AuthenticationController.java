@@ -99,7 +99,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/activate/{code}")
-    public Map<String, Boolean> activate(Model model, @PathVariable String code) {
+    public Map<String, Boolean> activate(@PathVariable String code) {
         Map<String,Boolean> result = new HashMap<>();
         result.put("activated", userService.activateUser(code));
         return result;

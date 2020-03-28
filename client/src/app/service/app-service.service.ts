@@ -31,16 +31,9 @@ export class AppService {
     }, httpOptions);
   }
 
-  activate(code: String){
-     // let activated = false;
-     // this.http.get(AUTH_API + 'activate/'+code).subscribe(
-     //   data => {
-     //     activated = data["activated"];
-     //
-     //   }
-     // );
-     // return activated;
-    return this.http.get(AUTH_API + 'activate/'+code);
+  activate(code): Observable<any>{
+    return this.http.get<any>(AUTH_API + 'activate/'+code);
+
   }
 
 }

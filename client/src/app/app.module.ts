@@ -18,6 +18,7 @@ import { RegisterComponent } from './templateComponents/register/register.compon
 import {authInterceptorProviders} from "./config/auth.interseptor";
 import { ProfileComponent } from './templateComponents/profile/profile.component';
 import { ActivationComponent } from './templateComponents/activation/activation.component';
+import { BagComponent } from './templateComponents/bag/bag.component';
 
 
 
@@ -31,6 +32,7 @@ import { ActivationComponent } from './templateComponents/activation/activation.
     RegisterComponent,
     ProfileComponent,
     ActivationComponent,
+    BagComponent,
 
   ],
   imports: [

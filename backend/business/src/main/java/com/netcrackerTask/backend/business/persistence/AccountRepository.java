@@ -6,17 +6,17 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
-   List<Account> getAccountsByGameId(Long id);
+   List<Account> getAccountsByGameIdAndStatus(Long id, String status);
 
-   List<Account> getAccountsByGameIdOrderByPriceDesc(Long id);
+   List<Account> getAccountsByGameIdAndStatusOrderByPriceDesc(Long id, String status);
 
-   List<Account> getAccountsByGameIdOrderByPrice(Long id);
+   List<Account> getAccountsByGameIdAndStatusOrderByPrice(Long id, String status);
 
-   List<Account> getAccountsByGameIdAndPriceBetween(Long id, Integer from, Integer to);
+   List<Account> getAccountsByGameIdAndStatusAndPriceBetween(Long id, String status, Integer from, Integer to);
 
-   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPrice(Long id, Integer from, Integer to);
+   List<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(Long id, String status, Integer from, Integer to);
 
-   List<Account> getAccountsByGameIdAndPriceBetweenOrderByPriceDesc(Long id, Integer from, Integer to);
+   List<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(Long id, String status, Integer from, Integer to);
 
    Account getAccountById(Long id);
 
