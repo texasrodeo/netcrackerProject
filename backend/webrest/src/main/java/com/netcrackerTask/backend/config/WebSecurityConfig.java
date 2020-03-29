@@ -43,19 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return encryptor;
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                    .antMatchers( "/main","/registration", "/categories","/activate/*", "/signin","/gamestore/**", "/gamestores","/getuser").permitAll()
-//                    .antMatchers("/admin/**").hasRole("ADMIN")
-//                    .antMatchers("/user/**","/pay","/pay/**").hasRole("USER")
-//                .anyRequest().authenticated()
-//                .and().httpBasic();
-//    }
-
-
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -82,8 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/main","/registration", "/categories","/activate/*", "/signin",  "/signup","/gamestore/**", "/gamestores").permitAll()
-               // .antMatchers("/api/test/**").permitAll()
+                .authorizeRequests().antMatchers("/main", "/registration", "/categories", "/activate/*", "/signin", "/signup", "/gamestore/**", "/gamestores").permitAll()
+                // .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -94,13 +81,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//
-//                .passwordEncoder(bCryptPasswordEncoder)
-//                .usersByUsernameQuery("select id, username, password from user where username=?")
-//                .authoritiesByUsernameQuery("select u.username, ur.roles from user u inner join user_role ur on u.id = ur.user_id where u.username=?");
-//    }
 }

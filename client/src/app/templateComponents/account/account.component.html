@@ -4,12 +4,13 @@
       <div class="card card-block text-center">
         <div class="card-body">
           <h4 class="card-title">Аккаунт</h4>
-          <p class="card-text">{{account.description}}</p>
+          <p class="card-text">{{account?.description}}</p>
+          <p class="card-text">Цена: {{account?.price}}</p>
 
         </div>
         <div class="card-footer text-center">
 
-          <a routerLink="/gamestore" [queryParams]="{'id':account.gameId.toString()}" class="btn-primary btn-sm float-left">Назад</a>
+          <button routerLink="/gamestore" [queryParams]="{'id':account?.gameId.toString()}" class="btn-primary btn-sm float-left">Назад</button>
           <button (click)="addToCart()" class="btn-primary btn-sf float-right">Добавить в корзину</button>
         </div>
       </div>
@@ -18,12 +19,12 @@
 </div>
 <div *ngIf="added">
   <div align="center">
-    <div class="col-md-9 col-xl-2">
-      <div class="card text-center border-primary">
+    <div  class="col-sm-10">
+      <div class="card card-block text-center">
         <div class="card-body">
-          <h4 class="card-title">message</h4>
-          <a routerLink="/gamestore" [queryParams]="{'id':account.gameId.toString()}" class="btn-primary">Продолжить покупки</a>
-          <a routerLink="/bag" class="btn-primary">Перейти в корзину</a>
+          <h4 class="card-title">{{message}}</h4>
+          <button routerLink="/gamestore" [queryParams]="{'id':account.gameId.toString()}" class="btn-primary btn-sm loat-left">Продолжить покупки</button>
+          <button routerLink="/bag" class="btn-primary btn-sm loat-left">Перейти в корзину</button>
         </div>
       </div>
     </div>

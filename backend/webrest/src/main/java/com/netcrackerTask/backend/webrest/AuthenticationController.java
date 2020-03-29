@@ -103,8 +103,6 @@ public class AuthenticationController {
         Map<String,Boolean> result = new HashMap<>();
         result.put("activated", userService.activateUser(code));
         return result;
-
-
     }
 
 

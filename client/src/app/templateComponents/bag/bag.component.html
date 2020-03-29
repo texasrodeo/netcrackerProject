@@ -1,12 +1,15 @@
+<h3 class="display-3">Ваша корзина</h3>
 <div class="card my-5">
 
   <div class="card-body">
-    <h3 class="display-3">Ваша корзина</h3>
-    <div *ngIf="accounts.length===0">
+
+    <div *ngIf="accounts?.length==0">
       <h6 class="display-4">Здесь пока ничего нет.</h6>
+      <a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
     </div>
-    <div *ngIf="accounts.length!==0">
-      <table class="table table-dark table-bordered table-striped">
+    <div *ngIf="accounts?.length!=0">
+
+      <table class="table  table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
 
@@ -20,10 +23,13 @@
 
           <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
           <td>{{account.price}}</td>
-          <td> <a (click)="deleteFromBag(account.id)" >Удалить из корзины</a> </td>
+          <td> <button (click)="deleteFromBag(account.id)" class="btn-primary" >Удалить из корзины</button> </td>
         </tr>
         </tbody>
       </table>
+      <p class="font-weight-bold">Сумма: {{sum}}</p>
+      <a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
+      <a routerLink="/checkout" class="btn-primary btn-sm float-right">Перейти к оформлению</a>
     </div>
 
   </div>

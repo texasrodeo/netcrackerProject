@@ -39,10 +39,11 @@ export class StoreService {
     this.removeFromBagUrl = 'http://localhost:8080/bag/removePurchase';
   }
 
-  getbag(id: any): Observable<Account[]>{
-    const params = new HttpParams()
-      .set('id', id)
-    return this.http.get<Account[]>(this.accountUrl,{params});
+  getbag(): Observable<any>{
+    // const params = new HttpParams()
+    //   .set('id', id)
+    //return this.http.get<Account[]>(this.accountUrl,{params});
+    return this.http.get<any>(this.bagUrl);
 
   }
 
@@ -52,9 +53,11 @@ export class StoreService {
     return this.http.get<any>(this.addToCartUrl, {params});
   }
 
-  deletefrombag(id: number):Observable<any> {
+  deletefrombag(id: number){
     const params = new HttpParams()
       .set('id',id.toString());
-    return  this.http.get<any>(this.removeFromBagUrl, {params});
+    return this.http.get(this.removeFromBagUrl, {params});
   }
+
+
 }

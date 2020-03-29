@@ -36,9 +36,15 @@ public class PurchaseController {
 
     @GetMapping("/bag")
     @PreAuthorize("hasRole('USER')")
-    public List<Account> getBag(@RequestParam("id") Long id){
-        List<Account> items = storeService.getBagItemsForUser(id);
-        return items;
+    public Map<String,Object> getBag(){
+        Map<String,Object> result = new HashMap<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name=auth.getName();
+        User user= userService.findByUsername(name);
+        List<Account> accounts = storeService.getBagItemsForUser(user.getId());
+        result.put("accounts", accounts);
+        result.put("sum", storeService.getPriceSum(accounts));
+        return result;
     }
 
 
@@ -64,15 +70,11 @@ public class PurchaseController {
 
     @GetMapping("bag/removePurchase")
     @PreAuthorize("hasRole('USER')")
-    public String remove(@RequestParam("id") Long accountId){
-
-        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-
-        String name = auth.getName();
-        User user = userService.findByUsername(name);
-
+    public void remove(@RequestParam("id") Long accountId){
+//        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName();
+//        User user = userService.findByUsername(name);
         storeService.removePurchase(accountId);
-        return "redirect:/bag?id="+user.getId().toString();
     }
 
 

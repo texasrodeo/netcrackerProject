@@ -13,28 +13,29 @@ import {TokenstorageService} from "../../service/tokenstorage.service";
 export class BagComponent implements OnInit {
 
   accounts: Account[]=[];
+  sum : number;
   currentUser: any;
   private querySubscription: Subscription;
 
 
   constructor(private storeService: StoreService, private route: ActivatedRoute, private tokenStorage: TokenstorageService) {
-    // this.querySubscription = route.queryParams.subscribe(
-    //   (queryParam: any) => {
-    //     this.id = queryParam['id'];
-    //   }
-    // );
+
   }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-
-    this.storeService.getbag(this.currentUser.id).subscribe(data => {
-      this.accounts = data;
-
+    this.storeService.getbag().subscribe(data => {
+      this.accounts = data["accounts"];
+      this.sum = data["sum"];
     });
+
   }
 
   deleteFromBag(id: number) {
     this.storeService.deletefrombag(id).subscribe();
+    this.reloadPage();
+  }
+  reloadPage() {
+    window.location.reload();
   }
 }
