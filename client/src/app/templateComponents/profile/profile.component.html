@@ -5,19 +5,16 @@
     </h3>
   </header>
   <p>
-    <strong>Token:</strong>
-    {{ currentUser.accessToken.substring(0, 20) }} ...
-    {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
   </p>
   <p>
     <strong>Email:</strong>
     {{ currentUser.email }}
   </p>
-  
+
   <ul>
     <li *ngFor="let role of currentUser.roles">
       <span *ngIf="role === 'ROLE_USER'">Вы вошли как пользователь</span>
-      <span *ngIf="role === 'ROLE_ADMIN'">Вы вошли как админитсрратор</span>
+      <span *ngIf="role === 'ROLE_ADMIN'">Вы вошли как администратор</span>
     </li>
   </ul>
 </div>

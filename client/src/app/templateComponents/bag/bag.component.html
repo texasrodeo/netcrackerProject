@@ -1,11 +1,13 @@
 <h3 class="display-3">Ваша корзина</h3>
+<span *ngIf="message">{{message}}</span>
 <div class="card my-5">
 
   <div class="card-body">
 
+
     <div *ngIf="accounts?.length==0">
       <h6 class="display-4">Здесь пока ничего нет.</h6>
-      <a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
+
     </div>
     <div *ngIf="accounts?.length!=0">
 
@@ -28,9 +30,13 @@
         </tbody>
       </table>
       <p class="font-weight-bold">Сумма: {{sum}}</p>
-      <a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
-      <a routerLink="/checkout" class="btn-primary btn-sm float-right">Перейти к оформлению</a>
+
     </div>
 
   </div>
+
+</div>
+<a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
+<div *ngIf="accounts?.length!=0">
+  <a routerLink="/checkout" class="btn-primary btn-sm float-right">Перейти к оформлению</a>
 </div>

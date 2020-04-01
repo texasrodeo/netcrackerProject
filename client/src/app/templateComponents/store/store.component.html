@@ -18,4 +18,7 @@
       </tr>
       </tbody>
     </table>
+    <div *ngIf="currentUser.role==='ROLE_ADMIN'">
+      <button routerLink="/addAccount" class="btn-primary float-left">Добавить аккаунт</button>
+    </div>
 

@@ -40,7 +40,7 @@ export class AccountComponent implements OnInit {
     this.storeService.addtocart(this.account.id).subscribe(data=>{
         this.message = data['message'];
         this.added=true;
-       //  this.reloadPage();
+
       }
     );
   }

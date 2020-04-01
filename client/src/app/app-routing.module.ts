@@ -8,6 +8,8 @@ import {RegisterComponent} from "./templateComponents/register/register.componen
 import {ProfileComponent} from "./templateComponents/profile/profile.component";
 import {ActivationComponent} from "./templateComponents/activation/activation.component";
 import {BagComponent} from "./templateComponents/bag/bag.component";
+import {CheckoutComponent} from "./templateComponents/checkout/checkout.component";
+import {AddAccountComponent} from "./templateComponents/add-account/add-account.component";
 
 
 const routes: Routes = [
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   {path: 'activate/:code', component: ActivationComponent},
-  {path: 'bag',component: BagComponent}
+  {path: 'bag',component: BagComponent},
+  {path:'checkout',component: CheckoutComponent},
+  {path:'addAccount',component: AddAccountComponent},
 ];
 
 @NgModule({

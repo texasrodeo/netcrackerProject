@@ -86,7 +86,7 @@ public class StoreService {
         return accountRepository.getAccountById(id);
     }
 
-    public void addPurchase(Long accountId, Long userId) {
+    public Boolean addPurchase(Long accountId, Long userId) {
         java.util.Date date=new java.util.Date();
 
         java.sql.Date sqlDate=new java.sql.Date(date.getTime());
@@ -95,10 +95,14 @@ public class StoreService {
         Purchase purchase = new Purchase(sqlTime, "ADDED_TO_BASKET", userId, accountId);
 
         Account account = accountRepository.getAccountById(accountId);
-        account.setStatus("RESERVED");
+        if(!account.getStatus().equals("RESERVED")){
+            account.setStatus("RESERVED");
 
-        accountRepository.save(account);
-        purchaseRepository.save(purchase);
+            accountRepository.save(account);
+            purchaseRepository.save(purchase);
+            return true;
+        }
+        return false;
     }
 
     public List<Account> getAccountsByPurchase(List<Purchase> purchases) {

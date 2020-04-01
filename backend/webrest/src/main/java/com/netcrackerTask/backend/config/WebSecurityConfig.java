@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 
 @Configuration
@@ -60,6 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+//    }
 
 
     @Override
@@ -69,7 +74,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/main", "/registration", "/categories", "/activate/*", "/signin", "/signup", "/gamestore/**", "/gamestores").permitAll()
+                .authorizeRequests().antMatchers("/main", "/registration", "/categories", "/activate/*", "/signin",
+                "/signup", "/gamestore/**", "/gamestores","/checkout","/pay","/pay/*",
+                "https://www.sandbox.paypal.com/cgi-bin/webscr").permitAll()
                 // .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 
 public class AdminController {
@@ -46,14 +49,15 @@ public class AdminController {
 
     @PostMapping("/admin/addaccount")
     @PreAuthorize("hasRole('ADMIN')")
-    public String sendaccount(@RequestParam("game") String gameId, Model model, Account account){
+    public Map<String, String> sendaccount(@RequestParam("game") String gameId, Model model, Account account){
+        Map<String, String> res = new HashMap<>();
         account.setGameId(Long.parseLong(gameId));
-        account.setStatus("FREE"); //??
+        account.setStatus("FREE");
         storeService.addAccount(account);
-        model.addAttribute("message","Аккаунт добавлен");
-        StringBuilder sb = new StringBuilder("redirect:/gamestore?id=");
-        sb.append(gameId);
-        return sb.toString();
+
+
+        res.put("message", "Аккаунт добавлен");
+        return res;
     }
 
 

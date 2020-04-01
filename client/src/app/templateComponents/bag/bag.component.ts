@@ -15,6 +15,7 @@ export class BagComponent implements OnInit {
   accounts: Account[]=[];
   sum : number;
   currentUser: any;
+  message: string;
   private querySubscription: Subscription;
 
 
@@ -32,7 +33,11 @@ export class BagComponent implements OnInit {
   }
 
   deleteFromBag(id: number) {
-    this.storeService.deletefrombag(id).subscribe();
+     this.storeService.deletefrombag(id).subscribe(data=>{
+         this.message = data;
+     }
+     );
+
     this.reloadPage();
   }
   reloadPage() {

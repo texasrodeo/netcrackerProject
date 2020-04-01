@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/bag")
-    @PreAuthorize("hasRole('USER')")
+  //  @PreAuthorize("hasRole('USER')")
     public Map<String,Object> getBag(){
         Map<String,Object> result = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -49,8 +51,9 @@ public class PurchaseController {
 
 
     @GetMapping("/addtocart")
-    @PreAuthorize("hasRole('USER')")
-    public Map<String,String> addtocart(@RequestParam("id") Long id){
+//    @PreAuthorize("hasRole('USER')")
+//
+    public Map<String,String>  addtocart(@RequestParam("id") Long id, HttpServletResponse response) throws IOException {
         Account account = storeService.getAccountById(id);
         Map<String, String> result = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -58,23 +61,26 @@ public class PurchaseController {
             String name=auth.getName();
             User user= userService.findByUsername(name);
             if(user!=null){
-                storeService.addPurchase(id, user.getId());
-                //model.addAttribute("addedToCart","Акаунт успешно добавлен в корзину");
-                result.put("message","Аккаунт успешно доабвлен в корзину") ;
+                if(storeService.addPurchase(id, user.getId()))
+                    result.put("message","Аккаунт успешно доабвлен в корзину") ;
+                else
+                    result.put("message", "Ошибка");
                 return result;
             }
         }
+
         result.put("message", "Ошибка");
         return result;
     }
 
     @GetMapping("bag/removePurchase")
     @PreAuthorize("hasRole('USER')")
-    public void remove(@RequestParam("id") Long accountId){
+    public String remove(@RequestParam("id") Long accountId){
 //        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
 //        String name = auth.getName();
 //        User user = userService.findByUsername(name);
         storeService.removePurchase(accountId);
+        return "Удалено";
     }
 
 

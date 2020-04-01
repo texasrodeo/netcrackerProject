@@ -4,6 +4,7 @@ import {StoreService} from "../../service/store-service.service";
 import {Account} from "../../model/account";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {TokenstorageService} from "../../service/tokenstorage.service";
 
 @Component({
   selector: 'app-store',
@@ -14,16 +15,17 @@ export class StoreComponent implements OnInit {
   accounts: Account[]=[];
   header: string;
   id:string;
-
+  currentUser: any;
   private querySubscription: Subscription;
 
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute) {
+  constructor(private storeService: StoreService, private route: ActivatedRoute, private token: TokenstorageService) {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam['id'];
       }
     );
+    this.currentUser = this.token.getUser();
   }
 
   ngOnInit(): void {

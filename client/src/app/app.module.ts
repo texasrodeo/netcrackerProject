@@ -19,6 +19,8 @@ import {authInterceptorProviders} from "./config/auth.interseptor";
 import { ProfileComponent } from './templateComponents/profile/profile.component';
 import { ActivationComponent } from './templateComponents/activation/activation.component';
 import { BagComponent } from './templateComponents/bag/bag.component';
+import { CheckoutComponent } from './templateComponents/checkout/checkout.component';
+import { AddAccountComponent } from './templateComponents/add-account/add-account.component';
 
 
 
@@ -33,6 +35,8 @@ import { BagComponent } from './templateComponents/bag/bag.component';
     ProfileComponent,
     ActivationComponent,
     BagComponent,
+    CheckoutComponent,
+    AddAccountComponent,
 
   ],
   imports: [
