@@ -23,6 +23,7 @@ export class StoreComponent implements OnInit {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam['id'];
+
       }
     );
     this.currentUser = this.token.getUser();

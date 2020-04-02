@@ -8,14 +8,6 @@
   >
     <div class="form-group">
 
-      <label>
-        <select name="game">
-          <option *ngFor="let store of stores" value="{{store.id}}">
-            {{store.name}}
-          </option>
-        </select>
-      </label>
-
       <label for="description">Описание</label>
       <input
         type="text"
@@ -54,7 +46,7 @@
       </div>
       <div class="form-group">
 
-        <label for="login">
+        <label for="login">Логин для входа   </label>
           <input
             class="form-control"
             name="price"
@@ -63,7 +55,7 @@
 
             #login="ngModel"
           />
-        </label>
+
         <div
           class="alert alert-danger"
           role="alert"
@@ -73,7 +65,7 @@
         </div>
         <div class="form-group">
 
-          <label for="password">
+          <label for="password">Пароль для входа</label>
             <input
               class="form-control"
               name="password"
@@ -82,7 +74,7 @@
 
               #password="ngModel"
             />
-          </label>
+
           <div
             class="alert alert-danger"
             role="alert"
@@ -101,7 +93,7 @@
   </form>
 
   <div class="alert alert-success" *ngIf="message">
-    message
+   {{message}}
   </div>
 </div>
 </div>

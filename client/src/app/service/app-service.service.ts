@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 
@@ -36,4 +36,9 @@ export class AppService {
 
   }
 
+  checkEmail(id:any):Observable<any> {
+    const params = new HttpParams()
+      .set('id',id.toString());
+    return this.http.get<any>(AUTH_API+"user/email",{params});
+  }
 }

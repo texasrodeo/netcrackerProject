@@ -39,7 +39,7 @@ public class PaypalController {
     @Autowired
     UserService userService;
 
-    private static final String url = "http://localhost:8080/";
+    private static final String url = "http://localhost:4200/";
     private static final String success = "pay/success";
     private static final String cancel = "pay/cancel";
 
@@ -60,47 +60,9 @@ public class PaypalController {
             List<Account> items = storeService.getBagItemsForUser(user.getId());
             result.put("items",items);
             result.put("sum",storeService.getPriceSum(items));
-
-
         }
         return result;
     }
-
-//    @PostMapping("/pay")
-//    public ResponseEntity<?> payment(@RequestBody PayRequest sum, HttpServletResponse response)    {
-//        try {
-//            Order order = new Order();
-//            order.setMethod("paypal");
-//            order.setIntent("sale");
-//            order.setCurrency("RUB");
-//
-//            order.setPrice(sum.getSum());
-//            order.setDescription("account purchase");
-//            Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-//            String name=auth.getName();
-//            User user= userService.findByUsername(name);
-//            order.setAccountId(user.getId());
-//            for (Account account: storeService.getBagItemsForUser(user.getId())) {
-//                order.setAccountId(account.getId());
-//            }
-//
-//            Payment payment = paypalService.createPayment(order.getPrice(), order.getCurrency(), order.getMethod(),
-//                    order.getIntent(), order.getDescription(),
-//                    url+cancel, paypalService.completeSuccessUrl(order.getAccountsId(),url+success));
-//
-//            for(Links link:payment.getLinks()){
-//                if(link.getRel().equals("approval_url")){
-//                    response.sendRedirect(link.getHref());
-//                }
-//            }
-//        }
-//        catch (PayPalRESTException | IOException e){
-//            e.printStackTrace();
-//        }
-//        return ResponseEntity
-//                .badRequest()
-//                .body(new MessageResponse("Ошибка"));
-//    }
 
 
 
@@ -119,7 +81,7 @@ public class PaypalController {
             Authentication auth= SecurityContextHolder.getContext().getAuthentication();
             String name=auth.getName();
             User user= userService.findByUsername(name);
-            order.setAccountId(user.getId());
+            //order.setAccountId(user.getId());
             for (Account account: storeService.getBagItemsForUser(user.getId())) {
                 order.setAccountId(account.getId());
             }
@@ -142,7 +104,8 @@ public class PaypalController {
     }
 
     @GetMapping("/pay/success")
-    public String successPay(@RequestParam Map<String,String> allRequestParams){
+    public Map<String,String> successPay(@RequestParam Map<String,String> allRequestParams){
+        Map<String, String> result = new HashMap<>();
         try {
             Payment payment = paypalService.executePayment(allRequestParams.get("paymentId"),allRequestParams.get("PayerID"));
             System.out.println(payment.toJSON());
@@ -160,14 +123,16 @@ public class PaypalController {
                     });
 
                     storeService.sellAccounts(accountsId, user.getUsername(), user.getEmail());
-                    return "success";
+                    result.put("message","Успешно! Благодарим Вас за покупку!") ;
+                    return result;
                 }
             }
         }
         catch (PayPalRESTException e){
             System.out.println(e.getMessage());
         }
-        return "redirect:/main";
+        result.put("message","Произошла ошибка на сервере") ;
+        return result;
     }
 
     @GetMapping("/pay/cancel")

@@ -10,6 +10,8 @@ import {ActivationComponent} from "./templateComponents/activation/activation.co
 import {BagComponent} from "./templateComponents/bag/bag.component";
 import {CheckoutComponent} from "./templateComponents/checkout/checkout.component";
 import {AddAccountComponent} from "./templateComponents/add-account/add-account.component";
+import {ForbiddenComponent} from "./templateComponents/forbidden/forbidden.component";
+import {PayresultComponent} from "./templateComponents/payresult/payresult.component";
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'bag',component: BagComponent},
   {path:'checkout',component: CheckoutComponent},
   {path:'addAccount',component: AddAccountComponent},
+  {path:'forbidden',component: ForbiddenComponent},
+  {path:'pay/:success', component: PayresultComponent}
 ];
 
 @NgModule({

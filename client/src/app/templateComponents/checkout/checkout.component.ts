@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Account} from "../../model/account";
 import {StoreService} from "../../service/store-service.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -12,16 +12,20 @@ export class CheckoutComponent implements OnInit {
 
   accounts: Account[]=[];
   sum : number;
-  error: string;
+  error: "";
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute) { }
+  constructor(private router:Router,private storeService: StoreService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.storeService.checkout().subscribe(data => {
-      this.accounts = data["accounts"];
+      this.accounts = data["items"];
       this.sum = data["sum"];
-      this.error = data["autherror"];
+      if(data["autherror"])
+        this.router.navigateByUrl("/forbidden");
+      // if(this.error!=="")
+
     });
+
   }
 
   buy(sum: number){

@@ -21,6 +21,8 @@ import { ActivationComponent } from './templateComponents/activation/activation.
 import { BagComponent } from './templateComponents/bag/bag.component';
 import { CheckoutComponent } from './templateComponents/checkout/checkout.component';
 import { AddAccountComponent } from './templateComponents/add-account/add-account.component';
+import { ForbiddenComponent } from './templateComponents/forbidden/forbidden.component';
+import { PayresultComponent } from './templateComponents/payresult/payresult.component';
 
 
 
@@ -37,6 +39,8 @@ import { AddAccountComponent } from './templateComponents/add-account/add-accoun
     BagComponent,
     CheckoutComponent,
     AddAccountComponent,
+    ForbiddenComponent,
+    PayresultComponent,
 
   ],
   imports: [

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Game} from "../../model/game";
 import {StoreService} from "../../service/store-service.service";
 import {TokenstorageService} from "../../service/tokenstorage.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-account',
@@ -13,14 +15,24 @@ export class AddAccountComponent implements OnInit {
   stores: Game[];
   form: any = {};
   currentUser: any;
-
+  querySubscription: Subscription;
   message: string;
+  gameId: string;
 
-  constructor(private storeService:StoreService, private token: TokenstorageService) { }
+  constructor(private router:Router, private route:ActivatedRoute,private storeService:StoreService, private token: TokenstorageService) {
+    this.querySubscription = route.queryParams.subscribe(
+      (queryParam: any) => {
+        this.gameId = queryParam['gameId'];
+
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    if(this.currentUser.role === "ROLE_ADMIN"){
+    if(!this.currentUser.roles.includes("ROLE_ADMIN"))
+      this.router.navigateByUrl("/forbidden");
+    else{
       this.storeService.findAll().subscribe(data => {
         this.stores = data;
       });
@@ -28,7 +40,7 @@ export class AddAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    this.storeService.addAccount(this.form).subscribe(
+    this.storeService.addAccount(this.form, this.gameId).subscribe(
       data=>{
         this.message = data["message"];
       }

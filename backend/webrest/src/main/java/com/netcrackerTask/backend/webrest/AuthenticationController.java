@@ -3,7 +3,7 @@ package com.netcrackerTask.backend.webrest;
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
 import com.netcrackerTask.backend.business.service.UserDetailsImpl;
-import com.netcrackerTask.backend.business.security.jwt.JwtUtils;
+import com.netcrackerTask.backend.jwt.JwtUtils;
 import com.netcrackerTask.backend.business.service.UserService;
 
 import com.netcrackerTask.backend.business.payloads.JwtResponse;
@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

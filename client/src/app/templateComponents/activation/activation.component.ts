@@ -13,7 +13,7 @@ import {Observable, Subscription} from "rxjs";
 export class ActivationComponent implements OnInit {
 
 
-  code: String
+  code: String;
   private routeSubscription: Subscription;
 
   constructor(private appService: AppService, private route: ActivatedRoute) {

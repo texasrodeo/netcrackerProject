@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {Game} from "../model/game";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Account} from "../model/account";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class StoreService {
@@ -15,6 +19,7 @@ export class StoreService {
   private checkoutUrl: string;
   private buyUrl: string;
   private addAccUrl: string;
+  private successUrl: string;
 
   public findAll(): Observable<Game[]>{
     return this.http.get<Game[]>(this.storesUrl);
@@ -43,6 +48,7 @@ export class StoreService {
     this.checkoutUrl = 'http://localhost:8080/checkout';
     this.buyUrl = 'http://localhost:8080/pay';
     this.addAccUrl = 'http://localhost:8080/admin/addaccount';
+    this.successUrl = 'http://localhost:8080/pay/success';
   }
 
   getbag(): Observable<any>{
@@ -79,13 +85,31 @@ export class StoreService {
 
   }
 
-  addAccount(form: any): Observable<any> {
+  addAccount(form: any, gameId: any): Observable<any> {
     return this.http.post(this.addAccUrl, {
-      game: form.game,
+      gameId: gameId,
       description: form.description,
       login: form.login,
       password: form.password,
       price: form.price
-    });
+    },httpOptions);
+  }
+
+  successBuy(paymentid: any, payerid: any, accountsId: any[]):Observable<any> {
+    let params = new HttpParams()
+      .set('paymentId', paymentid.toString())
+      .set('PayerID',payerid.toString())
+
+
+    let k=0;
+
+    for(let a of accountsId){
+      let str = "id"+k.toString();
+      k++;
+      params = params.append(str,a.toString());
+    }
+
+
+      return this.http.get<any>(this.successUrl,{params});
   }
 }

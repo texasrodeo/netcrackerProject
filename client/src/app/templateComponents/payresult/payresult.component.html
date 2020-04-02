@@ -1,0 +1,17 @@
+<div *ngIf="success==='success'">
+  <div class="alert alert-success" role="alert">
+    <h3 class="display-4">{{message}}</h3>
+
+    <br>
+    <button routerLink="/"  class="btn-primary btn-sm float-left">На главную</button>
+  </div>
+</div>
+<div *ngIf="success==='cancel'">
+  <div class="alert alert-danger" role="alert">
+    <h3 class="display-4">Ошибка в ходе оплаты</h3>
+    <span>Попробуйте повторить попытку позже
+  </span>
+    <br>
+    <button routerLink="/"  class="btn-primary btn-sm float-left">На главную</button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 package com.netcrackerTask.backend.config;
 
-import com.netcrackerTask.backend.business.security.jwt.AuthEntryPointJwt;
-import com.netcrackerTask.backend.business.security.jwt.AuthTokenFilter;
+import com.netcrackerTask.backend.jwt.AuthEntryPointJwt;
+import com.netcrackerTask.backend.jwt.AuthTokenFilter;
 import com.netcrackerTask.backend.business.service.UserService;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.iv.RandomIvGenerator;
@@ -19,7 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
 
 
 @Configuration
@@ -61,11 +61,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-//    }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -76,8 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/main", "/registration", "/categories", "/activate/*", "/signin",
                 "/signup", "/gamestore/**", "/gamestores","/checkout","/pay","/pay/*",
-                "https://www.sandbox.paypal.com/cgi-bin/webscr").permitAll()
-                // .antMatchers("/api/test/**").permitAll()
+                "/admin/addaccount").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

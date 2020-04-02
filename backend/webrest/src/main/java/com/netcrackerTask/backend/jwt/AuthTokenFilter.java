@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.security.jwt;
+package com.netcrackerTask.backend.jwt;
 
 import java.io.IOException;
 

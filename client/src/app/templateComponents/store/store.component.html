@@ -1,7 +1,7 @@
 
     <h3 class="display-4">{{header}}</h3>
     <table class="table  table-bordered table-striped">
-      <thead class="thead-dark">
+      <thead class="thead-light">
       <tr>
 
         <th scope="col">Название</th>
@@ -18,7 +18,8 @@
       </tr>
       </tbody>
     </table>
-    <div *ngIf="currentUser.role==='ROLE_ADMIN'">
-      <button routerLink="/addAccount" class="btn-primary float-left">Добавить аккаунт</button>
+    <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+      <button [routerLink]="['/addAccount']" [queryParams]="{'gameId':id.toString()}" class="btn-primary float-left">Добавить аккаунт</button>
+
     </div>
 

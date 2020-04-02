@@ -124,4 +124,9 @@ public class UserService implements UserDetailsService {
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    public Boolean checkEmail(Long id) {
+        User user = userRepository.getById(id);
+        return user.getActivationCode()==null;
+    }
 }
