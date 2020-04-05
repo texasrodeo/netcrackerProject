@@ -1,30 +1,25 @@
 package com.netcrackerTask.backend.business.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="game")
-    public class Game {
-
+public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+    private Long id;
 
-        public Long getId(){
-            return id;
-        }
+    private String description;
 
-        private String description;
+    private String name;
 
-        public String getDescription(){
-            return description;
-        }
 
-        private String name;
-
-        public String getName(){
-            return name;
-        }
-
-    }
+}
 

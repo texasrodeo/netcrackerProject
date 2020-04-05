@@ -1,10 +1,17 @@
 package com.netcrackerTask.backend.business.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "purchase")
 public class Purchase {
 
@@ -12,39 +19,20 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Long getId(){
-        return id;
-    }
-
     @Column(name="data")
     private Timestamp date;
 
-    public Timestamp getDate(){
-        return date;
-    }
 
     @Column(name="status")
     private String status;
-
-    public String getStatus(){
-        return status;
-    }
-
 
 
     @Column(name="user_id")
     private Long userId;
 
-    public Long getGameId(){
-        return  userId;
-    }
-
     @Column(name="game_account_id")
     private Long gameAccountId;
 
-    public Long getGameAccountId(){
-        return  gameAccountId;
-    }
 
     public Purchase(Timestamp date, String status, Long userId, Long gameAccountId){
         this.date = date;
@@ -53,8 +41,5 @@ public class Purchase {
         this.gameAccountId  = gameAccountId;
     }
 
-    public Purchase() {
-
-    }
 
 }

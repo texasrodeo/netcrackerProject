@@ -18,7 +18,6 @@ public class Log {
     @Column(name="type")
     private String type;
 
-//    @Column(name="file")
-//    private JsonObject file;
+
 
 }

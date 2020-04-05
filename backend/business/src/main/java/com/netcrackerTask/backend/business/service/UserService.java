@@ -78,11 +78,7 @@ public class UserService implements UserDetailsService {
 
         user.setRoles(roles);
         userRepository.save(user);
-
-
         user.setActivationCode(UUID.randomUUID().toString());
-
-
         userRepository.save(user);
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format("Здравствуйте "
