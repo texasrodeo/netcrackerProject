@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm} from '@angular/forms';
 
 import {StoreService} from "../../service/store-service.service";
 import {Account} from "../../model/account";
@@ -18,6 +19,10 @@ export class StoreComponent implements OnInit {
   currentUser: any;
   private querySubscription: Subscription;
 
+  sort:string;
+  from:string;
+  to:string;
+
 
   constructor(private storeService: StoreService, private route: ActivatedRoute, private token: TokenstorageService) {
     this.querySubscription = route.queryParams.subscribe(
@@ -30,12 +35,25 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
-    this.storeService.find(this.id).subscribe(data => {
+    this.storeService.findAcc(this.id).subscribe(data => {
       this.accounts = data["accounts"];
       this.header = data["header"];
     });
   }
 
+  submit(form: NgForm){
+    if(form.value.from && form.value.to || form.value.sort)
+    this.storeService.findAccWithParams(this.id,form.value.from,form.value.to,form.value.sort).subscribe(data => {
+      this.accounts = data["accounts"];
+      this.header = data["header"];
+    });
+  }
+
+  clear(form: NgForm) {
+    this.storeService.findAcc(this.id).subscribe(data => {
+      this.accounts = data["accounts"];
+      this.header = data["header"];
+    });
+    form.resetForm();
+  }
 }

@@ -21,23 +21,6 @@ export class StoreService {
   private addAccUrl: string;
   private successUrl: string;
 
-  public findAll(): Observable<Game[]>{
-    return this.http.get<Game[]>(this.storesUrl);
-  }
-
-  public find(id:string): Observable<any>{
-    const params = new HttpParams()
-      .set('id', id.toString());
-    return this.http.get<any>(this.storeUrl,{params});
-  }
-
-  public findAccount(id:string): Observable<Account>{
-    const params = new HttpParams()
-      .set('id', id.toString());
-    return this.http.get<Account>(this.accountUrl,{params});
-  }
-
-
   constructor(private http: HttpClient) {
     this.storesUrl = 'http://localhost:8080/gamestores';
     this.storeUrl = 'http://localhost:8080/gamestore';
@@ -50,6 +33,35 @@ export class StoreService {
     this.addAccUrl = 'http://localhost:8080/admin/addaccount';
     this.successUrl = 'http://localhost:8080/pay/success';
   }
+
+  public findAllStores(): Observable<Game[]>{
+    return this.http.get<Game[]>(this.storesUrl);
+  }
+
+  public findAcc(id:string): Observable<any>{
+    const params = new HttpParams()
+      .set('id', id.toString());
+    return this.http.get<any>(this.storeUrl,{params});
+  }
+
+  public findAccWithParams(id:string, from:string, to:string, sort:string): Observable<any>{
+    let params = new HttpParams()
+      .set('id', id);
+    if(from)
+      params = params.append('from',from);
+    if(to)
+      params = params.append('to',to);
+    if(sort)
+       params = params.append('sort',sort);
+    return this.http.get<any>(this.storeUrl,{params});
+  }
+
+  public findAccount(id:string): Observable<Account>{
+    const params = new HttpParams()
+      .set('id', id.toString());
+    return this.http.get<Account>(this.accountUrl,{params});
+  }
+
 
   getbag(): Observable<any>{
     return this.http.get<any>(this.bagUrl);

@@ -14,7 +14,7 @@ export class StoreListComponent implements OnInit {
   constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
-    this.storeService.findAll().subscribe(data => {
+    this.storeService.findAllStores().subscribe(data => {
       this.stores = data;
     });
   }

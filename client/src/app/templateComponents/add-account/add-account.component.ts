@@ -33,7 +33,7 @@ export class AddAccountComponent implements OnInit {
     if(!this.currentUser.roles.includes("ROLE_ADMIN"))
       this.router.navigateByUrl("/forbidden");
     else{
-      this.storeService.findAll().subscribe(data => {
+      this.storeService.findAllStores().subscribe(data => {
         this.stores = data;
       });
     }

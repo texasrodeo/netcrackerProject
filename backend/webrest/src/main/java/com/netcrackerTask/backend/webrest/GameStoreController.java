@@ -38,17 +38,12 @@ public class GameStoreController {
 
     @GetMapping("/gamestore")
     public Map<String, Object> gamestore(@RequestParam("id") Long id,
-                                         @RequestParam(value="from", required = false) Integer from,
-                                         @RequestParam(value="to",required = false) Integer to,
+                                         @RequestParam(value="from", required = false) String from,
+                                         @RequestParam(value="to",required = false) String to,
                                          @RequestParam(value="sort",required = false) String sort)
     {
         Map<String, Object> res = new HashMap<>();
-        if(id == 0){
-            res.put("header", "Список всех аккунтов");
-        }
-        else {
-            res.put("header", "Список аккаунтов " + storeService.getGameById(id).getName());
-        }
+        res.put("header", "Список аккаунтов " + storeService.getGameById(id).getName());
         res.put("accounts", storeService.getAccountsByGameID(id, from, to, sort));
         res.put("storeId",id);
         return res;

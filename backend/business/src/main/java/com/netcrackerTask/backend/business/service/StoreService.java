@@ -51,16 +51,15 @@ public class StoreService {
         return gameRepository.findAll();
     }
 
-    public Iterable<Account> getAccountsByGameID(Long id, Integer from, Integer to, String sort){
-            if(from!= null && to !=null){
+    public Iterable<Account> getAccountsByGameID(Long id, String from, String to, String sort){
+            if(from!=null && to!=null){
                 if(sort==null)
-
-                    return accountRepository.getAccountsByGameIdAndStatusAndPriceBetween(id, "FREE", from, to);
+                    return accountRepository.getAccountsByGameIdAndStatusAndPriceBetween(id, "FREE", Integer.parseInt(from), Integer.parseInt(to));
                 else {
                     if(sort.equals("desc"))
-                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(id, "FREE",  from, to);
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(id, "FREE",  Integer.parseInt(from), Integer.parseInt(to));
                     else
-                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(id, "FREE", from, to);
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(id, "FREE", Integer.parseInt(from), Integer.parseInt(to));
                 }
             }
             else {
@@ -89,7 +88,7 @@ public class StoreService {
     public Boolean addPurchase(Long accountId, Long userId) {
         java.util.Date date=new java.util.Date();
 
-        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+       // java.sql.Date sqlDate=new java.sql.Date(date.getTime());
         java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 
         Purchase purchase = new Purchase(sqlTime, "ADDED_TO_BASKET", userId, accountId);
@@ -135,8 +134,8 @@ public class StoreService {
             account.setStatus("SOLD");
             accountRepository.save(account);
         }
-        sb.append("С уважением, Кубленко Павел.");
-        mailService.send(email, "Покупка", sb.toString());
+        sb.append("С уважением, команда сайта.");
+        mailService.send(email, "Покупка аккаунта", sb.toString());
     }
 
     public void removePurchase(Long accountId) {
