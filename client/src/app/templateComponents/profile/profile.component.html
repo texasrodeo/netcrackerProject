@@ -21,6 +21,29 @@
     </li>
   </ul>
 </div>
+<div>
+  <h3 class="display-3">История покупок</h3>
+  <div *ngIf="message">
+    {{message}}
+  </div>
+  <div *ngIf="purchases">
+    <table class="table  table-bordered table-striped">
+      <thead class="thead-light">
+      <tr>
+
+        <th>Название</th>
+        <th>Цена</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of purchases">
+        <td> {{account.description}} </td>
+        <td>{{account.price}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <ng-template #loggedOut>
   Please login.

@@ -39,17 +39,18 @@ public class UserController {
         return res;
     }
 
-    @GetMapping("user/orders")
+    @GetMapping("user/purchases")
     @PreAuthorize("hasRole('USER')")
-    public String getOrderd(Model model, @RequestParam("id") long id){
+    public Map<String,Object> getPurchases(@RequestParam("id") long id){
+        Map<String,Object> res = new HashMap<>();
         List<Account> items = storeService.getOrdersForUser(id);
         if(items.size()==0){
-            model.addAttribute("message", "Здесь пока ничего нет");
+            res.put("message", "Вы пока не совершали покупок");
         }
         else {
-            model.addAttribute("items", items);
+            res.put("items", items);
         }
-        return "orders";
+        return res;
     }
 
 

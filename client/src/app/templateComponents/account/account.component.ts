@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {StoreService} from "../../service/store-service.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Account} from "../../model/account";
 import {TokenstorageService} from "../../service/tokenstorage.service";
 
@@ -20,7 +20,10 @@ export class AccountComponent implements OnInit {
   message: String;
   added = false;
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute, private tokenStorage: TokenstorageService) {
+  constructor(private storeService: StoreService,
+              private route: ActivatedRoute,
+              private tokenStorage: TokenstorageService,
+              private router:Router) {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam['id'];
@@ -37,12 +40,15 @@ export class AccountComponent implements OnInit {
   }
 
   addToCart(){
-    this.storeService.addtocart(this.account.id).subscribe(data=>{
-        this.message = data['message'];
-        this.added=true;
+    if(!this.tokenStorage.getUser())
+      this.router.navigateByUrl("/forbidden");
+    else{
+    this.storeService.addtocart(this.account.id).subscribe(data=> {
+      this.message = data['message'];
+      this.added = true;
+    } );
+    }
 
-      }
-    );
   }
 
   reloadPage() {

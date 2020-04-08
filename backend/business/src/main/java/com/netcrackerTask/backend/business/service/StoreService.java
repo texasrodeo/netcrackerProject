@@ -40,7 +40,7 @@ public class StoreService {
 
 
     public List<Account> getOrdersForUser(long id) {
-        return getAccountsByPurchase(purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, "BOUGHT"));
+        return getAccountsByPurchase(purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, "CONFIRMED"));
     }
 
     public List<Account> getBagItemsForUser(long id) {
@@ -133,9 +133,16 @@ public class StoreService {
             sb.append("Пароль: ").append(standardPBEStringEncryptor.decrypt(account.getPassword())).append("\n").append("\n");
             account.setStatus("SOLD");
             accountRepository.save(account);
+            confirmPurchase(account.getId());
         }
         sb.append("С уважением, команда сайта.");
         mailService.send(email, "Покупка аккаунта", sb.toString());
+    }
+
+    private void confirmPurchase(Long accountId){
+        Purchase purchase = purchaseRepository.getPurchaseByGameAccountId(accountId);
+        purchase.setStatus("CONFIRMED");
+        purchaseRepository.save(purchase);
     }
 
     public void removePurchase(Long accountId) {

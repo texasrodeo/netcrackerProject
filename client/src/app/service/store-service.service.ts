@@ -20,18 +20,20 @@ export class StoreService {
   private buyUrl: string;
   private addAccUrl: string;
   private successUrl: string;
+  private purchasesUrl: string;
 
   constructor(private http: HttpClient) {
     this.storesUrl = 'http://localhost:8080/gamestores';
     this.storeUrl = 'http://localhost:8080/gamestore';
     this.accountUrl = 'http://localhost:8080/gamestore/account';
-    this.bagUrl = 'http://localhost:8080/bag'
+    this.bagUrl = 'http://localhost:8080/bag';
     this.addToCartUrl = 'http://localhost:8080/addtocart';
     this.removeFromBagUrl = 'http://localhost:8080/bag/removePurchase';
     this.checkoutUrl = 'http://localhost:8080/checkout';
     this.buyUrl = 'http://localhost:8080/pay';
     this.addAccUrl = 'http://localhost:8080/admin/addaccount';
     this.successUrl = 'http://localhost:8080/pay/success';
+    this.purchasesUrl = 'http://localhost:8080/user/purchases';
   }
 
   public findAllStores(): Observable<Game[]>{
@@ -110,7 +112,7 @@ export class StoreService {
   successBuy(paymentid: any, payerid: any, accountsId: any[]):Observable<any> {
     let params = new HttpParams()
       .set('paymentId', paymentid.toString())
-      .set('PayerID',payerid.toString())
+      .set('PayerID',payerid.toString());
 
 
     let k=0;
@@ -123,5 +125,12 @@ export class StoreService {
 
 
       return this.http.get<any>(this.successUrl,{params});
+  }
+
+  findPurchases(id: any):Observable<any> {
+    const params = new HttpParams()
+      .set('id',id);
+    return this.http.get<any>(this.purchasesUrl,{params});
+
   }
 }
