@@ -1,10 +1,12 @@
 package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.Account;
+import com.netcrackerTask.backend.business.entity.Log;
 import com.netcrackerTask.backend.business.entity.Order;
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.payloads.MessageResponse;
 import com.netcrackerTask.backend.business.payloads.PayRequest;
+import com.netcrackerTask.backend.business.service.LogService;
 import com.netcrackerTask.backend.business.service.PaypalService;
 
 import com.netcrackerTask.backend.business.service.StoreService;
@@ -31,13 +33,23 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "*")
 public class PaypalController {
-    @Autowired
+
     PaypalService paypalService;
-    @Autowired
+
     StoreService storeService;
 
-    @Autowired
     UserService userService;
+
+    LogService logService;
+
+    @Autowired
+    public PaypalController(final PaypalService paypalService, final StoreService storeService,
+                            final UserService userService, final LogService logService){
+        this.paypalService = paypalService;
+        this.storeService = storeService;
+        this.userService = userService;
+        this.logService = logService;
+    }
 
     private static final String url = "http://localhost:4200/";
     private static final String success = "pay/success";
@@ -108,7 +120,8 @@ public class PaypalController {
         Map<String, String> result = new HashMap<>();
         try {
             Payment payment = paypalService.executePayment(allRequestParams.get("paymentId"),allRequestParams.get("PayerID"));
-            System.out.println(payment.toJSON());
+//            System.out.println(payment.toJSON());
+ //           logService.writeLog(payment.toJSON());
             if(payment.getState().equals("approved")){
                 Authentication auth= SecurityContextHolder.getContext().getAuthentication();
                 if(auth!=null){
@@ -133,11 +146,6 @@ public class PaypalController {
         }
         result.put("message","Произошла ошибка на сервере") ;
         return result;
-    }
-
-    @GetMapping("/pay/cancel")
-    public String cancel(){
-        return "cancel";
     }
 
 

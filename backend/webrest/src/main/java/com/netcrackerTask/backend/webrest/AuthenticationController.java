@@ -33,24 +33,27 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
-    @Autowired
+
     AuthenticationManager authenticationManager;
 
     UserService userService;
 
-    @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
     PasswordEncoder encoder;
 
-    @Autowired
     JwtUtils jwtUtils;
 
 
 
     @Autowired
-    public AuthenticationController(final UserService userService){
+    public AuthenticationController(final UserService userService, final JwtUtils jwtUtils,
+                                    final PasswordEncoder passwordEncoder, final RoleRepository roleRepository,
+                                    final AuthenticationManager authenticationManager){
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.encoder = passwordEncoder;
+        this.roleRepository = roleRepository;
         this.userService = userService;
     }
 

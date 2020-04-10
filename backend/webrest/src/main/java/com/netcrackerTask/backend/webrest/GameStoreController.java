@@ -28,12 +28,10 @@ public class GameStoreController {
 
     private final StoreService storeService;
 
-    private final UserService userService;
 
     @Autowired
-    public GameStoreController(final StoreService storeService, final UserService userService){
+    public GameStoreController(final StoreService storeService){
         this.storeService = storeService;
-        this.userService = userService;
     }
 
     @GetMapping("/gamestore")
@@ -50,10 +48,8 @@ public class GameStoreController {
     }
 
     @GetMapping("/gamestore/account")
-    public Account account(Model model, @RequestParam("id") Long id)
+    public Account account(@RequestParam("id") Long id)
     {
-//        model.addAttribute("account" s,toreService.getAccountById(id));
-//        return "account";
         return storeService.getAccountById(id);
     }
 

@@ -52,8 +52,9 @@
       </table>
     </div>
 
-    <div *ngif="token.getUser()">
+<!--    <div *ngif="token.getUser()">-->
+
       <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
         <button [routerLink]="['/addAccount']" [queryParams]="{'gameId':id.toString()}" class="btn-primary float-left">Добавить аккаунт</button>
       </div>
-    </div>
+<!--    </div>-->

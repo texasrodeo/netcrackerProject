@@ -23,27 +23,6 @@ public class AdminController {
         this.storeService = storeService;
     }
 
-    @GetMapping("/admin/addgame")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String addgame(){
-        return "addgame";
-    }
-
-
-
-
-    @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String main(){
-        return "adminPanel";
-    }
-
-//    @GetMapping("/admin/addaccount")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String addaccount(Model model){
-//        model.addAttribute("games", storeService.findAllgames());
-//        return "addaccount";
-//    }
 
     @PostMapping("/admin/addaccount")
     public Map<String, String> addaccount(@RequestBody AddAccRequest request){

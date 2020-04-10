@@ -21,17 +21,26 @@ import java.util.*;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
     private MailService mailService;
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
+
     UserRepository userRepository;
-    @Autowired
+
     RoleRepository roleRepository;
-    @Autowired
+
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public UserService(final MailService mailService, final UserRepository userRepository, final RoleRepository roleRepository,
+                       BCryptPasswordEncoder bCryptPasswordEncoder)
+    {
+        this.mailService = mailService;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

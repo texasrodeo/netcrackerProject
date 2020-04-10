@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {AppService} from "../../service/app-service.service";
-import {TokenstorageService} from "../../service/tokenstorage.service";
+import {AppService} from '../../service/app-service.service';
+import {TokenstorageService} from '../../service/tokenstorage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

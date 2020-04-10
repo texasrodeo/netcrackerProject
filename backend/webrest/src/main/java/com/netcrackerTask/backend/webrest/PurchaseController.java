@@ -37,7 +37,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/bag")
-  //  @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public Map<String,Object> getBag(){
         Map<String,Object> result = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,9 +51,8 @@ public class PurchaseController {
 
 
     @GetMapping("/addtocart")
-//    @PreAuthorize("hasRole('USER')")
-//
-    public Map<String,String>  addtocart(@RequestParam("id") Long id, HttpServletResponse response) throws IOException {
+    @PreAuthorize("hasRole('USER')")
+    public Map<String,String>  addtocart(@RequestParam("id") Long id){
         Account account = storeService.getAccountById(id);
         Map<String, String> result = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -76,9 +75,6 @@ public class PurchaseController {
     @GetMapping("bag/removePurchase")
     @PreAuthorize("hasRole('USER')")
     public String remove(@RequestParam("id") Long accountId){
-//        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-//        String name = auth.getName();
-//        User user = userService.findByUsername(name);
         storeService.removePurchase(accountId);
         return "Удалено";
     }

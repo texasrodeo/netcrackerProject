@@ -8,33 +8,35 @@ import com.netcrackerTask.backend.business.persistence.GameRepository;
 import com.netcrackerTask.backend.business.persistence.PurchaseRepository;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.acl.LastOwnerException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class StoreService {
 
-    @Autowired
+
     PurchaseRepository purchaseRepository;
 
-    @Autowired
     AccountRepository accountRepository;
 
-    @Autowired
     GameRepository gameRepository;
 
-    @Autowired
     MailService mailService;
 
-    @Autowired
     StandardPBEStringEncryptor standardPBEStringEncryptor;
+
+    @Autowired
+    public StoreService(final PurchaseRepository purchaseRepository, final AccountRepository accountRepository,
+                        final GameRepository gameRepository, final MailService mailService,
+                        final StandardPBEStringEncryptor standardPBEStringEncryptor){
+        this.purchaseRepository = purchaseRepository;
+        this. accountRepository = accountRepository;
+        this.gameRepository = gameRepository;
+        this.mailService = mailService;
+        this.standardPBEStringEncryptor = standardPBEStringEncryptor;
+    }
 
 
 
@@ -47,9 +49,6 @@ public class StoreService {
         return getAccountsByPurchase(purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, "ADDED_TO_BASKET"));
     }
 
-    public Iterable<Game> findAllgames() {
-        return gameRepository.findAll();
-    }
 
     public Iterable<Account> getAccountsByGameID(Long id, String from, String to, String sort){
             if(from!=null && to!=null){
@@ -87,8 +86,6 @@ public class StoreService {
 
     public Boolean addPurchase(Long accountId, Long userId) {
         java.util.Date date=new java.util.Date();
-
-       // java.sql.Date sqlDate=new java.sql.Date(date.getTime());
         java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 
         Purchase purchase = new Purchase(sqlTime, "ADDED_TO_BASKET", userId, accountId);
@@ -143,6 +140,10 @@ public class StoreService {
         Purchase purchase = purchaseRepository.getPurchaseByGameAccountId(accountId);
         purchase.setStatus("CONFIRMED");
         purchaseRepository.save(purchase);
+    }
+
+    private void writePurchaseLog(Purchase purchase){
+
     }
 
     public void removePurchase(Long accountId) {

@@ -30,42 +30,16 @@ public class MainController {
 
     private final GameRepository gameRepository;
 
-    private final UserRepository userRepository;
 
     @Autowired
-    public MainController(final GameRepository gameRepository, final UserRepository userRepository){
+    public MainController(final GameRepository gameRepository){
         this.gameRepository = gameRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/gamestores")
     public List<Game> main(){
-//        Map<String,Object> model = new HashMap<>();
-//
-//    model.put("stores", gameRepository.findAll());
-
- //       return model;
         return (List<Game>) gameRepository.findAll();
     }
-   
-
-
-//    @GetMapping("/login")
-//    public String login(Model model, String error, String logout) {
-//        if (error != null)
-//            model.addAttribute("error", "Неверное имя пользователя или пароль");
-//        if (logout != null)
-//            model.addAttribute("message", "Вы успешно вышли");
-//        return "login";
-//    }
-
-
-//
-//    @GetMapping("/getuser")
-//    public Principal user(Principal user) {
-//        return user;
-//    }
-
 
 
 }

@@ -16,8 +16,13 @@ import java.util.List;
 @Service
 public class PaypalService {
 
-    @Autowired
+
     private APIContext context;
+
+    @Autowired
+    public PaypalService(final APIContext apiContext){
+        this.context = apiContext;
+    }
 
     public Payment createPayment(
             Double total,
@@ -31,7 +36,6 @@ public class PaypalService {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
-       // amount.setTotal(String.format("%.2f", total));
         amount.setTotal(total.toString());  
 
         Transaction transaction = new Transaction();
@@ -42,10 +46,10 @@ public class PaypalService {
         transactionList.add(transaction);
 
         Payer payer = new Payer();
-        payer.setPaymentMethod(method.toString());
+        payer.setPaymentMethod(method);
 
         Payment payment = new Payment();
-        payment.setIntent(intent.toString());
+        payment.setIntent(intent);
         payment.setPayer(payer);
         payment.setTransactions(transactionList);
 
@@ -57,13 +61,15 @@ public class PaypalService {
 
         try{
             Payment result = payment.create(context);
+            return result;
         }
 
         catch(Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return null;
         }
-        return payment.create(context);
+//        return payment.create(context);
     }
 
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {

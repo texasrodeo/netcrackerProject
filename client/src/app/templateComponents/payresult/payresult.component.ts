@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {AppService} from "../../service/app-service.service";
-import {ActivatedRoute} from "@angular/router";
-import {StoreService} from "../../service/store-service.service";
+import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {StoreService} from '../../service/store-service.service';
 
 @Component({
   selector: 'app-payresult',
@@ -10,34 +9,35 @@ import {StoreService} from "../../service/store-service.service";
   styleUrls: ['./payresult.component.css']
 })
 export class PayresultComponent implements OnInit {
-  success: String;
+  success: string;
   private routeSubscription: Subscription;
   querySubscription: Subscription;
   paymentid: any;
   payerid: any;
   accountsId = [];
-  message = "";
+  message = '';
 
   constructor(private storeService: StoreService, private route: ActivatedRoute) {
 
 
   }
   ngOnInit(): void {
-    this.routeSubscription = this.route.params.subscribe(params=>this.success=params['success']);
-    if(this.success==='success'){
+    this.routeSubscription = this.route.params.subscribe(params => this.success = params.success);
+    if (this.success === 'success') {
       this.querySubscription = this.route.queryParams.subscribe(
-        data=>{
-          this.payerid = data["PayerID"];
-          this.paymentid = data["paymentId"];
-          for(let d in data){
-            if(d.includes("id"))
+        data => {
+          this.payerid = data.PayerID;
+          this.paymentid = data.paymentId;
+          for (const d in data) {
+            if (d.includes('id')) {
               this.accountsId.push(data[d]);
+            }
           }
         }
-      )
-      this.storeService.successBuy(this.paymentid,this.payerid,this.accountsId).subscribe(
-        data=>{
-          this.message = data["message"];
+      );
+      this.storeService.successBuy(this.paymentid, this.payerid, this.accountsId).subscribe(
+        data => {
+          this.message = data.message;
         }
       );
     }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {StoreService} from "../../service/store-service.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {switchMap} from "rxjs/operators";
-import {AppService} from "../../service/app-service.service";
-import {Observable, Subscription} from "rxjs";
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {AppService} from '../../service/app-service.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-activation',
@@ -13,7 +11,7 @@ import {Observable, Subscription} from "rxjs";
 export class ActivationComponent implements OnInit {
 
 
-  code: String;
+  code: string;
   private routeSubscription: Subscription;
 
   constructor(private appService: AppService, private route: ActivatedRoute) {
@@ -22,10 +20,8 @@ export class ActivationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.routeSubscription = this.route.params.subscribe(params=>this.code=params['code']);
-    this.appService.activate(this.code).subscribe();
-    // this.appService.activate(this.code);
-
+      this.routeSubscription = this.route.params.subscribe(params => this.code = params.code);
+      this.appService.activate(this.code).subscribe();
   }
 
 

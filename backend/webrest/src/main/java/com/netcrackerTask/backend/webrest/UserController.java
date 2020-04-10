@@ -26,13 +26,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/profile")
-    @PreAuthorize("hasRole('USER')")
-    public String profile(){
-        return "profile";
-    }
 
     @GetMapping("/user/email")
+    @PreAuthorize("hasRole('USER')")
     public Map<String,Object> checkEmail(@RequestParam("id") String id){
         Map<String,Object> res = new HashMap<>();
         res.put("res",userService.checkEmail(Long.parseLong(id)));
@@ -44,6 +40,7 @@ public class UserController {
     public Map<String,Object> getPurchases(@RequestParam("id") long id){
         Map<String,Object> res = new HashMap<>();
         List<Account> items = storeService.getOrdersForUser(id);
+
         if(items.size()==0){
             res.put("message", "Вы пока не совершали покупок");
         }
@@ -52,8 +49,5 @@ public class UserController {
         }
         return res;
     }
-
-
-
 
 }

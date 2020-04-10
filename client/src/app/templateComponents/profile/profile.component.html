@@ -9,6 +9,7 @@
   <p>
     <strong>Email:</strong>
     {{ currentUser.email }}
+    <br>
     <span *ngIf="emailConfirmed">Адрес почты подтвержден</span>
     <span *ngIf="!emailConfirmed">Адрес почты не подтвержден. Перейдите по ссылке, отправленной Вам в письме,
     чтобы иметь возможность совершать покупки на сайте</span>
@@ -21,7 +22,7 @@
     </li>
   </ul>
 </div>
-<div>
+<div *ngIf="!currentUser.roles.includes('ROLE_ADMIN')">
   <h3 class="display-3">История покупок</h3>
   <div *ngIf="message">
     {{message}}
@@ -39,6 +40,7 @@
       <tr *ngFor="let account of purchases">
         <td> {{account.description}} </td>
         <td>{{account.price}}</td>
+
       </tr>
       </tbody>
     </table>
