@@ -9,6 +9,7 @@ import com.netcrackerTask.backend.business.persistence.PurchaseRepository;
 import com.netcrackerTask.backend.business.service.Interfaces.IStoreService;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -51,24 +52,26 @@ public class StoreService implements IStoreService {
     }
 
 
-    public Iterable<Account> getAccountsByGameID(Long id, String from, String to, String sort){
+
+
+    public Iterable<Account> getAccountsByGameID(Long id, String from, String to, String sort, Pageable page){
             if(from!=null && to!=null){
                 if(sort==null)
-                    return accountRepository.getAccountsByGameIdAndStatusAndPriceBetween(id, "FREE", Integer.parseInt(from), Integer.parseInt(to));
+                    return accountRepository.getAccountsByGameIdAndStatusAndPriceBetween(id, "FREE", Integer.parseInt(from), Integer.parseInt(to), page);
                 else {
                     if(sort.equals("desc"))
-                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(id, "FREE",  Integer.parseInt(from), Integer.parseInt(to));
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(id, "FREE",  Integer.parseInt(from), Integer.parseInt(to), page);
                     else
-                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(id, "FREE", Integer.parseInt(from), Integer.parseInt(to));
+                        return accountRepository.getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(id, "FREE", Integer.parseInt(from), Integer.parseInt(to), page);
                 }
             }
             else {
                 if(sort==null)
-                    return accountRepository.getAccountsByGameIdAndStatus(id,"FREE");
-                else  if(sort.equals("desc"))
-                    return accountRepository.getAccountsByGameIdAndStatusOrderByPriceDesc(id, "FREE");
+                    return accountRepository.getAccountsByGameIdAndStatus(id,"FREE", page);
+                else if(sort.equals("desc"))
+                    return accountRepository.getAccountsByGameIdAndStatusOrderByPriceDesc(id, "FREE", page);
                 else
-                    return accountRepository.getAccountsByGameIdAndStatusOrderByPrice(id, "FREE");
+                    return accountRepository.getAccountsByGameIdAndStatusOrderByPrice(id, "FREE", page);
             }
     }
 

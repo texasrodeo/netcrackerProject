@@ -1,22 +1,25 @@
 package com.netcrackerTask.backend.business.persistence;
 
 import com.netcrackerTask.backend.business.entity.Account;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface AccountRepository extends CrudRepository<Account, Long> {
-   List<Account> getAccountsByGameIdAndStatus(Long id, String status);
+public interface AccountRepository extends PagingAndSortingRepository<Account, Long> {
+   Page<Account> getAccountsByGameIdAndStatus(Long id, String status, Pageable pageable);
 
-   List<Account> getAccountsByGameIdAndStatusOrderByPriceDesc(Long id, String status);
+   Page<Account> getAccountsByGameIdAndStatusOrderByPriceDesc(Long id, String status, Pageable pageable);
 
-   List<Account> getAccountsByGameIdAndStatusOrderByPrice(Long id, String status);
+   Page<Account> getAccountsByGameIdAndStatusOrderByPrice(Long id, String status, Pageable pageable);
 
-   List<Account> getAccountsByGameIdAndStatusAndPriceBetween(Long id, String status, Integer from, Integer to);
+   Page<Account> getAccountsByGameIdAndStatusAndPriceBetween(Long id, String status, Integer from, Integer to, Pageable pageable);
 
-   List<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(Long id, String status, Integer from, Integer to);
+   Page<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPrice(Long id, String status, Integer from, Integer to, Pageable pageable);
 
-   List<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(Long id, String status, Integer from, Integer to);
+   Page<Account> getAccountsByGameIdAndStatusAndPriceBetweenOrderByPriceDesc(Long id, String status, Integer from, Integer to, Pageable pageable);
 
    Account getAccountById(Long id);
 

@@ -43,6 +43,9 @@ export class AddAccountComponent implements OnInit {
     this.storeService.addAccount(this.form, this.gameId).subscribe(
       data => {
         this.message = data.message;
+        setTimeout(() => {
+          this.router.navigate(['/gamestore'], {queryParams: {id: this.gameId}});
+        }, 2000);
       }
     );
   }

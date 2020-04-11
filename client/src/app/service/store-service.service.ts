@@ -49,15 +49,19 @@ export class StoreService {
     return this.http.get<Game[]>(this.storesUrl);
   }
 
-  public findAcc(id: string): Observable<any> {
+  public findAcc(id: string, page: number, size: number): Observable<any> {
     const params = new HttpParams()
-      .set('id', id.toString());
+      .set('id', id.toString())
+      .set('page', page.toString())
+      .set('size', size.toString());
     return this.http.get<any>(this.storeUrl, {params});
   }
 
-  public findAccWithParams(id: string, from: string, to: string, sort: string): Observable<any> {
+  public findAccWithParams(id: string, from: string, to: string, sort: string, page: number, size: number): Observable<any> {
     let params = new HttpParams()
-      .set('id', id);
+      .set('id', id)
+      .set('page', page.toString())
+      .set('size', size.toString());
     if (from) {
       params = params.append('from', from);
     }

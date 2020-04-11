@@ -4,7 +4,5 @@ export class Account {
   description: string;
   price: number;
   status: string;
-  login: string;
-  password: string;
   gameId: number;
 }
