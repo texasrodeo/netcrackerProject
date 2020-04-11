@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name="game_account")
-public class Account {
+public class  Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

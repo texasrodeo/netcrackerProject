@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.service;
+package com.netcrackerTask.backend.business.service.ServiceImpl;
 
 import com.netcrackerTask.backend.business.entity.Role;
 import com.netcrackerTask.backend.business.entity.User;
@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class UserService implements UserDetailsService {
 
-    private MailService mailService;
+    private final MailService mailService;
 
     @PersistenceContext
     private EntityManager em;
@@ -55,14 +55,7 @@ public class UserService implements UserDetailsService {
 
 
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
-    }
 
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
 
     public ResponseEntity<?> saveUser(User user, Set<String> strRoles) {
         Set<Role> roles = new HashSet<>();
@@ -99,13 +92,7 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    public boolean deleteUser(Long userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
-    }
+
 
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
@@ -130,7 +117,7 @@ public class UserService implements UserDetailsService {
         return userRepository.existsByEmail(email);
     }
 
-    public Boolean checkEmail(Long id) {
+    public boolean checkEmail(Long id) {
         User user = userRepository.getById(id);
         return user.getActivationCode()==null;
     }

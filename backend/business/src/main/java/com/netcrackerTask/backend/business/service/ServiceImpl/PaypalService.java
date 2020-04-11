@@ -1,6 +1,6 @@
-package com.netcrackerTask.backend.business.service;
+package com.netcrackerTask.backend.business.service.ServiceImpl;
 
-import com.netcrackerTask.backend.business.entity.Order;
+import com.netcrackerTask.backend.business.service.Interfaces.IPaypalService;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class PaypalService {
+public class PaypalService implements IPaypalService {
 
 
-    private APIContext context;
+    private final APIContext context;
 
     @Autowired
     public PaypalService(final APIContext apiContext){

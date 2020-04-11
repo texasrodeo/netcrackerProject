@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Game} from "../model/game";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Account} from "../model/account";
+import {Observable} from 'rxjs';
+import {Game} from '../model/game';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Account} from '../model/account';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+// tslint:disable-next-line:variable-name
+const _url = 'http://localhost:8080/';
+
 @Injectable()
 export class StoreService {
+
+
+
+
   private storesUrl: string;
-  private storeUrl : string;
+  private storeUrl: string;
   private  accountUrl: string;
   private bagUrl: string;
   private addToCartUrl: string;
@@ -21,51 +28,56 @@ export class StoreService {
   private addAccUrl: string;
   private successUrl: string;
   private purchasesUrl: string;
+  private removeAccountUrl: string;
 
   constructor(private http: HttpClient) {
-    this.storesUrl = 'http://localhost:8080/gamestores';
-    this.storeUrl = 'http://localhost:8080/gamestore';
-    this.accountUrl = 'http://localhost:8080/gamestore/account';
-    this.bagUrl = 'http://localhost:8080/bag';
-    this.addToCartUrl = 'http://localhost:8080/addtocart';
-    this.removeFromBagUrl = 'http://localhost:8080/bag/removePurchase';
-    this.checkoutUrl = 'http://localhost:8080/checkout';
-    this.buyUrl = 'http://localhost:8080/pay';
-    this.addAccUrl = 'http://localhost:8080/admin/addaccount';
-    this.successUrl = 'http://localhost:8080/pay/success';
-    this.purchasesUrl = 'http://localhost:8080/user/purchases';
+    this.storesUrl = _url + 'gamestores';
+    this.storeUrl = _url + 'gamestore';
+    this.accountUrl = _url + 'gamestore/account';
+    this.bagUrl = _url + 'bag';
+    this.addToCartUrl = _url + 'addtocart';
+    this.removeFromBagUrl = _url + 'bag/removePurchase';
+    this.checkoutUrl = _url + 'checkout';
+    this.buyUrl = _url + 'pay';
+    this.addAccUrl = _url + 'admin/addaccount';
+    this.successUrl = _url + 'pay/success';
+    this.purchasesUrl = _url + 'user/purchases';
+    this.removeAccountUrl = _url + 'admin/removeAccount';
   }
 
-  public findAllStores(): Observable<Game[]>{
+  public findAllStores(): Observable<Game[]> {
     return this.http.get<Game[]>(this.storesUrl);
   }
 
-  public findAcc(id:string): Observable<any>{
+  public findAcc(id: string): Observable<any> {
     const params = new HttpParams()
       .set('id', id.toString());
-    return this.http.get<any>(this.storeUrl,{params});
+    return this.http.get<any>(this.storeUrl, {params});
   }
 
-  public findAccWithParams(id:string, from:string, to:string, sort:string): Observable<any>{
+  public findAccWithParams(id: string, from: string, to: string, sort: string): Observable<any> {
     let params = new HttpParams()
       .set('id', id);
-    if(from)
-      params = params.append('from',from);
-    if(to)
-      params = params.append('to',to);
-    if(sort)
-       params = params.append('sort',sort);
-    return this.http.get<any>(this.storeUrl,{params});
+    if (from) {
+      params = params.append('from', from);
+    }
+    if (to) {
+      params = params.append('to', to);
+    }
+    if (sort) {
+       params = params.append('sort', sort);
+    }
+    return this.http.get<any>(this.storeUrl, {params});
   }
 
-  public findAccount(id:string): Observable<Account>{
+  public findAccount(id: string): Observable<Account> {
     const params = new HttpParams()
       .set('id', id.toString());
-    return this.http.get<Account>(this.accountUrl,{params});
+    return this.http.get<Account>(this.accountUrl, {params});
   }
 
 
-  getbag(): Observable<any>{
+  getbag(): Observable<any> {
     return this.http.get<any>(this.bagUrl);
   }
 
@@ -75,25 +87,24 @@ export class StoreService {
     return this.http.get<any>(this.addToCartUrl, {params});
   }
 
-  deletefrombag(id: number): Observable<string>{
+  deletefrombag(id: number): Observable<string> {
     const params = new HttpParams()
-      .set('id',id.toString());
+      .set('id', id.toString());
     return this.http.get<string>(this.removeFromBagUrl, {params});
   }
 
 
-  checkout(): Observable<any>{
+  checkout(): Observable<any> {
     return this.http.get<any>(this.checkoutUrl);
   }
 
   buy(sum: any ) {
-    let url: String;
+    let paypalUrl: string;
     const params = new HttpParams()
-      .set('sum',sum.toString());
-    this.http.get<String>(this.buyUrl, {params}).subscribe(data=>{
-        url = data["url"];
-        window.location.href =url.toString();
-        // this.http.get(url.toString());
+      .set('sum', sum.toString());
+    this.http.get<string>(this.buyUrl, {params}).subscribe(data => {
+      paypalUrl = data['url'];
+      window.location.href = paypalUrl.toString();
       }
     );
 
@@ -101,36 +112,42 @@ export class StoreService {
 
   addAccount(form: any, gameId: any): Observable<any> {
     return this.http.post(this.addAccUrl, {
-      gameId: gameId,
+      gameId,
       description: form.description,
       login: form.login,
       password: form.password,
       price: form.price
-    },httpOptions);
+    }, httpOptions);
   }
 
-  successBuy(paymentid: any, payerid: any, accountsId: any[]):Observable<any> {
+  successBuy(paymentid: any, payerid: any, accountsId: any[]): Observable<any> {
     let params = new HttpParams()
       .set('paymentId', paymentid.toString())
-      .set('PayerID',payerid.toString());
+      .set('PayerID', payerid.toString());
 
 
-    let k=0;
+    let k = 0;
 
-    for(let a of accountsId){
-      let str = "id"+k.toString();
+    for (const a of accountsId) {
+      const str = 'id' + k.toString();
       k++;
-      params = params.append(str,a.toString());
+      params = params.append(str, a.toString());
     }
 
 
-      return this.http.get<any>(this.successUrl,{params});
+    return this.http.get<any>(this.successUrl, {params});
   }
 
-  findPurchases(id: any):Observable<any> {
+  findPurchases(id: any): Observable<any> {
     const params = new HttpParams()
-      .set('id',id);
-    return this.http.get<any>(this.purchasesUrl,{params});
+      .set('id', id);
+    return this.http.get<any>(this.purchasesUrl, {params});
 
+  }
+
+  deleteAccount(id: number): Observable<any> {
+    const params = new HttpParams()
+      .set('accountId', id.toString());
+    return this.http.get<any>(this.removeAccountUrl, {params});
   }
 }

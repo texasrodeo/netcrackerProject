@@ -2,23 +2,18 @@ package com.netcrackerTask.backend.webrest;
 
 
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.entity.Purchase;
 import com.netcrackerTask.backend.business.entity.User;
-import com.netcrackerTask.backend.business.service.StoreService;
-import com.netcrackerTask.backend.business.service.UserService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.StoreService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +58,7 @@ public class PurchaseController {
                 if(storeService.addPurchase(id, user.getId()))
                     result.put("message","Аккаунт успешно доабвлен в корзину") ;
                 else
-                    result.put("message", "Ошибка");
+                    result.put("message", "Ошибка: аккаунт уже зарезервирован.");
                 return result;
             }
         }

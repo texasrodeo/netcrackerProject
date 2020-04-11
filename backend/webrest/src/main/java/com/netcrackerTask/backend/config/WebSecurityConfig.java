@@ -2,7 +2,7 @@ package com.netcrackerTask.backend.config;
 
 import com.netcrackerTask.backend.jwt.AuthEntryPointJwt;
 import com.netcrackerTask.backend.jwt.AuthTokenFilter;
-import com.netcrackerTask.backend.business.service.UserService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserService;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.iv.RandomIvGenerator;
 import org.springframework.beans.factory.annotation.Autowired;

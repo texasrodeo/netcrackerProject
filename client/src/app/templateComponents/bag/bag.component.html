@@ -24,12 +24,12 @@
 
 
           <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
-          <td>{{account.price}}</td>
+          <td>{{account.price}} RUB</td>
           <td> <button (click)="deleteFromBag(account.id)" class="btn-primary" >Удалить из корзины</button> </td>
         </tr>
         </tbody>
       </table>
-      <p class="font-weight-bold">Сумма: {{sum}}</p>
+      <p class="font-weight-bold">Сумма: {{sum}} RUB</p>
 
     </div>
 

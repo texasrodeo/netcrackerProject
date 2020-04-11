@@ -1,5 +1,5 @@
 
-    <h3 class="display-4">{{header}}</h3>
+  <br>
 
     <div class="col-md-4">
       <div class="card card-container">
@@ -31,26 +31,43 @@
     </div>
     <br>
 
-    <div *ngIf="accounts.length===0">
-      <h3 class="display-3">Ничего не найдено</h3>
-    </div>
-    <div *ngIf="accounts.length!==0">
-      <table class="table  table-bordered table-striped">
-        <thead class="thead-light">
-        <tr>
 
-          <th>Название</th>
-          <th>Цена</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let account of accounts">
-          <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
-          <td>{{account.price}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <h3 class="display-4">{{header}}</h3>
+      <div *ngIf="accounts.length===0">
+        <h3 class="display-3">Ничего не найдено</h3>
+      </div>
+      <div *ngIf="accounts.length!==0">
+        <table class="table table-borderless">
+          <thead >
+          <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+              <th>
+                Действия
+              </th>
+            </div>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let account of accounts">
+            <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
+            <td>{{account.price}} RUB</td>
+            <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+              <td>
+                <button (click)="deleteAccount(account.id)" class="btn-primary float-left">Удалить аккаунт</button>
+              </td>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success" *ngIf="message">
+        {{message}}
+      </div>
+
+
 
 <!--    <div *ngif="token.getUser()">-->
 

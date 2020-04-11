@@ -18,6 +18,7 @@ export class StoreComponent implements OnInit {
   id: string;
   currentUser: any;
   private querySubscription: Subscription;
+  message: string;
 
   sort: string;
   from: string;
@@ -57,4 +58,15 @@ export class StoreComponent implements OnInit {
     });
     form.resetForm();
   }
+
+  deleteAccount(id: number) {
+    this.storeService.deleteAccount(id).subscribe(
+      data => {
+        this.message = data.message;
+      }
+    );
+    this.ngOnInit();
+
+  }
+
 }

@@ -2,12 +2,9 @@ package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.payloads.AddAccRequest;
-import com.netcrackerTask.backend.business.service.StoreService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -36,6 +33,14 @@ public class AdminController {
         account.setStatus("FREE");
         storeService.addAccount(account);
         res.put("message", "Аккаунт добавлен");
+        return res;
+    }
+
+    @GetMapping("/admin/removeAccount")
+    public Map<String, String> removeAccount(@RequestParam ("accountId") String id){
+        Map<String, String> res = new HashMap<>();
+        storeService.removeAccount(Long.parseLong(id));
+        res.put("message", "Аккаунт удален");
         return res;
     }
 

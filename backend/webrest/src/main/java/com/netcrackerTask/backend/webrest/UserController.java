@@ -2,12 +2,9 @@ package com.netcrackerTask.backend.webrest;
 
 
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.entity.Purchase;
-import com.netcrackerTask.backend.business.service.StoreService;
-import com.netcrackerTask.backend.business.service.UserService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.StoreService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

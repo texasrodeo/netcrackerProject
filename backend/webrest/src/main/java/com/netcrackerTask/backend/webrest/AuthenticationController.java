@@ -2,9 +2,9 @@ package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
-import com.netcrackerTask.backend.business.service.UserDetailsImpl;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserDetailsImpl;
 import com.netcrackerTask.backend.jwt.JwtUtils;
-import com.netcrackerTask.backend.business.service.UserService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserService;
 
 import com.netcrackerTask.backend.business.payloads.JwtResponse;
 import com.netcrackerTask.backend.business.payloads.LoginRequest;

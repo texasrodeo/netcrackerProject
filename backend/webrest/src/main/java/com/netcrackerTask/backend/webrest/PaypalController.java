@@ -1,29 +1,23 @@
 package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.entity.Log;
 import com.netcrackerTask.backend.business.entity.Order;
 import com.netcrackerTask.backend.business.entity.User;
-import com.netcrackerTask.backend.business.payloads.MessageResponse;
-import com.netcrackerTask.backend.business.payloads.PayRequest;
-import com.netcrackerTask.backend.business.service.LogService;
-import com.netcrackerTask.backend.business.service.PaypalService;
-
-import com.netcrackerTask.backend.business.service.StoreService;
-import com.netcrackerTask.backend.business.service.UserService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.LogService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.PaypalService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.StoreService;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +56,6 @@ public class PaypalController {
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
         if(auth!=null) {
             String name = auth.getName();
-            List<Long> accountsId = new ArrayList<>();
             User user = userService.findByUsername(name);
             if(user.getActivationCode()!=null){
 
@@ -93,7 +86,6 @@ public class PaypalController {
             Authentication auth= SecurityContextHolder.getContext().getAuthentication();
             String name=auth.getName();
             User user= userService.findByUsername(name);
-            //order.setAccountId(user.getId());
             for (Account account: storeService.getBagItemsForUser(user.getId())) {
                 order.setAccountId(account.getId());
             }

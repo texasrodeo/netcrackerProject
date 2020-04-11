@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.service;
+package com.netcrackerTask.backend.business.service.ServiceImpl;
 
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Game;
@@ -6,6 +6,7 @@ import com.netcrackerTask.backend.business.entity.Purchase;
 import com.netcrackerTask.backend.business.persistence.AccountRepository;
 import com.netcrackerTask.backend.business.persistence.GameRepository;
 import com.netcrackerTask.backend.business.persistence.PurchaseRepository;
+import com.netcrackerTask.backend.business.service.Interfaces.IStoreService;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StoreService {
+public class StoreService implements IStoreService {
 
 
     PurchaseRepository purchaseRepository;
@@ -148,5 +149,9 @@ public class StoreService {
 
     public void removePurchase(Long accountId) {
         purchaseRepository.delete(purchaseRepository.getPurchaseByGameAccountId(accountId));
+    }
+
+    public void removeAccount(Long accountId){
+        accountRepository.deleteById(accountId);
     }
 }

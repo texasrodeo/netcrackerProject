@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AppService, private tokenStorage: TokenstorageService) { }
+  constructor(private authService: AppService, private tokenStorage: TokenstorageService, private router:Router) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        setTimeout(() => {
+          this.router.navigate(['/gamestores']);
+        }, 2000);
       },
       err => {
         this.errorMessage = err.error.message;
@@ -44,7 +46,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  reloadPage() {
-    window.location.reload();
-  }
+
 }

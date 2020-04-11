@@ -2,7 +2,7 @@ package com.netcrackerTask.backend.jwt;
 
 import java.util.Date;
 
-import com.netcrackerTask.backend.business.service.UserDetailsImpl;
+import com.netcrackerTask.backend.business.service.ServiceImpl.UserDetailsImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

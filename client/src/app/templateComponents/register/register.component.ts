@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from '../../service/app-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AppService) { }
+  constructor(private authService: AppService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,6 +25,9 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 4000);
       },
       err => {
         this.errorMessage = err.error.message;
