@@ -1,12 +1,14 @@
-package com.netcrackerTask.backend.business.service.Interfaces;
+/*
+ * Copyright (c)
+ */
 
+package com.netcrackerTask.backend.business.service.interfaces;
+
+import java.util.List;
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Game;
 import com.netcrackerTask.backend.business.entity.Purchase;
 import org.springframework.data.domain.Pageable;
-
-
-import java.util.List;
 
 public interface IStoreService {
     List<Account> getOrdersForUser(long id);
@@ -28,8 +30,6 @@ public interface IStoreService {
     int getPriceSum(List<Account> accounts);
 
     void sellAccounts(List<Long> accountsId, String name, String email);
-
-
 
     void removePurchase(Long accountId);
 

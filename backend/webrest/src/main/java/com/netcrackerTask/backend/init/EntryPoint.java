@@ -13,8 +13,10 @@ public final class EntryPoint {
      */
     private EntryPoint() {
     }
+
     /**
      * Entry point.
+     *
      * @param args Arguments.
      */
     @SuppressWarnings("PMD.ProhibitPublicStaticMethods")

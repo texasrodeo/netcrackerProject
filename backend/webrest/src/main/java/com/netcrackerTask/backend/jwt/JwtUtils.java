@@ -1,21 +1,19 @@
 package com.netcrackerTask.backend.jwt;
 
-import java.util.Date;
-
-import com.netcrackerTask.backend.business.service.ServiceImpl.UserDetailsImpl;
-
+import com.netcrackerTask.backend.business.service.implementations.LogService;
+import com.netcrackerTask.backend.business.service.implementations.UserDetailsImpl;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-
-import io.jsonwebtoken.*;
+import java.util.Date;
 
 @Component
 public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${jwtSecret}")
     private String jwtSecret;
@@ -23,16 +21,23 @@ public class JwtUtils {
     @Value("${jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    public LogService logService;
+
+    @Autowired
+    public JwtUtils(final LogService logService){
+        this.logService = logService;
+    }
+
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+            .setSubject((userPrincipal.getUsername()))
+            .setIssuedAt(new Date())
+            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+            .signWith(SignatureAlgorithm.HS512, jwtSecret)
+            .compact();
     }
 
     public String getUserNameFromJwtToken(String token) {
@@ -44,15 +49,15 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            logger.error("Invalid JWT signature: {}", e.getMessage());
+            logService.writeLog("{'error': 'Invalid JWT signature'}","JWTError");
         } catch (MalformedJwtException e) {
-            logger.error("Invalid JWT token: {}", e.getMessage());
+            logService.writeLog("{'error': 'Invalid JWT token'}","JWTError");
         } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
+            logService.writeLog("{'error': 'JWT token is expired'}","JWTError");
         } catch (UnsupportedJwtException e) {
-            logger.error("JWT token is unsupported: {}", e.getMessage());
+            logService.writeLog("{'error': 'JWT token is unsupported'}","JWTError");
         } catch (IllegalArgumentException e) {
-            logger.error("JWT claims string is empty: {}", e.getMessage());
+            logService.writeLog("{'error': 'JWT claims string is empty}","JWTError");
         }
 
         return false;

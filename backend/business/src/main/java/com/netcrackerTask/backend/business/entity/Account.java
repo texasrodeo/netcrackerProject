@@ -1,17 +1,17 @@
 package com.netcrackerTask.backend.business.entity;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="game_account")
-public class  Account {
+@Table(name = "game_account")
+
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,8 +26,7 @@ public class  Account {
 
     private String password;
 
-    @Column(name="game_id")
+    @Column(name = "game_id")
     private Long gameId;
-
 
 }

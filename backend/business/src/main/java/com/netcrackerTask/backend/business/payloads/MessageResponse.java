@@ -1,3 +1,7 @@
+/*
+ * Copyright (c)
+ */
+
 package com.netcrackerTask.backend.business.payloads;
 
 import lombok.AllArgsConstructor;
@@ -8,5 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageResponse {
+
     private String message;
 }

@@ -1,16 +1,19 @@
+/*
+ * Copyright (c)
+ */
+
 package com.netcrackerTask.backend.business.entity;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="game")
+@Table(name = "game")
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

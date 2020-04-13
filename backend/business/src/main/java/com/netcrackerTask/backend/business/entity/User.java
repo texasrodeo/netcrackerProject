@@ -1,32 +1,29 @@
+/*
+ * Copyright (c)
+ */
+
 package com.netcrackerTask.backend.business.entity;
 
+import java.util.Set;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User  {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
     private Long id;
 
-    @Column(name="username")
     private String username;
-    @Column(name="password")
+
     private String password;
-    @Column(name="email")
+
     private String email;
 
     private String activationCode;
@@ -39,9 +36,5 @@ public class User  {
         this.email = email;
         this.password = encode;
     }
-
-
-
-
 
 }

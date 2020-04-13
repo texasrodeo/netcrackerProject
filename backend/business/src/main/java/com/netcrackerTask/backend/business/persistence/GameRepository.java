@@ -1,3 +1,7 @@
+/*
+ * Copyright (c)
+ */
+
 package com.netcrackerTask.backend.business.persistence;
 
 import com.netcrackerTask.backend.business.entity.Game;

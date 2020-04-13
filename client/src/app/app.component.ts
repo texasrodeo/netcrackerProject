@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -40,6 +41,10 @@ export class AppComponent implements OnInit {
   logout() {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+  refresh() {
+    this.ngOnInit();
   }
 }
 

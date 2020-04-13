@@ -24,6 +24,7 @@
         <div class="card-body">
           <h4 class="card-title">{{message}}</h4>
           <button routerLink="/gamestore" [queryParams]="{'id':account.gameId.toString()}" class="btn-primary btn-sm float-left">Продолжить покупки</button>
+          <br>
           <button routerLink="/bag" class="btn-primary btn-sm float-right">Перейти в корзину</button>
         </div>
       </div>

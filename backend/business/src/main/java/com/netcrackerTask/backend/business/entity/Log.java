@@ -1,35 +1,24 @@
+/*
+ * Copyright (c)
+ */
 package com.netcrackerTask.backend.business.entity;
 
-
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.sql.Timestamp;
-
-
+import javax.persistence.*;
+import lombok.Data;
 
 @Entity
-
-public class Log {
+@Data
+public class Log{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="data")
-    private Timestamp date;
+    @Column(name = "data")
+    private final Timestamp date;
 
-    @Column(name="type")
-    private String type;
+    private final String type;
 
-    @Column(name="json")
-    private String json;
+    private final String json;
 
-    public Log(Timestamp date, String type, String json) {
-        this.date = date;
-        this.type = type;
-        this.json = json;
-    }
 }
