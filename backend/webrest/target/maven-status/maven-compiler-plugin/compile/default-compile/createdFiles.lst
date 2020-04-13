@@ -1,0 +1,15 @@
+com\netcrackerTask\backend\webrest\AuthenticationController.class
+com\netcrackerTask\backend\webrest\GameStoreController.class
+com\netcrackerTask\backend\jwt\AuthEntryPointJwt.class
+com\netcrackerTask\backend\init\SpringBootConfig.class
+com\netcrackerTask\backend\init\EntryPoint.class
+com\netcrackerTask\backend\webrest\MainController.class
+com\netcrackerTask\backend\config\WebSecurityConfig.class
+com\netcrackerTask\backend\jwt\JwtUtils.class
+com\netcrackerTask\backend\webrest\AdminController.class
+com\netcrackerTask\backend\webrest\UserController.class
+com\netcrackerTask\backend\webrest\PaypalController.class
+com\netcrackerTask\backend\config\MailConfig.class
+com\netcrackerTask\backend\jwt\AuthTokenFilter.class
+com\netcrackerTask\backend\webrest\PurchaseController.class
+com\netcrackerTask\backend\config\PaypalConfig.class

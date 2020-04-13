@@ -1,0 +1,71 @@
+
+  <h3 class="display-3">Список всех игр</h3>
+
+   <table class="table  table-borderles border-spacing=0" >
+     <tr *ngFor="let store of stores">
+       <td width="450">
+         <span class="display-4" > {{store.name}}</span>
+         <br>
+         <p *ngIf="store.name==='DOTA 2'">
+           <a routerLink="/gamestore"  [queryParams]="{'id':store.id.toString()}">
+             <img src="../../../assets/dota2.jpg" width="400" height="400" alt="">
+           </a>
+         </p>
+         <p *ngIf="store.name==='Hearthstone'">
+           <a routerLink="/gamestore"  [queryParams]="{'id':store.id.toString()}">
+             <img src="../../../assets/hs.png"  alt="" width="400" height="400">
+           </a>
+         </p>
+       </td>
+       <TD >
+          <span >
+               {{store.description}}
+            </span>
+         <br>
+         <a class="btn-primary" routerLink="/gamestore"  [queryParams]="{'id':store.id.toString()}"> Перейти в магазин</a>
+
+       </TD>
+
+
+
+
+
+     </tr>
+
+   </table>
+
+
+
+
+
+
+
+
+<!--    <div class="row">-->
+
+<!--    </div>-->
+<!--    <div class="row">-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="card-body">-->
+<!--    <table class="table table-bordered table-striped">-->
+<!--      <thead class="thead-dark">-->
+<!--      <tr>-->
+
+<!--        <th scope="col">Название</th>-->
+
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let store of stores">-->
+
+<!--        <td>  <a routerLink="/gamestore"  [queryParams]="{'id':store.id.toString()}"> {{store.name}}</a></td>-->
+<!--&lt;!&ndash;        <td>  {{store.name}}</td>&ndash;&gt;-->
+
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+
+

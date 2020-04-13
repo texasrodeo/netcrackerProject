@@ -1,0 +1,42 @@
+<h3 class="display-3">Ваша корзина</h3>
+<span *ngIf="message">{{message}}</span>
+<div class="card my-5">
+
+  <div class="card-body">
+
+
+    <div *ngIf="accounts?.length==0">
+      <h6 class="display-4">Здесь пока ничего нет.</h6>
+
+    </div>
+    <div *ngIf="accounts?.length!=0">
+
+      <table class="table table-borderless">
+        <thead class="thead-light">
+        <tr>
+
+          <th scope="col">Название</th>
+          <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let account of accounts">
+
+
+          <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
+          <td>{{account.price}} RUB</td>
+          <td> <button (click)="deleteFromBag(account.id)" class="btn-primary" >Удалить из корзины</button> </td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="font-weight-bold">Сумма: {{sum}} RUB</p>
+
+    </div>
+
+  </div>
+
+</div>
+<a routerLink="/" class="btn-primary btn-sm float-left">Назад</a>
+<div *ngIf="accounts?.length!=0">
+  <a routerLink="/checkout" class="btn-primary btn-sm float-right">Перейти к оформлению</a>
+</div>
