@@ -48,7 +48,7 @@
           <tr>
             <th>Название</th>
             <th>Цена</th>
-            <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+            <div *ngIf="currentUser && currentUser.roles.includes('ROLE_ADMIN')">
               <th>
                 Действия
               </th>
@@ -59,7 +59,7 @@
           <tr *ngFor="let account of accounts">
             <td> <a [routerLink]="['/gamestore','account']" [queryParams]="{'id':account.id.toString()}">{{account.description}}</a> </td>
             <td>{{account.price}} RUB</td>
-            <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+            <div *ngIf="currentUser && currentUser.roles.includes('ROLE_ADMIN')">
               <td>
                 <button (click)="deleteAccount(account.id)" class="btn-primary float-left">Удалить аккаунт</button>
               </td>
@@ -83,7 +83,7 @@
 
 <!--    <div *ngif="token.getUser()">-->
 
-      <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+      <div *ngIf="currentUser && currentUser.roles.includes('ROLE_ADMIN')">
         <button [routerLink]="['/addAccount']" [queryParams]="{'gameId':id.toString()}" class="btn-primary float-left">Добавить аккаунт</button>
       </div>
 <!--    </div>-->

@@ -29,15 +29,14 @@ export class StoreComponent implements OnInit {
 
 
   constructor(private storeService: StoreService, private route: ActivatedRoute, private token: TokenstorageService) {
-
-  }
-
-  ngOnInit(): void {
-    this.querySubscription = this.route.queryParams.subscribe(
+    this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam.id;
       }
     );
+  }
+
+  ngOnInit(): void {
     this.currentUser = this.token.getUser();
     if (this.sort || this.from && this.to) {
       this.storeService.findAccWithParams(this.id, this.from, this.to, this.sort, this.page, this.size).subscribe(data => {

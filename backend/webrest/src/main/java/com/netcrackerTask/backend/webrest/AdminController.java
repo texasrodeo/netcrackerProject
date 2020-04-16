@@ -2,7 +2,7 @@ package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.payloads.AddAccRequest;
-import com.netcrackerTask.backend.business.service.implementations.StoreService;
+import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class AdminController {
-    private final StoreService storeService;
+    private final StoreServiceImpl storeService;
 
     @Autowired
-    public AdminController(final StoreService storeService){
+    public AdminController(final StoreServiceImpl storeService){
         this.storeService = storeService;
     }
 

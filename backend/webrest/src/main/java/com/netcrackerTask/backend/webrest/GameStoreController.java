@@ -2,7 +2,7 @@ package com.netcrackerTask.backend.webrest;
 
 
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.service.implementations.StoreService;
+import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +19,11 @@ import java.util.Map;
 public class GameStoreController {
 
 
-    private final StoreService storeService;
+    private final StoreServiceImpl storeService;
 
 
     @Autowired
-    public GameStoreController(final StoreService storeService){
+    public GameStoreController(final StoreServiceImpl storeService){
         this.storeService = storeService;
     }
 

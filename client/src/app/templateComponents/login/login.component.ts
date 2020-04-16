@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AppService} from '../../service/app-service.service';
 import {TokenstorageService} from '../../service/tokenstorage.service';
+import {AppComponent} from "../../app.component";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AppService, private tokenStorage: TokenstorageService, private router:Router) { }
+  constructor(private authService: AppService, private tokenStorage: TokenstorageService,
+              private router: Router, private appC: AppComponent) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         setTimeout(() => {
+          this.appC.refresh();
           this.router.navigate(['/gamestores']);
         }, 2000);
       },

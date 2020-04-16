@@ -16,6 +16,6 @@ public class Log{
 
     private final String type;
 
-    private final String json;
+    private final String description;
 
 }

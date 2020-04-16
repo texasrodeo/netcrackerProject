@@ -3,10 +3,7 @@ package com.netcrackerTask.backend.business.persistence;
 import com.netcrackerTask.backend.business.entity.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 public interface AccountRepository extends PagingAndSortingRepository<Account, Long> {
    Page<Account> getAccountsByGameIdAndStatus(Long id, String status, Pageable pageable);

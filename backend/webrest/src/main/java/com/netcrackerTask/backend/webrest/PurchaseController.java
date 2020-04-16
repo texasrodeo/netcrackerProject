@@ -3,8 +3,8 @@ package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.User;
-import com.netcrackerTask.backend.business.service.implementations.StoreService;
-import com.netcrackerTask.backend.business.service.implementations.UserService;
+import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
+import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,11 +22,11 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class PurchaseController {
-    private final UserService userService;
-    private final StoreService storeService;
+    private final UserServiceImpl userService;
+    private final StoreServiceImpl storeService;
 
     @Autowired
-    public PurchaseController(final StoreService storeService, final UserService userService){
+    public PurchaseController(final StoreServiceImpl storeService, final UserServiceImpl userService){
         this.storeService = storeService;
         this.userService = userService;
     }

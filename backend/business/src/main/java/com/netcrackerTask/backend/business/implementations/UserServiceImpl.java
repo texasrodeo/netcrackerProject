@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.service.implementations;
+package com.netcrackerTask.backend.business.implementations;
 
 import com.netcrackerTask.backend.business.entity.Role;
 import com.netcrackerTask.backend.business.entity.User;
@@ -19,9 +19,9 @@ import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService {
 
-    private final MailService mailService;
+    private final MailServiceImpl mailService;
 
     @PersistenceContext
     private EntityManager em;
@@ -33,8 +33,8 @@ public class UserService implements UserDetailsService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(final MailService mailService, final UserRepository userRepository, final RoleRepository roleRepository,
-                       BCryptPasswordEncoder bCryptPasswordEncoder)
+    public UserServiceImpl(final MailServiceImpl mailService, final UserRepository userRepository, final RoleRepository roleRepository,
+                           BCryptPasswordEncoder bCryptPasswordEncoder)
     {
         this.mailService = mailService;
         this.userRepository = userRepository;
@@ -52,10 +52,6 @@ public class UserService implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
-
-
-
-
 
     public ResponseEntity<?> saveUser(User user, Set<String> strRoles) {
         Set<Role> roles = new HashSet<>();
@@ -104,7 +100,6 @@ public class UserService implements UserDetailsService {
             return false;
         }
         user.setActivationCode(null);
-
         userRepository.save(user);
         return true;
     }

@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.service.implementations;
+package com.netcrackerTask.backend.business.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class StoreService implements IStoreService {
+public class StoreServiceImpl implements IStoreService {
 
     private static final String FREE_STATUS = "FREE";
 
@@ -36,16 +36,16 @@ public class StoreService implements IStoreService {
 
     GameRepository gameRepository;
 
-    MailService mailService;
+    MailServiceImpl mailService;
 
-    LogService logService;
+    LogServiceImpl logService;
 
     StandardPBEStringEncryptor standardPBEStringEncryptor;
 
     @Autowired
-    public StoreService(final PurchaseRepository purchaseRepository, final AccountRepository accountRepository,
-                        final GameRepository gameRepository, final MailService mailService,
-                        final StandardPBEStringEncryptor standardPBEStringEncryptor, final LogService logService) {
+    public StoreServiceImpl(final PurchaseRepository purchaseRepository, final AccountRepository accountRepository,
+                            final GameRepository gameRepository, final MailServiceImpl mailService,
+                            final StandardPBEStringEncryptor standardPBEStringEncryptor, final LogServiceImpl logService) {
         this.purchaseRepository = purchaseRepository;
         this.accountRepository = accountRepository;
         this.gameRepository = gameRepository;

@@ -2,7 +2,7 @@ package com.netcrackerTask.backend.config;
 
 import com.netcrackerTask.backend.jwt.AuthEntryPointJwt;
 import com.netcrackerTask.backend.jwt.AuthTokenFilter;
-import com.netcrackerTask.backend.business.service.implementations.UserService;
+import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.iv.RandomIvGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

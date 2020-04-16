@@ -2,9 +2,9 @@ package com.netcrackerTask.backend.webrest;
 
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
-import com.netcrackerTask.backend.business.service.implementations.UserDetailsImpl;
+import com.netcrackerTask.backend.business.implementations.UserDetailsImpl;
 import com.netcrackerTask.backend.jwt.JwtUtils;
-import com.netcrackerTask.backend.business.service.implementations.UserService;
+import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 
 import com.netcrackerTask.backend.business.payloads.JwtResponse;
 import com.netcrackerTask.backend.business.payloads.LoginRequest;
@@ -36,7 +36,7 @@ public class AuthenticationController {
 
     AuthenticationManager authenticationManager;
 
-    UserService userService;
+    UserServiceImpl userService;
 
     RoleRepository roleRepository;
 
@@ -47,7 +47,7 @@ public class AuthenticationController {
 
 
     @Autowired
-    public AuthenticationController(final UserService userService, final JwtUtils jwtUtils,
+    public AuthenticationController(final UserServiceImpl userService, final JwtUtils jwtUtils,
                                     final PasswordEncoder passwordEncoder, final RoleRepository roleRepository,
                                     final AuthenticationManager authenticationManager){
         this.authenticationManager = authenticationManager;

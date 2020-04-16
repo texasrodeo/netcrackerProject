@@ -2,8 +2,8 @@ package com.netcrackerTask.backend.webrest;
 
 
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.service.implementations.StoreService;
-import com.netcrackerTask.backend.business.service.implementations.UserService;
+import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
+import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +15,10 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
-    private final StoreService storeService;
-    private final UserService userService;
+    private final StoreServiceImpl storeService;
+    private final UserServiceImpl userService;
 
-    public UserController(final StoreService storeService, final UserService userService) {
+    public UserController(final StoreServiceImpl storeService, final UserServiceImpl userService) {
         this.storeService = storeService;
         this.userService = userService;
     }

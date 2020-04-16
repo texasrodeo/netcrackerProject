@@ -3,10 +3,10 @@ package com.netcrackerTask.backend.webrest;
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Order;
 import com.netcrackerTask.backend.business.entity.User;
-import com.netcrackerTask.backend.business.service.implementations.LogService;
-import com.netcrackerTask.backend.business.service.implementations.PaypalService;
-import com.netcrackerTask.backend.business.service.implementations.StoreService;
-import com.netcrackerTask.backend.business.service.implementations.UserService;
+import com.netcrackerTask.backend.business.implementations.LogServiceImpl;
+import com.netcrackerTask.backend.business.implementations.PaypalServiceImpl;
+import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
+import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -28,17 +28,17 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class PaypalController {
 
-    PaypalService paypalService;
+    PaypalServiceImpl paypalService;
 
-    StoreService storeService;
+    StoreServiceImpl storeService;
 
-    UserService userService;
+    UserServiceImpl userService;
 
-    LogService logService;
+    LogServiceImpl logService;
 
     @Autowired
-    public PaypalController(final PaypalService paypalService, final StoreService storeService,
-                            final UserService userService, final LogService logService){
+    public PaypalController(final PaypalServiceImpl paypalService, final StoreServiceImpl storeService,
+                            final UserServiceImpl userService, final LogServiceImpl logService){
         this.paypalService = paypalService;
         this.storeService = storeService;
         this.userService = userService;

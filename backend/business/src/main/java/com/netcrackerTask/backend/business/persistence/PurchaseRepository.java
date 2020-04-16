@@ -1,9 +1,8 @@
 package com.netcrackerTask.backend.business.persistence;
 
+import java.util.List;
 import com.netcrackerTask.backend.business.entity.Purchase;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
 

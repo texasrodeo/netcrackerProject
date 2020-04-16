@@ -1,4 +1,4 @@
-package com.netcrackerTask.backend.business.service.implementations;
+package com.netcrackerTask.backend.business.implementations;
 
 import com.netcrackerTask.backend.business.service.interfaces.IPaypalService;
 import com.paypal.api.payments.*;
@@ -13,13 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PaypalService implements IPaypalService {
-
+public class PaypalServiceImpl implements IPaypalService {
 
     private final APIContext context;
 
     @Autowired
-    public PaypalService(final APIContext apiContext){
+    public PaypalServiceImpl(final APIContext apiContext){
         this.context = apiContext;
     }
 
@@ -59,8 +58,7 @@ public class PaypalService implements IPaypalService {
         payment.setRedirectUrls(redirectUrls);
 
         try{
-            Payment result = payment.create(context);
-            return result;
+            return payment.create(context);
         }
 
         catch(Exception e){
@@ -68,7 +66,6 @@ public class PaypalService implements IPaypalService {
             e.printStackTrace();
             return null;
         }
-//        return payment.create(context);
     }
 
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
