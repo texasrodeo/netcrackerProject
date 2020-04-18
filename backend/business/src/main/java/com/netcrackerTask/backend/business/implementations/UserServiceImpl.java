@@ -5,6 +5,7 @@ import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.payloads.MessageResponse;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
 import com.netcrackerTask.backend.business.persistence.UserRepository;
+import com.netcrackerTask.backend.business.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,12 +20,9 @@ import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements IUserService, UserDetailsService {
 
     private final MailServiceImpl mailService;
-
-    @PersistenceContext
-    private EntityManager em;
 
     UserRepository userRepository;
 
@@ -32,6 +30,13 @@ public class UserServiceImpl implements UserDetailsService {
 
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Constructor.
+     * @param userRepository user DAO
+     *@param roleRepository relos DAO
+     * @param mailService service serving emailing
+     * @param bCryptPasswordEncoder password encrypt
+     * */
     @Autowired
     public UserServiceImpl(final MailServiceImpl mailService, final UserRepository userRepository, final RoleRepository roleRepository,
                            BCryptPasswordEncoder bCryptPasswordEncoder)
@@ -87,8 +92,6 @@ public class UserServiceImpl implements UserDetailsService {
         }
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-
-
 
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);

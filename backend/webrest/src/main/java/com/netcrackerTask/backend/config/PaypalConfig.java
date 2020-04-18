@@ -12,12 +12,21 @@ import java.util.Map;
 
 @Configuration
 public class PaypalConfig {
+    /**
+     * PayPal client id.
+     * */
     @Value("${paypal.client.id}")
     private String cliendId;
 
+    /**
+     * PayPal client sercret key.
+     * */
     @Value("${paypal.client.secret}")
     private String clientSecret;
 
+    /**
+     * PayPal mode (sandbox).
+     * */
     @Value("${paypal.mode}")
     private String mode;
 

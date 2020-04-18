@@ -15,12 +15,20 @@ import java.util.Map;
 public class AdminController {
     private final StoreServiceImpl storeService;
 
+    /**
+     * Constructor.
+     * @param storeService service associated with store
+     */
     @Autowired
     public AdminController(final StoreServiceImpl storeService){
         this.storeService = storeService;
     }
 
-
+    /**
+     * Logs user in
+     * @param request account credentials
+     * @return message about operation status
+     * */
     @PostMapping("/admin/addaccount")
     public Map<String, String> addaccount(@RequestBody AddAccRequest request){
         Map<String, String> res = new HashMap<>();
@@ -36,10 +44,15 @@ public class AdminController {
         return res;
     }
 
+    /**
+     * Logs user in
+     * @param id account id
+     * @return message about operation status
+     * */
     @GetMapping("/admin/removeAccount")
-    public Map<String, String> removeAccount(@RequestParam ("accountId") String id){
+    public Map<String, String> removeAccount(@RequestParam ("accountId") Long id){
         Map<String, String> res = new HashMap<>();
-        storeService.removeAccount(Long.parseLong(id));
+        storeService.removeAccount(id);
         res.put("message", "Аккаунт удален");
         return res;
     }

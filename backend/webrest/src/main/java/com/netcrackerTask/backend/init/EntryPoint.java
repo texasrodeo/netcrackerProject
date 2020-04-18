@@ -20,6 +20,5 @@ public final class EntryPoint {
     @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
     public static void main(final String[] args) {
         SpringApplication.run(SpringBootConfig.class, args);
-
     }
 }

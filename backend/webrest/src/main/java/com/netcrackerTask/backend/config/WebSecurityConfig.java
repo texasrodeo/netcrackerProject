@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public StandardPBEStringEncryptor standardPBEStringEncryptor(){
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
@@ -44,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return encryptor;
     }
 
-
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
@@ -53,14 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthTokenFilter();
     }
 
-
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 const AUTH_API = 'http://localhost:8080/';
 
@@ -31,14 +31,14 @@ export class AppService {
     }, httpOptions);
   }
 
-  activate(code): Observable<any>{
-    return this.http.get<any>(AUTH_API + 'activate/'+code);
+  activate(code): Observable<any> {
+    return this.http.get<any>(AUTH_API + 'activate/' + code);
 
   }
 
-  checkEmail(id:any):Observable<any> {
+  checkEmail(id: any): Observable<any> {
     const params = new HttpParams()
-      .set('id',id.toString());
-    return this.http.get<any>(AUTH_API+"user/email",{params});
+      .set('id', id.toString());
+    return this.http.get<any>(AUTH_API + 'user/email', {params});
   }
 }

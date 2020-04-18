@@ -51,6 +51,7 @@ export class StoreComponent implements OnInit {
         this.header = data.header;
       });
     }
+    this.message = undefined;
   }
 
   submit(form: NgForm) {
@@ -84,7 +85,10 @@ export class StoreComponent implements OnInit {
         this.message = data.message;
       }
     );
-    this.ngOnInit();
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 1000);
+
 
   }
 

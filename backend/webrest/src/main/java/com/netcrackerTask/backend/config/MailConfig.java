@@ -41,13 +41,11 @@ public class MailConfig {
         mailSender.setUsername(username);
         mailSender.setPort(port);
         mailSender.setPassword(password);
-
         Properties properties = mailSender.getJavaMailProperties();
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.smtp.auth", auth);
         properties.setProperty("mail.smtp.starttls.enable", enable);
         properties.setProperty("mail.debug", debug);
-
         return mailSender;
     }
 }

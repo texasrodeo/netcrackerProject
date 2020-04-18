@@ -9,11 +9,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MailServiceImpl implements IMailService {
+    /**
+     * Sender email.
+     *
+     */
     @Value("${spring.mail.username}")
     private String username;
 
     private final JavaMailSender mailSender;
 
+    /**
+     * Constructor.
+     * @param mailSender spring class for emailing
+     */
     @Autowired
     public MailServiceImpl(final JavaMailSender mailSender){
         this.mailSender = mailSender;
@@ -27,6 +35,5 @@ public class MailServiceImpl implements IMailService {
         mailMessage.setText(message);
         mailSender.send(mailMessage);
     }
-
 
 }

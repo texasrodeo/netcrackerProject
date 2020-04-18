@@ -11,19 +11,42 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails {
+
     private static final long serialVersionUID = 1L;
 
+    /**
+     * user id.
+     * */
     private final Long id;
 
+    /**
+     * user name.
+     * */
     private final String username;
 
+    /**
+     * user email.
+     * */
     private final String email;
 
+    /**
+     * user password.
+     * */
     @JsonIgnore
     private final String password;
 
+    /**
+     * user authorities.
+     * */
     private final Collection<? extends GrantedAuthority> authorities;
 
+    /**
+     * Constructor.
+     * @param id user id
+     *@param username user name
+     *@param password user password
+     * @param authorities user authorities
+     * */
     public UserDetailsImpl(Long id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -33,6 +56,11 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
+    /**
+     *Builds user.
+     * @param user user
+     * @return  user
+     * */
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

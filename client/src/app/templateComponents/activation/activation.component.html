@@ -1,5 +1,9 @@
-<div class="alert alert-success" >
+<div class="alert alert-success" *ngIf="message" >
   Успешное подтверждение почты.
    Теперь вы можете совершать покупки в магазине.
+  <a class="nav-link" routerLink="/">На главную</a>
+</div>
+<div class="alert alert-success" *ngIf="!message" >
+  Произошла ошибка, попробуйте похже
   <a class="nav-link" routerLink="/">На главную</a>
 </div>

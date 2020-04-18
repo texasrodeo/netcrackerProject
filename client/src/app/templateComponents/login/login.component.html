@@ -17,6 +17,7 @@
             type="text"
             class="form-control"
             name="username"
+            placeholder="Имя пользователя"
             [(ngModel)]="form.username"
             required
             #username="ngModel"
@@ -36,6 +37,7 @@
             type="password"
             class="form-control"
             name="password"
+            placeholder="Пароль"
             [(ngModel)]="form.password"
             required
             minlength="6"
@@ -73,5 +75,4 @@
       </div>
     </div>
   </div>
-
 </div>

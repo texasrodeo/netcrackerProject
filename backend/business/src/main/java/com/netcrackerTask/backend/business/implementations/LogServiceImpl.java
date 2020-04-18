@@ -13,6 +13,10 @@ public class LogServiceImpl implements ILogService {
 
     LogRepository logRepository;
 
+    /**
+     * Constructor.
+     * @param logRepository log DAO
+     */
     @Autowired
     public LogServiceImpl(final LogRepository logRepository){
         this.logRepository=logRepository;

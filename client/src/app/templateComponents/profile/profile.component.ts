@@ -19,17 +19,19 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-    this.app.checkEmail(this.currentUser.id).subscribe(
-      data => {
-        this.emailConfirmed = data.res;
-      }
-    );
-    this.storeService.findPurchases(this.currentUser.id).subscribe(
-      data => {
-        this.purchases = data.items;
-        this.message = data.message;
-      }
-    );
+    if (this.currentUser) {
+      this.app.checkEmail(this.currentUser.id).subscribe(
+        data => {
+          this.emailConfirmed = data.res;
+        }
+      );
+      this.storeService.findPurchases(this.currentUser.id).subscribe(
+        data => {
+          this.purchases = data.items;
+          this.message = data.message;
+        }
+      );
+    }
   }
 
 

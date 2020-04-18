@@ -1,29 +1,30 @@
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Purchase.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\StoreService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Game.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\UserService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\User.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\PurchaseRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\MailService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\GameRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\RoleRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Account.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\LogService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IUserService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Order.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\UserRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\PaypalService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\MessageResponse.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\PayRequest.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\implementations\UserDetailsImpl.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IPaypalService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\AccountRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\JwtResponse.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IStoreService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Role.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\SignupRequest.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IMailService.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\LoginRequest.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Log.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\LogRepository.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\AddAccRequest.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\UserRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Role.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\AccountRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\RoleRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\LogServiceImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\UserDetailsImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\JwtResponse.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Purchase.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Log.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\PurchaseRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\UserServiceImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IUserService.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\MessageResponse.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IStoreService.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Game.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Order.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\MailServiceImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\LogRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\ILogService.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\SignupRequest.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\PaypalServiceImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\LoginRequest.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IMailService.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\User.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\service\interfaces\IPaypalService.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\AddAccRequest.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\implementations\StoreServiceImpl.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\persistence\GameRepository.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\payloads\PayRequest.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\business\src\main\java\com\netcrackerTask\backend\business\entity\Account.java

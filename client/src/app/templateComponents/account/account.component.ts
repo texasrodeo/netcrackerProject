@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
     if (!this.tokenStorage.getUser()) {
       this.router.navigateByUrl('/forbidden');
     } else {
-    this.storeService.addtocart(this.account.id).subscribe(data => {
+    this.storeService.addtocart(this.account.id, this.currentUser.id).subscribe(data => {
       this.message = data.message;
       this.added = true;
     } );

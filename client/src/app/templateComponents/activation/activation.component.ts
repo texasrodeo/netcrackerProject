@@ -12,6 +12,7 @@ export class ActivationComponent implements OnInit {
 
 
   code: string;
+  message;
   private routeSubscription: Subscription;
 
   constructor(private appService: AppService, private route: ActivatedRoute) {
@@ -21,7 +22,11 @@ export class ActivationComponent implements OnInit {
 
   ngOnInit(): void {
       this.routeSubscription = this.route.params.subscribe(params => this.code = params.code);
-      this.appService.activate(this.code).subscribe();
+      this.appService.activate(this.code).subscribe(
+        data => {
+          this.message = data.activated;
+        }
+      );
   }
 
 

@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * Role entity.
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,11 +17,20 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name = "role")
 public class Role implements GrantedAuthority {
 
+    /**
+     * Role id.
+     */
     @Id
     private Long id;
 
+    /**
+     * Role name.
+     */
     private String name;
 
+    /**
+     * Users who have this role.
+     */
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;

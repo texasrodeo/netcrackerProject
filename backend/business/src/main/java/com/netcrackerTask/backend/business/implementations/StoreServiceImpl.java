@@ -18,16 +18,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class StoreServiceImpl implements IStoreService {
 
+    /**
+     * String for free account status.
+     * */
     private static final String FREE_STATUS = "FREE";
 
+    /**
+     * String for sold account status.
+     * */
     private static final String SOLD_STATUS = "SOLD";
 
+    /**
+     * String for confirmed purchase status.
+     * */
     private static final String CONFIRMED_STATUS = "CONFIRMED";
 
+    /**
+     * String for added to basket purchase status.
+     * */
     private static final String ADDED_TO_BASKET_STATUS = "ADDED_TO_BASKET";
 
+    /**
+     * String for fre reserved status.
+     * */
     private static final String RESERVED_STATUS = "RESERVED";
 
+    /**
+     * String for decreasing accounts sort status.
+     * */
     private static final String DESC_SORT = "desc";
 
     PurchaseRepository purchaseRepository;
@@ -42,6 +60,15 @@ public class StoreServiceImpl implements IStoreService {
 
     StandardPBEStringEncryptor standardPBEStringEncryptor;
 
+    /**
+     * Constructor.
+     * @param purchaseRepository purchase DAO
+     *@param accountRepository account DAO
+     *@param gameRepository game DAO
+     * @param mailService service serving emailing
+     * @param standardPBEStringEncryptor password encrypt
+     *@param logService service serving logging
+     * */
     @Autowired
     public StoreServiceImpl(final PurchaseRepository purchaseRepository, final AccountRepository accountRepository,
                             final GameRepository gameRepository, final MailServiceImpl mailService,
@@ -54,6 +81,9 @@ public class StoreServiceImpl implements IStoreService {
         this.logService = logService;
     }
 
+    public List<Game> findAllGames() {
+        return (List<Game>) gameRepository.findAll();
+    }
 
     public List<Account> getOrdersForUser(long id) {
         return getAccountsByPurchase(purchaseRepository.getPurchaseByUserIdAndStatusEquals(id, CONFIRMED_STATUS));
@@ -156,7 +186,6 @@ public class StoreServiceImpl implements IStoreService {
         Purchase purchase = purchaseRepository.getPurchaseByGameAccountId(accountId);
         purchase.setStatus("CONFIRMED");
         StringBuilder json = new StringBuilder("{\"purchase\":\"").append(purchase.toString()).append("\"}");
-        System.out.println(json.toString());
         logService.writeLog(json.toString(), "Purchase");
         purchaseRepository.save(purchase);
     }
@@ -169,4 +198,6 @@ public class StoreServiceImpl implements IStoreService {
     public void removeAccount(Long accountId) {
         accountRepository.deleteById(accountId);
     }
+
+
 }

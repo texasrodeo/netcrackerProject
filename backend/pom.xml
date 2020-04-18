@@ -26,11 +26,8 @@
     <profiles>
         <profile>
             <id>Qulice</id>
-
-            <!-- Дейсвия которые будут выполнятся при сборке этого и всех дочерних проектов -->
             <build>
                 <plugins>
-                    <!-- Анализатор кода https://www.qulice.com -->
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
@@ -38,7 +35,6 @@
                         <configuration>
                             <license>LICENSE.txt</license>
                         </configuration>
-                        <!--   Добавляем зависимость на модуль с лицензией     -->
                         <dependencies>
                             <dependency>
                                 <groupId>netcrackerTask</groupId>

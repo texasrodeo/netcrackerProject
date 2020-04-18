@@ -14,9 +14,6 @@ const _url = 'http://localhost:8080/';
 @Injectable()
 export class StoreService {
 
-
-
-
   private storesUrl: string;
   private storeUrl: string;
   private  accountUrl: string;
@@ -80,14 +77,16 @@ export class StoreService {
     return this.http.get<Account>(this.accountUrl, {params});
   }
 
-
-  getbag(): Observable<any> {
-    return this.http.get<any>(this.bagUrl);
-  }
-
-  addtocart(id: number): Observable<any> {
+  getbag(id: number): Observable<any> {
     const  params = new HttpParams()
       .set('id', id.toString());
+    return this.http.get<any>(this.bagUrl, {params});
+  }
+
+  addtocart(id: number, userId: number): Observable<any> {
+    const  params = new HttpParams()
+      .set('id', id.toString())
+      .set('userId', userId.toString());
     return this.http.get<any>(this.addToCartUrl, {params});
   }
 
@@ -111,7 +110,6 @@ export class StoreService {
       window.location.href = paypalUrl.toString();
       }
     );
-
   }
 
   addAccount(form: any, gameId: any): Observable<any> {
@@ -128,10 +126,7 @@ export class StoreService {
     let params = new HttpParams()
       .set('paymentId', paymentid.toString())
       .set('PayerID', payerid.toString());
-
-
     let k = 0;
-
     for (const a of accountsId) {
       const str = 'id' + k.toString();
       k++;

@@ -1,16 +1,12 @@
 package com.netcrackerTask.backend.jwt;
 
 import java.util.Date;
-
 import com.netcrackerTask.backend.business.implementations.UserDetailsImpl;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-
-
 import io.jsonwebtoken.*;
 
 @Component
@@ -23,6 +19,11 @@ public class JwtUtils {
     @Value("${jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    /**
+     * Logs user in
+     * @param authentication current authentication
+     * @return jwt token
+     * */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -35,10 +36,20 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Gets username
+     * @param token jwt token
+     * @return username
+     * */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * Validates token
+     * @param authToken token
+     * @return true or writes error to logger
+     * */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

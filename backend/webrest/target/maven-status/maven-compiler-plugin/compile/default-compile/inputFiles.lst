@@ -1,15 +1,15 @@
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\PaypalConfig.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\WebSecurityConfig.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\init\EntryPoint.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\AuthenticationController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\PaypalController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\AdminController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\UserController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\PurchaseController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\GameStoreController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\MainController.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\JwtUtils.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\AuthTokenFilter.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\init\SpringBootConfig.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\MailConfig.java
-C:\Users\Mvideo787\Downloads\netcrackerProject-master (1)\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\AuthEntryPointJwt.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\AdminController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\MailConfig.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\GameStoreController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\PaypalController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\init\EntryPoint.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\WebSecurityConfig.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\AuthTokenFilter.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\JwtUtils.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\config\PaypalConfig.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\init\SpringBootConfig.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\MainController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\PurchaseController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\jwt\AuthEntryPointJwt.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\AuthenticationController.java
+C:\Users\Mvideo787\IdeaProjects\netcrackerProject-master\backend\webrest\src\main\java\com\netcrackerTask\backend\webrest\UserController.java

@@ -25,7 +25,7 @@ export class BagComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-    this.storeService.getbag().subscribe(data => {
+    this.storeService.getbag(this.currentUser.id).subscribe(data => {
       this.accounts = data.accounts;
       this.sum = data.sum;
     });
@@ -37,7 +37,6 @@ export class BagComponent implements OnInit {
          this.message = data;
      }
      );
-
      this.reloadPage();
   }
   reloadPage() {

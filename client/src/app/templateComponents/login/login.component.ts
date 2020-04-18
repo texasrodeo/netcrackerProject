@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {AppService} from '../../service/app-service.service';
 import {TokenstorageService} from '../../service/tokenstorage.service';
-import {AppComponent} from "../../app.component";
+import {AppComponent} from '../../app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +17,8 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
   constructor(private authService: AppService, private tokenStorage: TokenstorageService,
-              private router: Router, private appC: AppComponent) { }
+              private router: Router,
+              private appC: AppComponent) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

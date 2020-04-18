@@ -1,6 +1,8 @@
 package com.netcrackerTask.backend.webrest;
 
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
@@ -14,66 +16,59 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class PurchaseController {
-    private final UserServiceImpl userService;
+
     private final StoreServiceImpl storeService;
 
+    /**
+     * Constructor.
+     * @param storeService service associated with store
+     */
     @Autowired
-    public PurchaseController(final StoreServiceImpl storeService, final UserServiceImpl userService){
+    public PurchaseController(final StoreServiceImpl storeService){
         this.storeService = storeService;
-        this.userService = userService;
     }
 
+    /**
+     * Gets accounts that user has put in his bag
+     *@param id user id
+     * @return map with accounts and their summary price
+     */
     @GetMapping("/bag")
-    @PreAuthorize("hasRole('USER')")
-    public Map<String,Object> getBag(){
+    public Map<String,Object> getBag(@RequestParam ("id") Long id){
         Map<String,Object> result = new HashMap<>();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name=auth.getName();
-        User user= userService.findByUsername(name);
-        List<Account> accounts = storeService.getBagItemsForUser(user.getId());
+        List<Account> accounts = storeService.getBagItemsForUser(id);
         result.put("accounts", accounts);
         result.put("sum", storeService.getPriceSum(accounts));
         return result;
     }
 
-
+    /**
+     * Add account to user bag
+     * @param id account id
+     *@param userId user id
+     *@return message about operation success
+     */
     @GetMapping("/addtocart")
-    @PreAuthorize("hasRole('USER')")
-    public Map<String,String>  addtocart(@RequestParam("id") Long id){
-        Account account = storeService.getAccountById(id);
+    public Map<String,String> addtocart(@RequestParam("id") Long id, @RequestParam ("userId") Long userId){
         Map<String, String> result = new HashMap<>();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth!=null){
-            String name=auth.getName();
-            User user= userService.findByUsername(name);
-            if(user!=null){
-                if(storeService.addPurchase(id, user.getId()))
-                    result.put("message","Аккаунт успешно доабвлен в корзину") ;
-                else
-                    result.put("message", "Ошибка: аккаунт уже зарезервирован.");
-                return result;
-            }
-        }
-
-        result.put("message", "Ошибка");
+        if(storeService.addPurchase(id, userId))
+            result.put("message","Аккаунт успешно доабвлен в корзину") ;
+        else
+            result.put("message", "Ошибка: аккаунт уже зарезервирован.");
         return result;
     }
 
+    /**
+     * Removes account from bag
+     * @param accountId account id
+     */
     @GetMapping("bag/removePurchase")
-    @PreAuthorize("hasRole('USER')")
-    public String remove(@RequestParam("id") Long accountId){
+    public void remove(@RequestParam("id") Long accountId){
         storeService.removePurchase(accountId);
-        return "Удалено";
     }
-
-
 
 }

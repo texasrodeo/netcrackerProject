@@ -1,6 +1,5 @@
 
   <br>
-
     <div class="col-md-4">
       <div class="card card-container">
         <h5 class="display-5">Фильтр</h5>
@@ -80,10 +79,7 @@
       </div>
 
 
-
-<!--    <div *ngif="token.getUser()">-->
-
       <div *ngIf="currentUser && currentUser.roles.includes('ROLE_ADMIN')">
-        <button [routerLink]="['/addAccount']" [queryParams]="{'gameId':id.toString()}" class="btn-primary float-left">Добавить аккаунт</button>
+        <button [routerLink]="['/addAccount']" [queryParams]="{'gameId':id}" class="btn-primary float-right">Добавить аккаунт</button>
       </div>
-<!--    </div>-->
+  <a  class="btn btn-primary" [routerLink]="['/gamestores']" >Назад</a>

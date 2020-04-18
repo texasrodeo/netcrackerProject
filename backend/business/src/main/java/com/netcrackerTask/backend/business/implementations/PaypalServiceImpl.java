@@ -15,8 +15,13 @@ import java.util.List;
 @Service
 public class PaypalServiceImpl implements IPaypalService {
 
+
     private final APIContext context;
 
+    /**
+     * Constructor.
+     * @param apiContext PayPal context
+     */
     @Autowired
     public PaypalServiceImpl(final APIContext apiContext){
         this.context = apiContext;

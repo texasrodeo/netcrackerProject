@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * Purchase entity.
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -15,25 +18,40 @@ import java.util.Date;
 @Table(name = "purchase")
 public class Purchase {
 
+    /**
+     * Purchase id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * Purchase date.
+     */
     @Column(name="data")
     private Timestamp date;
 
-
+    /**
+     * Purchase status (CONFIRMED, ADDED_TO_BASKET).
+     */
     @Column(name="status")
     private String status;
 
-
+    /**
+     * Purchase owner id.
+     */
     @Column(name="user_id")
     private Long userId;
 
+    /**
+     *Game account id in purchase.
+     */
     @Column(name="game_account_id")
     private Long gameAccountId;
 
-
+    /**
+     * Constructor.
+     */
     public Purchase(Timestamp date, String status, Long userId, Long gameAccountId){
         this.date = date;
         this.status = status;
