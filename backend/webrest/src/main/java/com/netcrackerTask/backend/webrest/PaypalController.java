@@ -1,9 +1,7 @@
 package com.netcrackerTask.backend.webrest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Order;
 import com.netcrackerTask.backend.business.entity.User;
@@ -11,16 +9,14 @@ import com.netcrackerTask.backend.business.implementations.LogServiceImpl;
 import com.netcrackerTask.backend.business.implementations.PaypalServiceImpl;
 import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
 import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
+import com.netcrackerTask.backend.business.payloads.SellRequest;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -34,11 +30,11 @@ public class PaypalController {
 
     LogServiceImpl logService;
 
-    private static final String url = "http://localhost:4200/";
+    private static final String url = "http://localhost:4200";
 
-    private static final String success = "pay/success";
+    private static final String success = "/pay/success";
 
-    private static final String cancel = "pay/cancel";
+    private static final String cancel = "/pay/cancel";
 
     /**
      * Constructor.
@@ -84,8 +80,8 @@ public class PaypalController {
      * @return redirecting link to PayPal paymnet URL
      */
     @GetMapping("/pay")
-    public Map<String,String> payment(@RequestParam Long sum){
-        Map<String,String> res = new HashMap<>();
+    public Map<String,Object> payment(@RequestParam Long sum){
+        Map<String,Object> res = new HashMap<>();
         try {
             Order order = new Order();
             order.setMethod("paypal");
@@ -103,57 +99,46 @@ public class PaypalController {
             Payment payment = paypalService.createPayment(order.getPrice(), order.getCurrency(), order.getMethod(),
                     order.getIntent(), order.getDescription(),
                     url+cancel, paypalService.completeSuccessUrl(order.getAccountsId(),url+success));
-
             for(Links link:payment.getLinks()){
                 if(link.getRel().equals("approval_url")){
+                    res.put("accounts", order.getAccountsId());
                     res.put("url",link.getHref()) ;
                     return res;
                 }
             }
         }
         catch (PayPalRESTException e){
-            StringBuilder json = new StringBuilder("{\"purchase\":\"").append(e.getMessage()).append("\"}");
-            logService.writeLog(json.toString(),"PayPal exception");
+            logService.writeLog("{\"purchase\":\"" + e.getMessage() + "\"}","PayPal exception");
         }
         return res;
     }
+
 
 
     /**
      * Marks bought accounts as SOLD,
      *@return message about operation status
      */
-    @GetMapping("/pay/success")
-    public Map<String,String> successPay(@RequestParam Map<String,String> allRequestParams){
+    @PostMapping(success)
+    public Map<String,String> successPay(@RequestBody SellRequest sellRequest){
         Map<String, String> result = new HashMap<>();
         try {
-            Payment payment = paypalService.executePayment(allRequestParams.get("paymentId"),allRequestParams.get("PayerID"));
+            Payment payment = paypalService.executePayment(sellRequest.getPaymentId(),sellRequest.getPayerId());
             logService.writeLog(payment.toJSON(), "PayPalPayment");
             if(payment.getState().equals("approved")){
-                Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-                if(auth!=null){
-                    String name=auth.getName();
-                    List<Long> accountsId = new ArrayList<>();
-                    User user= userService.findByUsername(name);
-                    allRequestParams.forEach((k,v)->{
-                        if(k.contains("id")){
-                            Long id = new Long(v);
-                            accountsId.add(id);
-                        }
-                    });
-                    storeService.sellAccounts(accountsId, user.getUsername(), user.getEmail());
-                    result.put("message","Успешно! Благодарим Вас за покупку!") ;
-                    return result;
+                    Optional<User> user = userService.findById(sellRequest.getUserId());
+                    if(user.isPresent()) {
+                        storeService.sellAccounts(sellRequest.getAccounts(), user.get().getUsername(), user.get().getEmail());
+                        result.put("message","Успешно! Благодарим Вас за покупку!") ;
+                        return result;
+                    }
                 }
-            }
         }
         catch (PayPalRESTException e){
-            StringBuilder json = new StringBuilder("{\"purchase\":\"").append(e.getMessage()).append("\"}");
-            logService.writeLog(json.toString(),"PayPal exception");
+            logService.writeLog("{\"purchase\":\"" + e.getMessage() + "\"}","PayPal exception");
         }
         result.put("message","Произошла ошибка на сервере") ;
         return result;
     }
-
 
 }

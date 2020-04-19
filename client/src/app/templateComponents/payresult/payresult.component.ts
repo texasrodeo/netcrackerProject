@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {StoreService} from '../../service/store-service.service';
+import {TokenstorageService} from "../../service/tokenstorage.service";
 
 @Component({
   selector: 'app-payresult',
@@ -17,7 +18,8 @@ export class PayresultComponent implements OnInit {
   accountsId = [];
   message = '';
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute) {
+  constructor(private storeService: StoreService, private route: ActivatedRoute,
+              private token: TokenstorageService) {
 
 
   }
@@ -35,7 +37,7 @@ export class PayresultComponent implements OnInit {
           }
         }
       );
-      this.storeService.successBuy(this.paymentid, this.payerid, this.accountsId).subscribe(
+      this.storeService.successBuy(this.paymentid, this.payerid, this.accountsId, this.token.getUser().id).subscribe(
         data => {
           this.message = data.message;
         }

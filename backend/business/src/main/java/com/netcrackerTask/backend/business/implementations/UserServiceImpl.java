@@ -15,8 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Service
@@ -95,6 +93,10 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
+    }
+
+    public Optional<User> findById(Long id){
+        return userRepository.findById(id);
     }
 
     public boolean activateUser(String code) {

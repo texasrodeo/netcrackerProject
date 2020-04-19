@@ -13,6 +13,7 @@ export class CheckoutComponent implements OnInit {
   accounts: Account[] = [];
   sum: number;
   error: '';
+  private accountsId: any;
 
   constructor(private router: Router, private storeService: StoreService, private route: ActivatedRoute) { }
 
@@ -23,22 +24,13 @@ export class CheckoutComponent implements OnInit {
       if (data.autherror) {
         this.router.navigateByUrl('/forbidden');
       }
-      // if(this.error!=="")
-
     });
 
   }
 
   buy(sum: number) {
     this.storeService.buy(sum);
-    //   .subscribe(
-  //     data=>{
-  //     this.error = "";
-  // },
-  //     err=>{
-  //       this.error = err.error.message;
-  //     }
-  //   );
+
   }
 
 }

@@ -122,19 +122,9 @@ export class StoreService {
     }, httpOptions);
   }
 
-  successBuy(paymentid: any, payerid: any, accountsId: any[]): Observable<any> {
-    let params = new HttpParams()
-      .set('paymentId', paymentid.toString())
-      .set('PayerID', payerid.toString());
-    let k = 0;
-    for (const a of accountsId) {
-      const str = 'id' + k.toString();
-      k++;
-      params = params.append(str, a.toString());
-    }
-
-
-    return this.http.get<any>(this.successUrl, {params});
+  successBuy(paymentid: any, payerid: any, accountsId: any[], id: number): Observable<any> {
+    return this.http.post<any>(this.successUrl, {paymentId: paymentid,
+      payerId: payerid.toString(), accounts: accountsId, userId: id});
   }
 
   findPurchases(id: any): Observable<any> {
