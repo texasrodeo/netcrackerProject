@@ -26,6 +26,7 @@ export class StoreService {
   private successUrl: string;
   private purchasesUrl: string;
   private removeAccountUrl: string;
+  private clearBagUrl: string;
 
   constructor(private http: HttpClient) {
     this.storesUrl = _url + 'gamestores';
@@ -40,6 +41,7 @@ export class StoreService {
     this.successUrl = _url + 'pay/success';
     this.purchasesUrl = _url + 'user/purchases';
     this.removeAccountUrl = _url + 'admin/removeAccount';
+    this.clearBagUrl = _url + 'bag/clear';
   }
 
   public findAllStores(): Observable<Game[]> {
@@ -90,7 +92,7 @@ export class StoreService {
     return this.http.get<any>(this.addToCartUrl, {params});
   }
 
-  deletefrombag(id: number): Observable<string> {
+  deletefrombag(id: number) {
     const params = new HttpParams()
       .set('id', id.toString());
     return this.http.get<string>(this.removeFromBagUrl, {params});
@@ -138,5 +140,9 @@ export class StoreService {
     const params = new HttpParams()
       .set('accountId', id.toString());
     return this.http.get<any>(this.removeAccountUrl, {params});
+  }
+
+  clearBag(accountsId: any[]) {
+    return this.http.post<any>(this.clearBagUrl, {itemsId: accountsId});
   }
 }

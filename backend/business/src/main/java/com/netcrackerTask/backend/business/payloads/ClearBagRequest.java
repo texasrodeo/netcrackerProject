@@ -1,5 +1,6 @@
 package com.netcrackerTask.backend.business.payloads;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +12,11 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequest {
-    /**
-     * User name.
-     */
-    @NotBlank
-    private String username;
+public class ClearBagRequest {
 
     /**
-     * User password.
+     * List of accounts ids in bag
      */
     @NotBlank
-    private String password;
-
+    List<Long> itemsId;
 }

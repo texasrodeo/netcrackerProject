@@ -1,8 +1,10 @@
 package com.netcrackerTask.backend.webrest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.netcrackerTask.backend.business.entity.Account;
+import com.netcrackerTask.backend.business.entity.Game;
 import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,15 @@ public class GameStoreController {
     }
 
     /**
+     * Gets list of game stores
+     *@return list of game stores
+     */
+    @GetMapping("/gamestores")
+    public List<Game> main(){
+        return storeService.findAllGames();
+    }
+
+    /**
      * Gets all accounts in game store
      * @param id store service id
      * @param from minimum accounts price
@@ -35,10 +46,8 @@ public class GameStoreController {
      *@return map with gamestore name and list of account in it
      */
     @GetMapping("/gamestore")
-    public Map<String, Object> gamestore(@RequestParam("id") Long id,
-                                         @RequestParam(value="from", required = false) String from,
-                                         @RequestParam(value="to",required = false) String to,
-                                         @RequestParam(value="sort",required = false) String sort,
+    public Map<String, Object> gamestore(@RequestParam("id") Long id, @RequestParam(value="from", required = false) String from,
+                                         @RequestParam(value="to",required = false) String to, @RequestParam(value="sort",required = false) String sort,
                                          Pageable pageable
                                          )
     {

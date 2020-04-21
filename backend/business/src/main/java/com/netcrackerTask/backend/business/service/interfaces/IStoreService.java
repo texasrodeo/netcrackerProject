@@ -1,6 +1,5 @@
 package com.netcrackerTask.backend.business.service.interfaces;
 
-
 import java.util.List;
 import com.netcrackerTask.backend.business.entity.Account;
 import com.netcrackerTask.backend.business.entity.Game;
@@ -104,4 +103,9 @@ public interface IStoreService {
      * */
     void removeAccount(Long accountId);
 
+    /**
+     * Removes all accounts from user bag
+     * @param itemsId list of accounts ids in bag
+     * */
+    void clearBag(List<Long> itemsId);
 }

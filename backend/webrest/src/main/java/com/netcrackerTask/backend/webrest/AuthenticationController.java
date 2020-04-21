@@ -1,5 +1,7 @@
 package com.netcrackerTask.backend.webrest;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
 import com.netcrackerTask.backend.business.implementations.UserDetailsImpl;
@@ -23,8 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

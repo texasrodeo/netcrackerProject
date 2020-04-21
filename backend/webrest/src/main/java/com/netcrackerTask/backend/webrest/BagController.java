@@ -4,22 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.netcrackerTask.backend.business.entity.Account;
-import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.implementations.StoreServiceImpl;
-import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
+import com.netcrackerTask.backend.business.payloads.ClearBagRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-
-public class PurchaseController {
+public class BagController {
 
     private final StoreServiceImpl storeService;
 
@@ -28,7 +20,7 @@ public class PurchaseController {
      * @param storeService service associated with store
      */
     @Autowired
-    public PurchaseController(final StoreServiceImpl storeService){
+    public BagController(final StoreServiceImpl storeService){
         this.storeService = storeService;
     }
 
@@ -70,5 +62,16 @@ public class PurchaseController {
     public void remove(@RequestParam("id") Long accountId){
         storeService.removePurchase(accountId);
     }
+
+    /**
+     * Removes all accounts from user bag
+     * @param request POST request with list of accounts ids in bag in body
+     * */
+    @PostMapping("bag/clear")
+    public void clearBag(@RequestBody ClearBagRequest request){
+        storeService.clearBag(request.getItemsId());
+    }
+
+
 
 }

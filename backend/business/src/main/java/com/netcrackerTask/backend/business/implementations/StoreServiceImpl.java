@@ -200,4 +200,11 @@ public class StoreServiceImpl implements IStoreService {
     }
 
 
+    public void clearBag(List<Long> itemsId) {
+        for(Long item: itemsId){
+            purchaseRepository.delete(purchaseRepository.getPurchaseByGameAccountId(item));
+        }
+    }
+
+
 }

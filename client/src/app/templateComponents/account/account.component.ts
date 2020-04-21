@@ -41,7 +41,7 @@ export class AccountComponent implements OnInit {
 
   addToCart() {
     if (!this.tokenStorage.getUser()) {
-      this.router.navigateByUrl('/forbidden');
+      this.router.navigate(['/forbidden'], {queryParams: {code: 'autherror'}})
     } else {
     this.storeService.addtocart(this.account.id, this.currentUser.id).subscribe(data => {
       this.message = data.message;
@@ -51,8 +51,5 @@ export class AccountComponent implements OnInit {
 
   }
 
-  reloadPage() {
-    window.location.reload();
-  }
 
 }

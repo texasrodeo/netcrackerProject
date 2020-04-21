@@ -25,6 +25,8 @@ import { AddAccountComponent } from './templateComponents/add-account/add-accoun
 import { ForbiddenComponent } from './templateComponents/forbidden/forbidden.component';
 import { PayresultComponent } from './templateComponents/payresult/payresult.component';
 import { HomeComponent } from './templateComponents/home/home.component';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -50,7 +52,9 @@ import { HomeComponent } from './templateComponents/home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [StoreService, AppService,  authInterceptorProviders],
   bootstrap: [AppComponent]

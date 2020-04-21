@@ -1,13 +1,18 @@
 <div class="alert alert-danger" role="alert">
   <h3 class="display-4">У вас недостаточно прав для доступа к данной странице!</h3>
-  <span>Эта ошибка вызникает если: <br>
-    1)Вы пытаетесь воспользоваться функционалом, предназначенным для администратора
-    2)Если вы не авторизировались <br>
-    3)Eсли Вы пытаетесь совершить покупку, не подтвердив свой e-mail <br>
-  </span>
+
+  <div *ngIf="code==='autherror'">
+    <b>Если вы не авторизировались</b> <br>
+  </div>
+  <div *ngIf="code==='noemail'">
+    <b>Eсли Вы пытаетесь совершить покупку, не подтвердив свой e-mail</b> <br>
+  </div>
+  <div *ngIf="code==='norights'">
+    <b>Вы пытаетесь воспользоваться функционалом, предназначенным для администратора</b> <br>
+  </div>
   <br>
   <button routerLink="/"  class="btn-primary btn-sm float-left">На главную</button>
-  <button routerLink="/login"  class="btn-primary btn-sm float-right">На страницу авторизации</button>
+  <button routerLink="/login"  class="btn-primary btn-sm float-right">На страницу входа в систему</button>
 </div>
 
 

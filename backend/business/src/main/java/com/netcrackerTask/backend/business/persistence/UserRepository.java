@@ -3,7 +3,6 @@ package com.netcrackerTask.backend.business.persistence;
 import com.netcrackerTask.backend.business.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Gets user

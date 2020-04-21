@@ -33,13 +33,20 @@ export class BagComponent implements OnInit {
   }
 
   deleteFromBag(id: number) {
-     this.storeService.deletefrombag(id).subscribe(data => {
-         this.message = data;
-     }
-     );
+     this.storeService.deletefrombag(id).subscribe();
      this.reloadPage();
   }
+
   reloadPage() {
     window.location.reload();
+  }
+
+  clearBag() {
+    const accountsId = [];
+    for (const account of this.accounts) {
+      accountsId.push(account.id);
+    }
+    this.storeService.clearBag(accountsId).subscribe();
+    this.reloadPage();
   }
 }

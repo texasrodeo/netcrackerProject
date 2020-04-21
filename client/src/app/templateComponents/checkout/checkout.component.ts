@@ -13,7 +13,6 @@ export class CheckoutComponent implements OnInit {
   accounts: Account[] = [];
   sum: number;
   error: '';
-  private accountsId: any;
 
   constructor(private router: Router, private storeService: StoreService, private route: ActivatedRoute) { }
 
@@ -22,7 +21,7 @@ export class CheckoutComponent implements OnInit {
       this.accounts = data.items;
       this.sum = data.sum;
       if (data.autherror) {
-        this.router.navigateByUrl('/forbidden');
+        this.router.navigate(['/forbidden'], {queryParams: {code: 'noemail'}});
       }
     });
 

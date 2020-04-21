@@ -3,7 +3,6 @@ package com.netcrackerTask.backend.business.service.interfaces;
 import java.util.List;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface IPaypalService {
     /**

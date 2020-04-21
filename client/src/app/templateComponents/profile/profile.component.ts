@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TokenstorageService} from '../../service/tokenstorage.service';
 import {AppService} from '../../service/app-service.service';
 import {StoreService} from '../../service/store-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,8 @@ export class ProfileComponent implements OnInit {
   message: string;
   purchases: any;
 
-  constructor(private token: TokenstorageService, private app: AppService, private storeService: StoreService) { }
+  constructor(private token: TokenstorageService, private app: AppService, private storeService: StoreService,
+              private router: Router) { }
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
@@ -31,6 +33,8 @@ export class ProfileComponent implements OnInit {
           this.message = data.message;
         }
       );
+    } else {
+      this.router.navigate(['/forbidden'], {queryParams: {code: 'autherror'}});
     }
   }
 

@@ -1,12 +1,10 @@
 package com.netcrackerTask.backend.business.entity;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Purchase entity.

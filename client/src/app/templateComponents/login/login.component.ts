@@ -3,6 +3,9 @@ import {Router} from '@angular/router';
 import {AppService} from '../../service/app-service.service';
 import {TokenstorageService} from '../../service/tokenstorage.service';
 import {AppComponent} from '../../app.component';
+import { ToastrService } from 'ngx-toastr';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AppService, private tokenStorage: TokenstorageService,
               private router: Router,
-              private appC: AppComponent) { }
+              private appC: AppComponent, private toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -36,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
+        this.toastr.success('Вы вошли!');
         setTimeout(() => {
           this.appC.refresh();
           this.router.navigate(['/gamestores']);
