@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {StoreService} from '../../service/store-service.service';
-import {TokenstorageService} from "../../service/tokenstorage.service";
+import {TokenstorageService} from '../../service/tokenstorage.service';
 
 @Component({
   selector: 'app-payresult',
@@ -43,8 +43,6 @@ export class PayresultComponent implements OnInit {
         }
       );
     }
-
-
   }
 
 }

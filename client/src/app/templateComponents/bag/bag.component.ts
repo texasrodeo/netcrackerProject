@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Account} from '../../model/account';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {StoreService} from '../../service/store-service.service';
 import {ActivatedRoute} from '@angular/router';
 import {TokenstorageService} from '../../service/tokenstorage.service';
@@ -16,9 +16,6 @@ export class BagComponent implements OnInit {
   sum: number;
   currentUser: any;
   message: string;
-  private querySubscription: Subscription;
-
-
   constructor(private storeService: StoreService, private route: ActivatedRoute, private tokenStorage: TokenstorageService) {
 
   }

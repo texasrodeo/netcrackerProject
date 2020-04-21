@@ -6,6 +6,8 @@ import {Account} from '../../model/account';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {TokenstorageService} from '../../service/tokenstorage.service';
+import {ToastrService} from "ngx-toastr";
+
 
 @Component({
   selector: 'app-store',
@@ -28,7 +30,8 @@ export class StoreComponent implements OnInit {
   to: string;
 
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute, private token: TokenstorageService) {
+  constructor(private storeService: StoreService, private route: ActivatedRoute, private token: TokenstorageService,
+              private toastr: ToastrService) {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.id = queryParam.id;
@@ -71,6 +74,7 @@ export class StoreComponent implements OnInit {
     this.sort = '';
     this.from = '';
     this.to = '';
+    this.toastr.success('Фильтр очищен', '',{timeOut: 2000});
     this.storeService.findAcc(this.id, this.page, this.size).subscribe(data => {
       this.accounts = data.accounts.content;
       this.pages = new Array(data.accounts.totalPages);

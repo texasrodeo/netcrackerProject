@@ -4,7 +4,7 @@ import {StoreService} from '../../service/store-service.service';
 import {TokenstorageService} from '../../service/tokenstorage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-account',
@@ -46,7 +46,7 @@ export class AddAccountComponent implements OnInit {
   onSubmit() {
     this.storeService.addAccount(this.form, this.gameId).subscribe(
       data => {
-        this.toastr.success('Аккаунт добавлен');
+        this.toastr.success('Аккаунт добавлен', '',{timeOut: 2000});
         setTimeout(() => {
           this.router.navigate(['/gamestore'], {queryParams: {id: this.gameId}});
         }, 2000);

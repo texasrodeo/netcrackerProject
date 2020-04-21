@@ -12,7 +12,7 @@ import {CheckoutComponent} from './templateComponents/checkout/checkout.componen
 import {AddAccountComponent} from './templateComponents/add-account/add-account.component';
 import {ForbiddenComponent} from './templateComponents/forbidden/forbidden.component';
 import {PayresultComponent} from './templateComponents/payresult/payresult.component';
-import {HomeComponent} from "./templateComponents/home/home.component";
+import {HomeComponent} from './templateComponents/home/home.component';
 
 
 const routes: Routes = [

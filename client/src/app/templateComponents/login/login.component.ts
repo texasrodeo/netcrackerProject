@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.toastr.success('Вы вошли!');
+        this.toastr.success('Вы вошли!', '',{timeOut: 2000});
         setTimeout(() => {
           this.appC.refresh();
           this.router.navigate(['/gamestores']);

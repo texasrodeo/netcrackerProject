@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   showAdminBoard = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenstorageService, private http: HttpClient, private app: AppService, private router: Router, private route: ActivatedRoute) {
+  constructor(private tokenStorageService: TokenstorageService ) {
     this.title = 'Магазин продажи игровых аккаунтов';
   }
 
@@ -29,10 +29,6 @@ export class AppComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
-
       this.username = user.username;
     }
   }
