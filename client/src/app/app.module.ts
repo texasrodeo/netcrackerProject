@@ -27,6 +27,7 @@ import { PayresultComponent } from './templateComponents/payresult/payresult.com
 import { HomeComponent } from './templateComponents/home/home.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NotFoundComponent } from './templateComponents/not-found/not-found.component';
 
 
 
@@ -46,6 +47,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ForbiddenComponent,
     PayresultComponent,
     HomeComponent,
+    NotFoundComponent,
 
   ],
   imports: [

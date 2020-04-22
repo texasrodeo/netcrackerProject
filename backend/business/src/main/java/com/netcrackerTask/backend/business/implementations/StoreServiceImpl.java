@@ -163,7 +163,7 @@ public class StoreServiceImpl implements IStoreService {
     }
 
     public void sellAccounts(List<Long> accountsId, String name, String email) {
-        StringBuilder sb = new StringBuilder("Здравствуйте, ").append(name).append(".\\n\"")
+        StringBuilder sb = new StringBuilder("Здравствуйте, ").append(name).append('\n')
             .append("Ваши покупки: ").append('\n');
         for (Long id : accountsId) {
             Account account = accountRepository.getAccountById(id);
@@ -185,8 +185,8 @@ public class StoreServiceImpl implements IStoreService {
     private void confirmPurchase(Long accountId) {
         Purchase purchase = purchaseRepository.getPurchaseByGameAccountId(accountId);
         purchase.setStatus("CONFIRMED");
-        StringBuilder json = new StringBuilder("{\"purchase\":\"").append(purchase.toString()).append("\"}");
-        logService.writeLog(json.toString(), "Purchase");
+//        StringBuilder json = new StringBuilder("{\"purchase\":\"").append(purchase.toString()).append("\"}");
+//        logService.writeLog(json.toString(), "Purchase");
         purchaseRepository.save(purchase);
     }
 

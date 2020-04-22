@@ -13,6 +13,7 @@ import {AddAccountComponent} from './templateComponents/add-account/add-account.
 import {ForbiddenComponent} from './templateComponents/forbidden/forbidden.component';
 import {PayresultComponent} from './templateComponents/payresult/payresult.component';
 import {HomeComponent} from './templateComponents/home/home.component';
+import {NotFoundComponent} from "./templateComponents/not-found/not-found.component";
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'addAccount', component: AddAccountComponent},
   {path: 'forbidden', component: ForbiddenComponent},
-  {path: 'pay/:success', component: PayresultComponent}
+  {path: 'pay/:success', component: PayresultComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

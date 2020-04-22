@@ -18,5 +18,5 @@ export class StoreListComponent implements OnInit {
       this.stores = data;
     });
   }
-
+ 
 }

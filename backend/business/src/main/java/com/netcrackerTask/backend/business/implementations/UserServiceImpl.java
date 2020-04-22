@@ -81,11 +81,12 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         userRepository.save(user);
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
+        String href="http://localhost:4200/activate/"+user.getActivationCode();
         if(!StringUtils.isEmpty(user.getEmail())){
-            String message = String.format("Здравствуйте "
-                    +user.getUsername()+".  Для активации аккаунта перейдите по ссылке"
-                    +"  http://localhost:4200/activate/%s",
-                    user.getActivationCode());
+            String message = String.format("Здравствуйте, "
+                    +user.getUsername()+".  <b>Для активации Вашего аккаунта перейдите по </b>"
+                    +"<a href=\"%s\">ссылке</a>",
+                    href);
             mailService.send(user.getEmail(), "Код активации", message);
         }
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
