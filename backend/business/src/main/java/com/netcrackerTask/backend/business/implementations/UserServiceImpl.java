@@ -2,6 +2,7 @@ package com.netcrackerTask.backend.business.implementations;
 
 import com.netcrackerTask.backend.business.entity.Role;
 import com.netcrackerTask.backend.business.entity.User;
+import com.netcrackerTask.backend.business.entity.UserDetailsImpl;
 import com.netcrackerTask.backend.business.payloads.MessageResponse;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
 import com.netcrackerTask.backend.business.persistence.UserRepository;
@@ -84,8 +85,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         String href="http://localhost:4200/activate/"+user.getActivationCode();
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format("Здравствуйте, "
-                    +user.getUsername()+".  <b>Для активации Вашего аккаунта перейдите по </b>"
-                    +"<a href=\"%s\">ссылке</a>",
+                    +user.getUsername()+".  Для активации Вашего аккаунта перейдите по ссылке: %s",
                     href);
             mailService.send(user.getEmail(), "Код активации", message);
         }
@@ -119,7 +119,6 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
     }
 
     public boolean checkEmail(Long id) {
-        User user = userRepository.getById(id);
-        return user.getActivationCode()==null;
+        return userRepository.getById(id).getActivationCode()==null;
     }
 }

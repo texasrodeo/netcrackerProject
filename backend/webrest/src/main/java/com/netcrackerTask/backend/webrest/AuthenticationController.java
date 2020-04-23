@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import com.netcrackerTask.backend.business.entity.User;
 import com.netcrackerTask.backend.business.persistence.RoleRepository;
-import com.netcrackerTask.backend.business.implementations.UserDetailsImpl;
+import com.netcrackerTask.backend.business.entity.UserDetailsImpl;
 import com.netcrackerTask.backend.jwt.JwtUtils;
 import com.netcrackerTask.backend.business.implementations.UserServiceImpl;
 import com.netcrackerTask.backend.business.payloads.JwtResponse;

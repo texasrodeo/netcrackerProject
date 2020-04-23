@@ -13,7 +13,7 @@ import {AddAccountComponent} from './templateComponents/add-account/add-account.
 import {ForbiddenComponent} from './templateComponents/forbidden/forbidden.component';
 import {PayresultComponent} from './templateComponents/payresult/payresult.component';
 import {HomeComponent} from './templateComponents/home/home.component';
-import {NotFoundComponent} from "./templateComponents/not-found/not-found.component";
+import {NotFoundComponent} from './templateComponents/not-found/not-found.component';
 
 
 const routes: Routes = [

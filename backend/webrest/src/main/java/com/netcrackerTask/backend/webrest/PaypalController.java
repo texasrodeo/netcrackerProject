@@ -92,7 +92,7 @@ public class PaypalController {
             order.setDescription("account purchase");
             Authentication auth= SecurityContextHolder.getContext().getAuthentication();
             String name=auth.getName();
-            User user= userService.findByUsername(name);
+            User user = userService.findByUsername(name);
             for (Account account: storeService.getBagItemsForUser(user.getId())) {
                 order.setAccountId(account.getId());
             }

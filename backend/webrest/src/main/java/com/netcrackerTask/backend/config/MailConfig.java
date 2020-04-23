@@ -9,27 +9,52 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 public class MailConfig {
+
+    /**
+     * Mail host server
+     * */
     @Value("${spring.mail.host}")
     private String host;
 
+    /**
+     * Mail host username
+     * */
     @Value("${spring.mail.username}")
     private String username;
 
+    /**
+     * Mail host password
+     * */
     @Value("${spring.mail.password}")
     private String password;
 
+    /**
+     * Mail host port
+     * */
     @Value("${spring.mail.port}")
     private int port;
 
+    /**
+     * Mail host protocol
+     * */
     @Value("${spring.mail.protocol}")
     private String protocol;
 
+    /**
+     * Mail host debug (true or false)
+     * */
     @Value("${mail.debug}")
     private String debug;
 
+    /**
+     * Mail host auth (enabled or not)
+     * */
     @Value("${spring.mail.properties.mail.smtp.auth}")
     private String auth;
 
+    /**
+     * Mail host tls enabled or not
+     * */
     @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
     private String enable;
 

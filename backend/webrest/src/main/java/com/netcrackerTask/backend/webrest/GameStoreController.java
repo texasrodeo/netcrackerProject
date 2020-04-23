@@ -33,7 +33,7 @@ public class GameStoreController {
      *@return list of game stores
      */
     @GetMapping("/gamestores")
-    public List<Game> main(){
+    public List<Game> gamestores(){
         return storeService.findAllGames();
     }
 

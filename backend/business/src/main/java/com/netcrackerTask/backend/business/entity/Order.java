@@ -50,7 +50,7 @@ public class Order {
      */
     public void setAccountId(Long accountId) {
         if (this.accountsId == null){
-            this.accountsId = new ArrayList<Long>();
+            this.accountsId = new ArrayList<>();
         }
         this.accountsId.add(accountId);
     }

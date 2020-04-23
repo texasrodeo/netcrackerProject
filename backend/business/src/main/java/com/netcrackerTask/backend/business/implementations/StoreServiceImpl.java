@@ -185,8 +185,6 @@ public class StoreServiceImpl implements IStoreService {
     private void confirmPurchase(Long accountId) {
         Purchase purchase = purchaseRepository.getPurchaseByGameAccountId(accountId);
         purchase.setStatus("CONFIRMED");
-//        StringBuilder json = new StringBuilder("{\"purchase\":\"").append(purchase.toString()).append("\"}");
-//        logService.writeLog(json.toString(), "Purchase");
         purchaseRepository.save(purchase);
     }
 

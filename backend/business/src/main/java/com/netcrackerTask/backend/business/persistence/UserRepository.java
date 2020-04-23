@@ -3,6 +3,8 @@ package com.netcrackerTask.backend.business.persistence;
 import com.netcrackerTask.backend.business.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Gets user
@@ -10,6 +12,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return user
      * */
     User findByUsername(String username);
+
+    /**
+     * Gets user
+     * @param id user id
+     * @return user
+     * */
+    Optional<User> findById(Long id);
 
     /**
      * Gets user

@@ -26,11 +26,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserServiceImpl userService;
 
+    /**
+     * Password encode for users passwords
+     * */
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Password encoder for account passwords
+     * */
     @Bean
     public StandardPBEStringEncryptor standardPBEStringEncryptor(){
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
