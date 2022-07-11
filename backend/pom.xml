@@ -18,7 +18,7 @@
 
     <properties>
         <spring.version>5.2.3.RELEASE</spring.version>
-        <springboot.version>2.2.4.RELEASE</springboot.version>
+        <springboot.version>2.2.11.RELEASE</springboot.version>
     </properties>
 
     <dependencies>
